@@ -1,0 +1,205 @@
+---
+layout: 	coco
+title: 		"映射"
+date: 		2018-03-02 12:00:00  
+author: 	"shamphone"  
+chapter:	"2"
+---
+
+映射是一种引用类型，存储键值对。它的定义是： 
+```
+  mapping(key => value)
+```
+
+概念上与java中的map，python中的字典类型类似，但在使用上有比较多的限制。 
+
+## 一、mapping定义
+
+在mapping中， key可以是整型、字符串等基本数据类型，但不能使用动态数组、contract、枚举、struct，以及mapping这些类型。 
+value 的类型没有限制，甚至使用一个mapping作为value也是允许的。 
+
+```
+pragma solidity ^0.4.24;
+
+
+contract Mappings {
+    struct Employee {
+        string name;
+        uint8 no;
+    }
+    mapping (bytes => Employee) bytesMapping;  //字节数组作为key
+    mapping (address => Employee) addressMapping; // address作为key 
+    mapping (string => mapping(uint => Employee)) complexMapping;  // mapping作为value，是可以的。 
+    // mapping (Employee ==> uint8) structMapping; //不能使用struct来作为key
+  
+}
+```
+
+
+在solidity中，mapping可以看做是一个哈希表。 在这个表中，已经列举了所有可能的key值，并把这些key映射到已经将所有字段初始化为0的value上。 
+但在存储上，key的值并不是直接保存在这个哈希表中，而是它的``keccak256``值。使用的时候，需要通过这个值来查到对应的真实的key值。 
+所以，在solidity中，mapping没有长度length的概念，也无法使用set来设置或者添加映射值的必要。 
+
+```
+
+  function len() public returns(uint8) {
+		// 编译错误： TypeError: Member "length" not found or not visible after argument-dependent lookup in mapping(bytes memory => struct Mappings.Employee  // storage ref)
+        // return bytesMapping.length;
+        //        ^-----------------^
+        return bytesMapping.length;  
+    }
+	
+```
+
+## 二、 存储模型
+
+到当前版本，mapping 还仅能被声明为storage变量中，不能使用在memory上。
+由于在mapping中键的数量是任意的，导致映射的大小也是变长的。映射只能声明为``storage``的状态变量， 或者在局部变量中引用到某个状态变量。 
+
+```
+pragma solidity ^0.4.24;
+
+
+contract Mappings {
+    struct Employee {
+        string name;
+        uint8 no;
+    }
+    mapping (bytes => Employee) bytesMapping;
+    
+    function declaring() public returns(string) {
+        bytesMapping["alex"] = Employee("Alex John", 1);
+        mapping (bytes => Employee) ref = bytesMapping; 
+        ref["alex"].name = "Alexanda Jackson";
+        return bytesMapping["alex"].name;
+    }
+   
+}
+
+```
+
+如上我们声明了``bytesMapping``的状态变量，然后在函数中申明``ref``局部变量来引用它。 
+
+## 三、 mapping状态变量
+
+如果在contract中声明了mapping状态变量， solidity编译器会自动生成get方法， 输入参数为key，输出参数为value。 
+如果使用mapping来作为value，则会生成两个输入参数的get方法， 以此类推。 
+
+```
+pragma solidity ^0.4.24;
+
+
+contract Mappings {
+    struct Employee {
+        string name;
+        uint8 no;
+    }
+    mapping (string => mapping(uint8 => Employee)) complexMapping; 
+
+    function setter() public returns(string){
+        complexMapping["alex"][1] = Employee("Alex John", 1);
+        complexMapping["alex"][2] = Employee("Alex Mike", 2);
+        complexMapping["tom"][1] = Employee("Tom Cruise", 6);
+        return complexMapping["tom"][1].name;
+    }   
+}
+
+```
+
+在上面的示例中，我们声明了storage的状态变量complexMapping，可以使用key来访问或者设置对应的值。
+
+## 四、mapping扩展
+
+由于原生的mapping限制比较多， 以太坊在[官方的github上提供了一个扩展IterableMapping库](https://github.com/ethereum/dapp-bin/blob/master/library/iterable_mapping.sol) 。 
+增加了类似其他语言的映射类型的操作。 
+
+```
+library IterableMapping
+{
+  struct itmap
+  {
+    mapping(uint => IndexValue) data;
+    KeyFlag[] keys;
+    uint size;
+  }
+  struct IndexValue { uint keyIndex; uint value; }
+  struct KeyFlag { uint key; bool deleted; }
+  function insert(itmap storage self, uint key, uint value) returns (bool replaced)
+  {
+    uint keyIndex = self.data[key].keyIndex;
+    self.data[key].value = value;
+    if (keyIndex > 0)
+      return true;
+    else
+    {
+      keyIndex = self.keys.length++;
+      self.data[key].keyIndex = keyIndex + 1;
+      self.keys[keyIndex].key = key;
+      self.size++;
+      return false;
+    }
+  }
+  function remove(itmap storage self, uint key) returns (bool success)
+  {
+    uint keyIndex = self.data[key].keyIndex;
+    if (keyIndex == 0)
+      return false;
+    delete self.data[key];
+    self.keys[keyIndex - 1].deleted = true;
+    self.size --;
+  }
+  function contains(itmap storage self, uint key) returns (bool)
+  {
+    return self.data[key].keyIndex > 0;
+  }
+  function iterate_start(itmap storage self) returns (uint keyIndex)
+  {
+    return iterate_next(self, uint(-1));
+  }
+  function iterate_valid(itmap storage self, uint keyIndex) returns (bool)
+  {
+    return keyIndex < self.keys.length;
+  }
+  function iterate_next(itmap storage self, uint keyIndex) returns (uint r_keyIndex)
+  {
+    keyIndex++;
+    while (keyIndex < self.keys.length && self.keys[keyIndex].deleted)
+      keyIndex++;
+    return keyIndex;
+  }
+  function iterate_get(itmap storage self, uint keyIndex) returns (uint key, uint value)
+  {
+    key = self.keys[keyIndex].key;
+    value = self.data[key].value;
+  }
+}
+
+```
+
+使用示例如下：
+
+```
+contract User
+{
+  // Just a struct holding our data.
+  IterableMapping.itmap data;
+  // Insert something
+  function insert(uint k, uint v) returns (uint size)
+  {
+    // Actually calls itmap_impl.insert, auto-supplying the first parameter for us.
+    IterableMapping.insert(data, k, v);
+    // We can still access members of the struct - but we should take care not to mess with them.
+    return data.size;
+  }
+  // Computes the sum of all stored data.
+  function sum() returns (uint s)
+  {
+    for (var i = IterableMapping.iterate_start(data); IterableMapping.iterate_valid(data, i); i = IterableMapping.iterate_next(data, i))
+    {
+        var (key, value) = IterableMapping.iterate_get(data, i);
+        s += value;
+    }
+  }
+}
+
+```

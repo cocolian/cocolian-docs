@@ -1,0 +1,80 @@
+---
+layout:     source 
+title:      "2019-02-21-WeChat"
+date:       2019-02-21 12:00:00
+author:     None
+lines:      18 
+tag:       [chat]
+---
+> 09:19:54  马春林-工品汇-研发  
+   
+[强]  
+   
+> 17:17:42  wxid_pkxruacyhejn21  
+   
+今天给大家分享一下个人原创的敏捷开发WeAP(准确的定义是敏捷开发方法论实例instance)，原本安排在2月初，由于春节因素，推迟到了今天  
+   
+> 17:18:11  wxid_pkxruacyhejn21  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MzI0ODk0MzExMg==&amp;amp;mid=2247483826&amp;amp;idx=1&amp;amp;sn=4d5d7aae541f3cb235f0a68d79b72bf3&amp;amp;chksm=e99846d5deefcfc31c80654f03dddc54cac2fd357a85f743f2a2ef905fd3b6ec6be9e904c83e&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=0221XTiq6XtO6VjkjwMtccDk#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;【WeAP介绍篇】敏捷开发方法论WeAP【PPT】&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;wxid_pkxruacyhejn21)  
+   
+> 17:18:48  wxid_pkxruacyhejn21  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MzI0ODk0MzExMg==&amp;amp;mid=2247483702&amp;amp;idx=1&amp;amp;sn=b6beec867ecf8aa163651cad52933b81&amp;amp;chksm=e9984651deefcf47d3583d7c7126c2a8f8db3c0684f94984d4f9ea8a191711d0b7cd14b30069&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=02217YsqsfevGUvGewTkXFSe#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;WeAP - Overview&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;wxid_pkxruacyhejn21)  
+   
+> 17:19:15  wxid_pkxruacyhejn21  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MzI0ODk0MzExMg==&amp;amp;mid=2247483991&amp;amp;idx=1&amp;amp;sn=da98160c90e033686df3d2b839d3ec7b&amp;amp;chksm=e9984530deefcc269dd5c89acee2255a85de6c365c46a830e235d1b8ea86e008e7e2377cecfa&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=02213bdqPI7UwFohmQ1kypGt#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;WeAP - 招行网银-财务管理系统【案例分享】&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;wxid_pkxruacyhejn21)  
+   
+> 17:19:33  wxid_pkxruacyhejn21  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MzI0ODk0MzExMg==&amp;amp;mid=2247483911&amp;amp;idx=1&amp;amp;sn=f57bdb205c903ca08b4b742529311d5e&amp;amp;chksm=e9984560deefcc76df5b2d6cfcaa3d61856e365aefc29e51988fda8cc6a902a7d42ce8dc2d76&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=0221UNR9sGZ7CRWMQPQJlspt#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;我的Thoughworks-Scrum经历点滴&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;wxid_pkxruacyhejn21)  
+   
+> 17:19:55  wxid_pkxruacyhejn21  
+   
+![2019-02-21 17:19:55](http://static.cocolian.cn/img/20190221_171955.png) 
+   
+> 17:20:15  wxid_pq95nm7qjlzq21  
+   
+[强]  
+   
+> 17:20:17  wxid_pkxruacyhejn21  
+   
+![2019-02-21 17:20:17](http://static.cocolian.cn/img/20190221_172017.png) 
+   
+> 17:20:47  wxid_pkxruacyhejn21  
+   
+后面两个案例分享文章，涉及内部信息，就不方便分享了  
+   
+> 17:21:30  wxid_pkxruacyhejn21  
+   
+> 17:21:52  wxid_pkxruacyhejn21  
+   
+有兴趣的可以关注一下公众号  
+   
+> 17:22:03  wxid_pkxruacyhejn21  
+   
+欢迎大家一起交流  
+   
+> 17:22:07  开科-SmartWave--后端开发  
+   
+> 17:23:02  wxid_pkxruacyhejn21  
+   
+这里说的敏捷开发WeAP，不是项目管理，不是粗制滥造、快速上线  
+   
+> 17:24:52  wxid_pkxruacyhejn21  
+   
+最终想写本书，但由于个人写作能力有限，估计比较漫长  
+   
+> 18:20:21  和讯私财-产品-肆伍  
+   
+@戈弋 请问在电销中的合规留痕你们是如何处理的呢?  
+   
+> 18:21:25  戈弋  
+   
+全部录音+语音识别+抽检  
+   

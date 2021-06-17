@@ -1,0 +1,90 @@
+---
+layout: 	coco
+title: 		"修饰符"
+date: 		2018-04-05 12:00:00
+author: 	"shamphone"
+chapter:	"5"
+---
+
+## 一、定义
+
+在solidity中，我们知道，如果修改了合约的状态变量，那这个改变需要让矿工来通知到整个网络，这意味着需要支付给矿工gas。 但有一些函数，它不会修改状态变量，这就意味着这些函数执行是不需要消耗gas的。 
+在solidity V0.4.17 版本前，引入了constant关键字，来告知编译器，这些函数执行不修改状态变量，无需消耗gas。 
+V0.4.17版本及其之后，又做了更进一步的细分，deprecate掉了constant关键字，使用：
+- view关键字，通知编译器，函数不会修改状态变量，但可以读取状态变量。 
+- pure关键字，更进一步说明函数既不会读取也不会修改状态变量。 
+
+## 二、pure修饰符
+
+对比一下加和不加pure的区别。 
+```
+pragma solidity ^0.4.24;
+
+
+contract Modifiers {
+    function pureFoo() public pure returns (uint){
+		uint a = 0;
+        for(uint256 i=0; i<1024; i++)
+			a += i;
+        return a;
+    }
+    function nopureFoo() public returns (uint){
+		uint a = 0;
+        for(uint256 i=0; i<1024; i++)
+			a += i;
+        return a;
+    }
+}
+```
+
+pureFoo和nopureFoo的实现是一样的，都不会读取和写入本地数据。 如果没有pure修饰符，则执行结果如下：
+![](http://static.cocolian.cn/img/coco/solidity/nopure-foo.png)
+需要消耗93273的Gas。但是如果加了pure，则很快就能得到结果，执行结果如下： 
+![](http://static.cocolian.cn/img/coco/solidity/pure-foo.png)
+
+也就是加了pure，则不会消耗gas。 如果在pure函数中访问状态变量，则会编译不通过。 
+
+```
+contract Modifiers {
+	
+	uint public b = 1;
+    
+    function bar() public pure returns (uint){ //编译不通过，pure中禁止访问状态属性b。
+        for(uint256 i=0; i<2; i++)
+			b += i;
+        return b;
+    }
+}
+```
+
+## 三、view关键字
+
+和pure一样，声明为view的函数调用也是不需要耗费gas的。 看如下两个函数。 
+
+```
+contract Modifiers {
+
+	uint public b = 1;
+
+    function viewBar() public view returns (uint){
+		uint c = 0;
+        for(uint256 i=0; i<1024; i++)
+			c += b;
+        return c;
+    }
+    
+    function bar() public view returns (uint){
+        for(uint256 i=0; i<2; i++)
+			b += i;
+        return b;
+    }
+}
+```
+
+函数viewBar中，仅读取状态变量，调用时不耗费gas。 
+函数bar中，对状态变量做了修改，但由于方法被声明为pure，调用的时候也不耗费gas。 注意，**这也导致对状态变量b的修改是不生效的**。 
+``b``在bar执行前后，值都是 1 。   
+![](http://static.cocolian.cn/img/coco/solidity/view-2.png)
+调用bar之后，查询``b``的值，仍然是 ``1``。  
+![](http://static.cocolian.cn/img/coco/solidity/view-3.png)
+

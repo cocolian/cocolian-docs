@@ -1,0 +1,100 @@
+---
+layout: 	coco
+title: 		"事件定义"
+date: 		2018-05-01 12:00:00
+author: 	"shamphone"
+chapter:	"1"
+status:		"hidden"
+---
+
+在Solidity中没有类似其他语言的控制台打印的功能，这样日志就需要寻找一种新的机制来实现。 事件的作用是用来打通EVM的日志机制，这样在javascript中可以使用回调函数来跟踪执行情况。 
+
+Additionally, events are inheritable members of the contracts. When called, they would make the arguments get stored inside the transaction’s log, which is a special data structure found in the blockchain. Those logs are associated with the contract’s address and are to be incorporated into the blockchain itself to stay there as long so long a block is accessible (permanently as of Homestead and Frontier, however, this may be changed with Serenity). Event and log data cannot be accessed from inside contracts (this includes the contract that created the event as well).
+
+SPV proofs for logs are viable, so in case an outsider entity were to supply a contract with a proof like that, it may check that the log really does exist in the blockchain. Either way, you should be aware of the fact that block headers must be supplied since the contract is only capable of seeing the last 256 block hashes.
+
+No more than three parameters are capable of receiving the indexed attribute that is going to causing the search for each of their arguments: The Indexed arguments’ specific values can be filtered for.
+
+In the case of arrays (this includes bytes and string) get used as indexed arguments, the Keccak-256 hash of it will be stored in the form of topic instead.
+
+The signature’s hash of the event is one of the topics, unless you used the anonymous specifier to declare the event. This would mean filtering for anonymous, specific events by name is not possible.
+
+Each non-indexed argument is going to be stored inside the log’s data part.
+
+```
+
+pragma solidity 0.4.8;
+
+
+// Events are the way to inform external monitoring entities about the 
+// cenrtain activities in the smart contracts
+// they can also be used as a log in the system.
+
+// lets checkout out this coin example where we will jump deeper
+// in the next lecture.
+
+
+
+contract Coin {
+    /*
+    * @title A Simple Subcurrency Example
+    * @author Toshendra Sharma
+    * @notice Example for the Solidity Course
+    * @dev This is only for demo the simple Coin example
+    * 
+    */
+    address public minter;
+    uint public totalCoins;
+
+
+    event LogCoinsMinted(address deliveredTo, uint amount);
+    event LogCoinsSent(address sentTo, uint amount);
+
+    // Please note the caps lock. Your mist walled will you capital letters 
+    // to seperate th event name into a meaningful name. 
+
+    // As I said Events allow the convenient usage of the EVM logging facilities. 
+    // Events are inheritable members of contracts. When they are called, 
+    // they cause the arguments to be stored in the transaction's log. 
+    // Up to three parameters can receive the attribute indexed which 
+    // will cause the respective arguments to be treated as log topics 
+    // instead of data. The hash of the signature of the event is one of 
+    // the topics except you declared the event with anonymous specifier. 
+    // All non-indexed arguments will be stored in the data part of the log. 
+
+    mapping (address => uint) balances;
+    function Coin(uint initialCoins) {
+        minter = msg.sender;
+        totalCoins = initialCoins;
+        balances[minter] = initialCoins;
+    }
+
+    /// @notice Mint the coins
+    /// @dev This does not return any value
+    /// @param owner address of the coin owner, amount amount of coins to be delivered to owner
+    /// @return Nothing
+    function mint(address owner, uint amount) {
+        if (msg.sender != minter) return;
+        balances[owner] += amount;
+        totalCoins += amount;
+        LogCoinsMinted(owner, amount);
+    }
+
+    function send(address receiver, uint amount) {
+        if (balances[msg.sender] < amount) return;
+        balances[msg.sender] -= amount;
+        balances[receiver] += amount;
+        LogCoinsSent(receiver, amount);
+    }
+
+    function queryBalance(address addr) constant returns (uint balance) {
+        return balances[addr];
+    }
+
+    function killCoin() returns (bool status) {
+        if (msg.sender != minter) throw;
+        selfdestruct(minter);
+    }
+}
+
+```

@@ -1,0 +1,475 @@
+---
+layout:     source 
+title:      "2019-03-13-WeChat"
+date:       2019-03-13 12:00:00
+author:     None
+lines:      114 
+tag:       [chat]
+---
+> 00:21:09  龚晓冬-银联-产品-上海  
+   
+[&amp;lt;a href=&amp;quot;https://c.m.163.com/news/a/EA3QN75F0519DFFO.html?spss=newsapp&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;遭遇严管 金融科技企业助贷业务洗牌&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;gxd1987)  
+   
+> 00:21:18  龚晓冬-银联-产品-上海  
+   
+[&amp;lt;a href=&amp;quot;https://c.m.163.com/news/a/EA3KBUES0519X1J2.html?spss=newsapp&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;通知丨监管急文+权威声音：870万保险代理人清虚整顿或许开始了&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;wyp57801314)  
+   
+> 00:46:41  yann-支付宝-开发  
+   
+研发转pm 是不是一种退步  
+   
+> 01:07:06  何鹏飞-猪八戒-钱包产品-重庆  
+   
+[尴尬]  
+   
+> 07:19:14  Ben-富友-产品  
+   
+是种进步  
+   
+> 07:27:56  龚晓冬-银联-产品-上海  
+   
+是把自己的命运放在危险的区域  
+   
+> 08:40:34  ark-雪球-开发  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MzU4Mzc5NTAzNQ==&amp;amp;mid=2247484077&amp;amp;idx=1&amp;amp;sn=5cfdd993b150c6a85cfecb22d00a6b10&amp;amp;chksm=fda2ea99cad5638fe066feb2a82559dcaa5a2f1c5751be57e30c9d6e53dce924e26112d31b3c&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;2019-03-13 阿里回应完成并购爱康国宾：以爱康国宾公告为准、字节跳动：腾讯应用宝全面封禁多闪&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;wxid_l0u8mnfl4fxe21)  
+   
+> 09:41:43  龙  
+   
+![2019-03-13 09:41:43](http://static.cocolian.cn/img/20190313_094143.png) 
+   
+> 09:41:49  龙  
+   
+春天来了，万物在生长，##支付宝技术岗位##等着你，和我们一起成长！ 社招、校招、实习生都有名额，社招主要面向Java技术岗位，欢迎骚扰和推荐！ 等秋天到了，我们一起收获丰硕果实！  
+   
+> 13:06:59  程琳Wa-支付pm-上海  
+   
+问下，微信这种支付方式 区分线上费率和线下费率两种吗？  
+   
+> 13:07:04  程琳Wa-支付pm-上海  
+   
+![2019-03-13 13:07:04](http://static.cocolian.cn/img/20190313_130704.png) 
+   
+> 13:07:57  哈木-快钱-产品-上海  
+   
+区分  
+   
+> 13:10:28  程琳Wa-支付pm-上海  
+   
+如果是小程序里面 预约下单，然后到店消费这种 能报备成 线下吗？  
+   
+> 13:10:48  程琳Wa-支付pm-上海  
+   
+[呲牙]感觉倒回来补扫码的常识了。。。。。。。  
+   
+> 13:11:06  龚晓冬-银联-产品-上海  
+   
+肯定区分的  
+   
+> 13:11:23  龚晓冬-银联-产品-上海  
+   
+@程琳Wa-支付pm-上海 以实际消费的支付方式为准  
+   
+> 13:16:32  程琳Wa-支付pm-上海  
+   
+「 龚晓冬-银联-产品-上海: @程琳Wa-支付pm-上海 以实际消费的支付方式为准 」 - - - - - - - - - - - - - - - 如果是小程序里面 预约下单，然后到店消费这种 能报备成 线下吗？  
+   
+> 13:19:34  龚晓冬-银联-产品-上海  
+   
+看你用啥支付的  
+   
+> 13:19:42  Frank_待业青年  
+   
+看支付方式  
+   
+> 13:19:50  程琳Wa-支付pm-上海  
+   
+微信公众号  
+   
+> 13:20:07  龚晓冬-银联-产品-上海  
+   
+那就是线上啊  
+   
+> 13:20:18  Frank_待业青年  
+   
+走线上支付的话，就是线上，到了门店走扫码支付就是线下  
+   
+> 13:26:22  程琳Wa-支付pm-上海  
+   
+理发店 这种 线上预约 然后到点消费，算线上还是线下？走的是微信公众号  
+   
+> 13:28:20  龚晓冬-银联-产品-上海  
+   
+线上  
+   
+> 13:32:17  程琳Wa-支付pm-上海  
+   
+如果是水果店 线上抢购，线下去店面领取商品。走的微信公众号或者微信小程序，这种算线上还是线下？  
+   
+> 13:32:29  龚晓冬-银联-产品-上海  
+   
+线上  
+   
+> 13:33:02  于江宁-ChinaPay-产品经理-上海  
+   
+@程琳Wa-支付pm-上海?门店里用扫码不就行了  
+   
+> 13:33:24  龚晓冬-银联-产品-上海  
+   
+程老师要复古，玩O2O  
+   
+> 13:34:34  程琳Wa-支付pm-上海  
+   
+「 于江宁-ChinaPay-产品经理-上海: @程琳Wa-支付pm-上海 门店里用扫码不就行了 」 - - - - - - - - - - - - - - - 关键是 他们比较奇葩 全部是线上预约下单，及时到门店也是线上下单  
+   
+> 13:34:40  程琳Wa-支付pm-上海  
+   
+你说作不作  
+   
+> 13:35:02  程琳Wa-支付pm-上海  
+   
+「 龚晓冬-银联-产品-上海: 程老师要复古，玩O2O 」 - - - - - - - - - - - - - - - 销售推荐啥客户 接啥客户 没得挑  
+   
+> 13:35:30  龚晓冬-银联-产品-上海  
+   
+只能说你们销售也不是一般人啊  
+   
+> 13:36:09  shawn孔-北京-上海  
+   
+厉害，这样得销售给我来半吨  
+   
+> 13:36:14  程琳Wa-支付pm-上海  
+   
+新零售不是还没散去的吗  
+   
+> 13:39:32  龚晓冬-银联-产品-上海  
+   
+能忽悠一个水果店做小程序，你们也赚翻了  
+   
+> 13:39:49  程琳Wa-支付pm-上海  
+   
+[呲牙][呲牙][呲牙]  
+   
+> 13:39:54  龚晓冬-银联-产品-上海  
+   
+这水果店也至少是中等规模以上了  
+   
+> 13:41:34  shawn孔-北京-上海  
+   
+也许是洗Q水果店  
+   
+> 13:47:00  于洪权-上海  
+   
+??我阿里云个人邮箱密码被改了，现在登陆不上去了  
+   
+> 13:49:19  龚晓冬-银联-产品-上海  
+   
+重置密码呢  
+   
+> 13:51:13  于洪权-上海  
+   
+??手机号是我出去的时候用虚拟手机号注册的，现在不能用了  
+   
+> 13:51:26  于洪权-上海  
+   
+刚才看好像还有人手机号和密码都被改了  
+   
+> 13:51:31  龚晓冬-银联-产品-上海  
+   
+好吧。。。  
+   
+> 13:53:20  于洪权-上海  
+   
+阿里云邮箱个人服务太差～  
+   
+> 13:53:54  于洪权-上海  
+   
+走申诉半个月没理??  
+   
+> 13:54:51  龚晓冬-银联-产品-上海  
+   
+为啥好好的干嘛不用qq邮箱啊  
+   
+> 13:55:55  于洪权-上海  
+   
+唉～强迫症，一直用阿里云的东西就想配套～  
+   
+> 13:56:16  龚晓冬-银联-产品-上海  
+   
+好吧。。。这就是执念吧  
+   
+> 15:56:03  Ben-富友-产品  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MzI3ODQ1NTM1OA==&amp;amp;mid=2247487271&amp;amp;idx=4&amp;amp;sn=02cac7d4343c006fbd576ef261f01fed&amp;amp;chksm=eb57fa76dc2073600ba237b383dc8dd0da0b1fac1196fc4e3f1ec5cb83352853f4792e189ed2&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;常用信息查询网站及APP汇总（建议收藏）&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;zuozuo1116888)  
+   
+> 19:12:42  程琳Wa-支付pm-上海  
+   
+年卡，一年500元包多少次，这种也算到单用途商业预付卡里的吧？  
+   
+> 19:13:09  龚晓冬-银联-产品-上海  
+   
+不算  
+   
+> 19:13:44  龚晓冬-银联-产品-上海  
+   
+程老师又混淆概念了  
+   
+> 19:14:56  程琳Wa-支付pm-上海  
+   
+为啥  
+   
+> 19:15:06  程琳Wa-支付pm-上海  
+   
+这种算啥  
+   
+> 19:15:16  龚晓冬-银联-产品-上海  
+   
+交学费一年上10次课算不算预付卡  
+   
+> 19:16:32  程琳Wa-支付pm-上海  
+   
+那如果这样的话，美容院里面的计次卡都不算单用途了？  
+   
+> 19:16:44  Frank_待业青年  
+   
+其实就是服务合约啦，付的钱就是企业收入的服务费，直接进企业账户算收入的  
+   
+> 19:17:13  龚晓冬-银联-产品-上海  
+   
+@程琳Wa-支付pm-上海?信用卡年费程老师如何理解  
+   
+> 19:17:21  龚晓冬-银联-产品-上海  
+   
+京东会员费，  
+   
+> 19:19:36  程琳Wa-支付pm-上海  
+   
+这种如果算到企业收入里面，那京东会员享受的优惠价格 差价不是要京东商城结算给商家吗？那结算的差价又算做什么科目呢？  
+   
+> 19:19:50  天正-支付产品-上海  
+   
+[&amp;lt;a href=&amp;quot;dianping://shopinfo?shopid=58512499&amp;amp;utm=wechatraise&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;盆鱼宴&amp;#183;秘制酸菜鱼(缤谷文化休闲广场店)&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;gxd1987)  
+   
+> 19:20:49  龚晓冬-银联-产品-上海  
+   
+@程琳Wa-支付pm-上海?营业成本  
+   
+> 19:23:24  程琳Wa-支付pm-上海  
+   
+收入要缴纳增值税 成本只能抵扣净利润（减少企业所得税），这种业务如果增税点过高也不划算  
+   
+> 19:23:43  老熊-北京  
+   
+@天正-支付产品-上海?请勿发无关内容。  
+   
+> 19:24:00  天正-支付产品-上海  
+   
+发错了  
+   
+> 19:24:08  龚晓冬-银联-产品-上海  
+   
+程老师，税法是这么算的吗？！@程琳Wa-支付pm-上海  
+   
+> 19:24:31  天正-支付产品-上海  
+   
+sorry，居然发到群里了  
+   
+> 19:25:01  龚晓冬-银联-产品-上海  
+   
+增值税和营业税的区别了解一下  
+   
+> 19:25:12  龚晓冬-银联-产品-上海  
+   
+是卖预付卡还是会员服务  
+   
+> 19:25:34  程琳Wa-支付pm-上海  
+   
+不是已经营改增了吗  
+   
+> 19:25:53  龚晓冬-银联-产品-上海  
+   
+也不是所有都改了啊  
+   
+> 19:30:11  程琳Wa-支付pm-上海  
+   
+现在还有哪些行业保留了营业税？  
+   
+> 19:30:54  龚晓冬-银联-产品-上海  
+   
+程老师这个你自己查吧，每次都是我查好告诉你，完全没记住啊  
+   
+> 19:31:59  程琳Wa-支付pm-上海  
+   
+好，我一直以为完全营改增了  
+   
+> 19:54:28  于江宁-ChinaPay-产品经理-上海  
+   
+请教一下各位，商户的微信小程序内，跳转到一个H5页面，通过这个H5页面可以唤起微信小程序支付吗？  
+   
+> 19:56:22  龚晓冬-银联-产品-上海  
+   
+不可以  
+   
+> 19:56:33  于江宁-ChinaPay-产品经理-上海  
+   
+好吧  
+   
+> 19:57:44  程琳Wa-支付pm-上海  
+   
+微信体系外 没办法唤起微信收银台吗？@龚晓冬-银联-产品-上海?  
+   
+> 19:58:05  龚晓冬-银联-产品-上海  
+   
+@程琳Wa-支付pm-上海?没办法  
+   
+> 19:58:40  龚晓冬-银联-产品-上海  
+   
+不过微信也有h5，不知道是不是还开放  
+   
+> 19:59:59  丁丁  
+   
+H5对支付机构和服务商不是不开放的么？  
+   
+> 20:00:00  前苏行-支付-熊烽  
+   
+用浏览器打开H5链接也可以唤起微信APP进行微信支付  
+   
+> 20:00:39  龚晓冬-银联-产品-上海  
+   
+那也是回到了微信体系内的  
+   
+> 20:05:36  王启荣—力码科技-保险-CTO—北京  
+   
+微信h5支付现在还可以申请  
+   
+> 20:06:07  龚晓冬-银联-产品-上海  
+   
+好吧，我记得停掉过  
+   
+> 20:06:36  王启荣—力码科技-保险-CTO—北京  
+   
+停掉过一段时间  
+   
+> 20:07:02  王启荣—力码科技-保险-CTO—北京  
+   
+近期对一些商户开放了  
+   
+> 20:07:35  龚晓冬-银联-产品-上海  
+   
+哦哦，好的，看来是我信息滞后了.....  
+   
+> 20:16:08  龚晓冬-银联-产品-上海  
+   
+[&amp;lt;a href=&amp;quot;https://c.m.163.com/news/a/EA62TS000519AKBM.html?spss=newsapp&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;产业观察丨今后，办理不动产登记将更加方便了！&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;gxd1987)  
+   
+> 20:16:32  龚晓冬-银联-产品-上海  
+   
+全国联网指日可待  
+   
+> 20:20:49  ark-雪球-开发  
+   
+赶紧卖房？  
+   
+> 20:22:52  龚晓冬-银联-产品-上海  
+   
+3、2019年底前实现所有市县城镇登记数据成果的完善与汇交全覆盖。  
+   
+> 20:23:10  龚晓冬-银联-产品-上海  
+   
+@ark-雪球-开发?房子可能又要跌了  
+   
+> 20:23:35  ark-雪球-开发  
+   
+这是一个忧伤的故事  
+   
+> 20:32:51  小北-安邦-技术  
+   
+以后什么保值  
+   
+> 20:33:44  ark-雪球-开发  
+   
+什么都不保值。。  
+   
+> 20:34:11  小北-安邦-技术  
+   
+健康应该还是第一的  
+   
+> 20:34:16  龚晓冬-银联-产品-上海  
+   
+希望  
+   
+> 20:38:17  Ben-富友-产品  
+   
+记次的预付行为可以定义为预付卡行为  
+   
+> 20:39:07  龚晓冬-银联-产品-上海  
+   
+是可以，但是也要细分  
+   
+> 20:40:17  龚晓冬-银联-产品-上海  
+   
+[&amp;lt;a href=&amp;quot;https://c.m.163.com/news/a/EA32D6HL0512D03F.html?spss=newsapp&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;瞄准小镇青年 拍拍贷线下布局普惠金融&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;zuozuo1116888)  
+   
+> 21:20:37  程琳Wa-支付pm-上海  
+   
+@Ben-富友-产品?那什么场景下算预付费卡 什么场景下不算 有规则吗？  
+   
+> 21:45:04  百联-田浩沛  
+   
+[呲牙]  
+   
+> 21:48:55  Ben-富友-产品  
+   
+没有规则  
+   
+> 21:49:06  Ben-富友-产品  
+   
+看发卡企业给你开什么票  
+   
+> 21:52:36  Ben-富友-产品  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MzAwMzEyMzA1Ng==&amp;amp;mid=2650281953&amp;amp;idx=2&amp;amp;sn=85309a4a3eae390be36abb36b36f0aff&amp;amp;chksm=833345feb444cce852f6f4cf9967331f7a2281a351f55bea26fea4de69a7a9d5ccf79ea512a6&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=0313UbtuGTiqAvSKMH0yFqTw#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;单用途商业预付卡业务，发票开具具体规定是什么？&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;gxd1987)  
+   
+> 21:55:56  龚晓冬-银联-产品-上海  
+   
+[&amp;lt;a href=&amp;quot;http://www.chinatax.gov.cn/n810341/n810755/c2254755/content.html&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;关于营改增试点若干征管问题的公告&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;gxd1987)  
+   
+> 21:56:23  龚晓冬-银联-产品-上海  
+   
+gxd1987: 　　三、单用途商业预付卡（以下简称“单用途卡”）业务按照以下规定执行： 　　（一）单用途卡发卡企业或者售卡企业（以下统称“售卡方”）销售单用途卡，或者接受单用途卡持卡人充值取得的预收资金，不缴纳增值税。售卡方可按照本公告第九条的规定，向购卡人、充值人开具增值税普通发票，不得开具增值税专用发票。 　　单用途卡，是指发卡企业按照国家有关规定发行的，仅限于在本企业、本企业所属集团或者同一品牌特许经营体系内兑付货物或者服务的预付凭证。 　　发卡企业，是指按照国家有关规定发行单用途卡的企业。售卡企业，是指集团发卡企业或者品牌发卡企业指定的，承担单用途卡销售、充值、挂失、换卡、退卡等相关业务的本集团或同一品牌特许经营体系内的企业。 　　（二）售卡方因发行或者销售单用途卡并办理相关资金收付结算业务取得的手续费、结算费、服务费、管理费等收入，应按照现行规定缴纳增值税。 　　（三）持卡人使用单用途卡购买货物或服务时，货物或者服务的销售方应按照现行规定缴纳增值税，且不得向持卡人开具增值税发票。 　　（四）销售方与售卡方不是同一个纳税人的，销售方在收到售卡方结算的销售款时，应向售卡方开具增值税普通发票，并在备注栏注明“收到预付卡结算款”，不得开具增值税专用发票。 　　售卡方从销售方取得的增值税普通发票，作为其销售单用途卡或接受单用途卡充值取得预收资金不缴纳增值税的凭证，留存备查。  
+   
+> 21:56:43  龚晓冬-银联-产品-上海  
+   
+@程琳Wa-支付pm-上海  
+   
+> 22:04:17  程琳Wa-支付pm-上海  
+   
+这里面说全面取消营业税  
+   
+> 22:04:17  程琳Wa-支付pm-上海  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MjM5MjAxNDM4MA==&amp;amp;mid=2666173432&amp;amp;idx=1&amp;amp;sn=8f92b23f5166a545397fc6cf308da2c7&amp;amp;chksm=bdb2fabb8ac573ad38741383ff53f22a46b0ade411bd1a49ad1d76206c188e06d2548a01ed91&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=0313yWMWbzFAyWEZkN4X7OLQ#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;重磅！营业税正式废止&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;gxd1987)  
+   
+> 22:14:06  龚晓冬-银联-产品-上海  
+   
+@程琳Wa-支付pm-上海?是发布了管理办法废止了，但是细分还是服务业的税率  
+   
+> 22:15:29  龚晓冬-银联-产品-上海  
+   
+如果还有进账税，是可以抵扣的，营改增的目地是为了增加抵扣额，营业税是抵扣不了的  
+   
+> 22:17:19  龚晓冬-银联-产品-上海  
+   
+[&amp;lt;a href=&amp;quot;https://baijiahao.baidu.com/s?id=1610089668822155737&amp;amp;wfr=spider&amp;amp;for=pc&amp;amp;isFailFlag=1&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;我国金融业“营改增”的现状、影响及优化对策研究&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;zhangchaoqian003)  
+   

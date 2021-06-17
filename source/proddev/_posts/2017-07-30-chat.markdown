@@ -1,0 +1,16 @@
+---
+layout:     source 
+title:      "2017-07-30-WeChat"
+date:       2017-07-30 12:00:00
+author:     "PaymentGroup"
+tag:		  [chat]
+header-img: "img/post-bg-wechat.jpg"
+---
+> 00:41:29  Peter-找钢网-PM  
+   
+[强][玫瑰]  
+   
+> 09:40:11  Stark-产品经理，银生宝  
+   
+[强][玫瑰]  
+   

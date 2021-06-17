@@ -1,0 +1,41 @@
+---
+layout:     source 
+title:      "2019-01-10-WeChat"
+date:       2019-01-10 12:00:00
+author:     None
+lines:      7 
+tag:       [chat]
+---
+> 08:01:52  ark-雪球-开发  
+   
+[2019-01-10 滴滴2018查处83人、阿里巴巴2018年新增12亿行代码、张小龙谈启动页
+](http://mp.weixin.qq.com/s?__biz=MzU4Mzc5NTAzNQ==&amp;amp;amp;mid=2247483771&amp;amp;amp;idx=1&amp;amp;amp;sn=bd355edd30c09c7104c1ffa03f1504fe&amp;amp;amp;chksm=fda2e94fcad56059294c14e6500c2a5cc8ef9aad26c47eb6de571d64b863a1a2571d5cbd3e47&amp;amp;amp;mpshare=1&amp;amp;amp;scene=1&amp;amp;amp;srcid=0110cK8m2Z66quECVlKmZ2aS#rd)  
+   
+> 10:03:46  刘科长@支付百科  
+   
+[支付百科：现场直击微信支付2019全新服务商政策！
+](http://mp.weixin.qq.com/s?__biz=MjM5MTQ0ODgyMA==&amp;amp;amp;mid=2650645957&amp;amp;amp;idx=1&amp;amp;amp;sn=e310d77be2e18d4e2e51145465a5da06&amp;amp;amp;chksm=bebc6e5e89cbe748c7230a9fe65d7a7c93842d8b251bf58b140cde5d3064116ab6509fbbc3b3&amp;amp;amp;mpshare=1&amp;amp;amp;scene=1&amp;amp;amp;srcid=01105DTl5tqXNQZLOJSiTiar#rd)  
+   
+> 18:30:20  sunshine-苏宁金融-技术-南京  
+   
+[张小龙：每天都有 1 亿人教我如何做产品（附演讲完整视频）
+](http://mp.weixin.qq.com/s?__biz=MzA4NTU2MTg3MQ==&amp;amp;amp;mid=2655166811&amp;amp;amp;idx=1&amp;amp;amp;sn=e87a6488b6c727a87d9084c635fcbbda&amp;amp;amp;chksm=8460063bb3178f2dd0444cc7d6b792888c88c36f032dde56f9047dbc73d62f056ea1233e8a85&amp;amp;amp;mpshare=1&amp;amp;amp;scene=1&amp;amp;amp;srcid=#rd)  
+   
+> 22:10:12  于江宁-ChinaPay-产品经理-上海  
+   
+[外媒炸裂！真是外星人？宇宙深处神秘信号到底要不要回应？
+](http://mp.weixin.qq.com/s?__biz=MzAxMzk5MDc2OQ==&amp;amp;amp;mid=2247507466&amp;amp;amp;idx=1&amp;amp;amp;sn=e97ce672b58494910b449c089bd1216f&amp;amp;amp;chksm=9b98b014acef390262889c6a779bcf57497a55ded4b7c72c2884ae6a1661c35bd59eee03f2b5&amp;amp;amp;mpshare=1&amp;amp;amp;scene=1&amp;amp;amp;srcid=0110ahJpZFOvHQLU20g7BSMy#rd)  
+   
+> 23:29:39  龚晓冬-银联-产品-上海  
+   
+[余额宝和消费贷一年缩水 7545 亿，支付宝的银行梦被监管终结
+](https://c.m.163.com/news/a/E55C4Q8G051280SH.html?spss=newsapp)  
+   
+> 23:30:13  龚晓冬-银联-产品-上海  
+   
+“像蚂蚁金服这样的公司，每天要受监管，一年要写 700 封检查报告……” 马云在上月底举行的浙商总会上说。他称其为好事情，因为国家在给蚂蚁金服做体检。  
+   
+> 23:36:31  程昱_群管理  
+   
+余额宝的收益现在都不如银行的货币基金了  
+   

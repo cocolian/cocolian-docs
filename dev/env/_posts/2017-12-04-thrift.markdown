@@ -1,0 +1,33 @@
+---
+layout: dev
+title: "安装Apache Thrift"
+subtitle: "Dev Config"
+date: 2017-12-04 12:00:00
+author: "shamphone"
+chapter: "04"
+catalog: true
+tag: [devenv]
+---
+
+Centos上安装Apache Thrift，请参考官方文档： https://thrift.apache.org/docs/install/centos 。 
+
+## 注意
+
+1. 必须先安装ant，即sudo yum install ant。 否则无法编辑java代码。   
+2. 默认的 yum install thrift 安装的是0.9.1版本，这个版本比较老。 推荐大家安装新的版本0.10.0或者0.11.0。   
+3. 安装thrift ,不要用git包，直接到官网上下载tar包 wget http://apache.fayea.com/thrift/0.10.0/thrift-0.10.0.tar.gz   
+
+## 安装错误及解决方案
+
+**1.找不到libboost_unit_test_framework.a；**  
+解决：源码本地编译boost安装，不要直接yum install boost。   
+
+**2.gcc宏编译问题__STDC_FORMAT_MACROS**  
+解决：不要用git包，因为使用git包在安装的时候会报  
+
+```bash
+src/thrift/server/TNonblockingServer.cpp:460:16: 
+错误：expected ‘)’ before ‘PRIu32’
+"(%" PRIu32 " > %" PRIu64
+                ^
+```

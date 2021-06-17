@@ -1,0 +1,117 @@
+---
+layout: 	coco
+title: 		"控制结构"
+date: 		2018-08-07 12:00:00
+author: 	"shamphone"
+chapter:	"8"
+---  
+
+
+
+## 一、示例
+
+和其他语言一样，Solidity使用条件语句和循环语句来控制流程。 
+我们先讨论条件语句，之后是循环语句。
+但这里需要提一下：**截止到这个版本，Solidity不支持switch和go。**   
+
+```
+
+pragma solidity 0.4.8;
+
+contract ControlStructure {
+
+    address public a;
+
+    function ControlStructure(uint input1) {
+        
+        // if-else 示例
+        if(input1 == 2)
+            a = 1;
+        else
+            a = 0;
+
+        // while 示例    
+        while(input1 >= 0){
+            if(input1 == 5)
+                continue; //本轮循环不往下执行，但会继续下一轮循环。 
+            input1 = input1 - 1;   
+            a++;
+        } 
+
+
+        // for 循环
+        for(uint i=0; i<=50; i++)
+        {
+            a++;
+            if(a == 4) break;
+        }  
+
+        // do while 示例
+        do{
+            a--;
+        } (while a>0);
+
+        // 条件运算符示例
+        bool isTrue = (a == 1)? true: false;
+
+        
+        // 注意，if 只能使用布尔值作为条件，其他类型都会出错，系统不会做自动转换
+        if (1) { 
+           ... 
+        }
+    }
+
+}
+
+```
+
+
+## 二、条件语句
+
+在solidity中，条件语句格式为：
+
+```
+if (condition) statement 
+```
+
+条件必须使用括号括起来。如果条件测试通过后需要执行多行语句，则必须使用{}括起来。 我们建议不管一行还是多行，都要使用{}。 
+
+注意，与 C 和 JavaScript 不同， Solidity 中非布尔类型数值不能转换为布尔类型，因此 ``if (1) { ... }`` 的写法在 Solidity 中 *无效* 。
+
+如果使用else，则else与距离最近的if配对。这和其他语言是类似的。 
+
+## 三、循环语句
+
+当条件为true时，while循环执行一条或者一个语句块，格式：
+
+```
+while(condition) statement
+```
+
+如果condition一开始就是false，则statement就不会被执行。 如果希望statement至少被执行一次，则可使用
+
+do statement while(condition);
+
+这个语句会先执行statement，然后验证条件。 
+
+## 四、确定循环
+
+for允许执行给定次数的循环：  
+
+```
+int a = 0;
+for(int i=0; i<10; i++) {
+	a += i;
+}
+```
+
+
+
+## 五、中断循环
+
+和java一样，solidity也可以使用break和continue来控制循环语句。 
+break是跳出包含break的最内层的循环，不再继续执行。 
+continue则是中断当前控制流，重新回到最内层循环的顶部。 
+
+
+

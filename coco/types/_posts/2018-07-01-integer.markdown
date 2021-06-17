@@ -1,0 +1,187 @@
+---
+layout: 	coco
+title: 		"整型"
+date: 		2018-08-04 12:00:00
+author: 	"shamphone"
+chapter:	"1"
+---
+
+## 一、类型表示
+
+solidity的整型比较复杂。 默认的使用``int`` / ``uint`` 分别表示有符号和无符号的不同位数的整型变量。 
+solidity提供的整型类型， 需要指定数据长度， 从8 bit (即 1 byte)到 256 bit (即32 bytes)。 
+对应的无符号类型为 uint8、uint16、uint24...uint256， 按照步长8来递增。 
+或者有符号类型的 int8、int16、int24...int256， 按照步长8来递增。
+而默认的``uint`` 和 ``int`` 分别是 ``uint256`` 和 ``int256`` 的别名。
+有符号整数以补码来表示，保留最高位作为符号位。 n位数字的取值范围为 -2^(n-1) ~ 2^(n-1)。
+无符号整数可以由全部位构成非负值， 范围是 0~2^n-1。
+例如 int8： -127~127； 而 uint8是0~255。 
+
+## 二、初始值
+
+uint和int变量，系统默认的初始值都是0。
+
+## 三、运算符
+
+* 比较运算符： ``<=`` ， ``<`` ， ``==`` ， ``!=`` ， ``>=`` ， ``>`` （返回布尔值）
+* 位运算符： ``&`` ， ``|`` ， ``^`` （异或）， ``~`` （位取反）
+* 算数运算符： ``+`` ， ``-`` ， 一元运算 ``-`` ， 一元运算 ``+`` ， ``*`` ， ``/`` ， ``%`` （取余） ， ``**`` （幂）， ``<<`` （左移位） ， ``>>`` （右移位）
+
+### 3.1 取模 
+
+取模的余数的正负号和被除数是相同的， (-5%3) == (-5%-3)== -2。
+
+
+### 3.2 溢出
+
+如果计算出现溢出，则高位会被抛弃。 无符号整数：
+
+```
+ function uintOverflow() public pure returns(uint8, uint8, uint8){
+        uint8 a = 255;
+        return (a, a+1, a*a);
+    }
+```
+
+返回值：
+```
+0: uint8: 255
+1: uint8: 0
+2: uint8: 1
+
+```
+
+有符号整数：
+```
+   function intOverflow() public pure returns(int8, int8, int8){
+        int8 b = 127;
+        return (b, b+1, b*b);
+    }
+```
+返回值：
+
+```
+0: int8: 127
+1: int8: -128
+2: int8: 1
+```
+
+
+### 3.3 除法截断
+
+除法总是会截断的（仅被编译为 EVM 中的 ``DIV`` 操作码），比如5/4 =1 。  但如果操作数都是literals类型，则不会截断。
+
+``` 
+function litOverflow() public pure returns(int256, int256) {
+	int a = 1;
+	int b = 4; 
+	return ((a/b)*100, (1/4)*100);
+}
+```
+	
+返回值：
+
+```
+0: int256: 0
+1: int256: 25
+```
+
+除以零或者模零运算都会引发运行时异常。
+
+
+### 3.4 移位
+
+移位运算的结果取决于运算符左边的类型。
+表达式 ``x << y`` 与 ``x * 2**y`` 是等价的，
+``x >> y`` 与 ``x / 2**y`` 是等价的。这意味对一个负数进行移位会导致其符号消失。
+按负数位移动会引发运行时异常。
+
+```
+pragma solidity ^0.4.24;
+
+
+contract IntegerType {
+    function shift() public pure returns(int,int,int,int){
+        int a = -1 << 2;//-4
+		int b = -1 >> 2;//0
+		int c = 1 << 2;//4
+		int d = 1 >> 2;//0
+        return (a, b, c, d);
+    }
+  
+}
+```
+
+返回值：
+```
+    0: int256: -4
+    1: int256: 0
+    2: int256: 4
+    3: int256: 0
+```
+
+> 由有符号整数类型负值右移所产生的结果跟其它语言中所产生的结果是不同的。在 Solidity 中，右移和除是等价的，因此对一个负数进行右移操作会导致向 0 的取整（截断）。而在其它语言中， 对负数进行右移类似于（向负无穷）取整。
+
+## 四、安全问题
+
+Solidity中整数溢出问题，在开发中防不胜防。 为了减少solidity合约开发中产生的安全问题，以太坊的官方开发博客陆续发布了一些与solidity开发安全相关的博文。
+在2017年8月6日有一篇使用SafeMath库进行整数安全操作的文章[SafeMath to protect from overflows](https://ethereumdev.io/safemath-protect-overflows/)， 
+对常用的整形操作做封装，解决溢出问题：
+
+```
+pragma solidity ^0.4.11;
+
+
+/**
+ * @title SafeMath
+ * @dev Math operations with safety checks that throw on error
+ */
+library SafeMath {
+  function mul(uint256 a, uint256 b) internal constant returns (uint256) {
+    uint256 c = a * b;
+    assert(a == 0 || c / a == b);
+    return c;
+  }
+
+  function div(uint256 a, uint256 b) internal constant returns (uint256) {
+    // assert(b > 0); // Solidity automatically throws when dividing by 0
+    uint256 c = a / b;
+    // assert(a == b * c + a % b); // There is no case in which this doesn't hold
+    return c;
+  }
+
+  function sub(uint256 a, uint256 b) internal constant returns (uint256) {
+    assert(b <= a);
+    return a - b;
+  }
+
+  function add(uint256 a, uint256 b) internal constant returns (uint256) {
+    uint256 c = a + b;
+    assert(c >= a);
+    return c;
+  }
+}
+```
+
+使用时，需要引入SafeMath库：
+```
+using SafeMath for uint256;
+```
+
+使用示例如下：  
+
+```
+contract MyContract {
+
+    using SafeMath for uint256;    
+    
+    uint256 result;
+
+    function SafeAdd(uint256 a, uint256 b) {
+      result = 0;
+      result = a.add(b);
+    }
+}
+
+```
+

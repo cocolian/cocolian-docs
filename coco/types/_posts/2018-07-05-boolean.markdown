@@ -1,0 +1,36 @@
+---
+layout: 	coco
+title: 		"布尔型"
+date: 		2018-07-05 12:00:00
+author: 	"shamphone"
+chapter:	"5"
+---
+
+## 一、布尔类型
+
+布尔类型使用``bool`` 来定义， 可能的取值为字面常数值 ``true`` 和 ``false`` 。
+
+布尔类型常量的默认值是false。 和其他语言不同，在solidity中，布尔和整型、字符串等不能互转，必须通过函数来转换。 
+
+```
+
+  function boo2int() public pure returns (int8, int8){
+        bool a ;
+        bool b = true;
+		// int8 c = int8(a)  //这会编译失败，不能强转；Type conversion not allowed from "bool" to "int8".
+        return ( a?int8(1):int8(-1) , b?int8(1):int8(-1));
+    }  
+
+``` 
+
+
+## 二、运算符
+
+*  ``!`` （逻辑非）
+*  ``&&`` （逻辑与， "and" ）
+*  ``||`` （逻辑或， "or" ）
+*  ``==`` （等于）
+*  ``!=`` （不等于）
+
+运算符 ``||`` 和 ``&&`` 都遵循同样的短路（ short-circuiting ）规则。就是说在表达式 ``f(x) || g(y)`` 中，
+如果 ``f(x)`` 的值为 ``true`` ，那么 ``g(y)`` 就不会被执行，即使会出现一些副作用。

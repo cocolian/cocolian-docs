@@ -1,0 +1,78 @@
+---
+layout: default
+---
+
+<!-- Page Header -->
+<header class="intro-header">
+	<div class="post-heading"> 
+         <h1>About Cocolian</h1>                             
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+		<div>	  
+Cocolian Framework is an opensource project to provide basic components for online payment system. 
+It is <a href="https://github.com/cocolian">hosted on Github</a>. 
+The payment system is an indispensable module for Internet applications, and it is also among a small number of Internet applications that could be standardized. 
+The Cocolian Framework was designed based on the <a href="http://doc.cocolian.cn/essay/">Phoenix Bear series</a>. 
+It provides basic components for the payment system with the microservice architecture, including RPC server, Payment Gateway, Account and Accounting System, Payment Channels, Payment Routing, etc. 
+ 
+The needs of various Internet companies in terms of payment, clearing and statement are common and can be developed as a general system. 
+At present, the payment systems of most companies are established when the company’s early technological power is weak, and many systems are built on the basis of the payment systems of banks or third-party payment companies. They are technically conservative and their design is unreasonable. 
+Many systems make use of Map type data for input and output of interfaces.
+This has made it difficult to develop and maintain payment systems. 
+Payments require high security and reliability of transactions. 
+In addition to the need to ensure the design as much as possible, but also need to learn lessons from the use of experience, to avoid repeated pitting. 
+Each pit means the company's economic loss. <br/>
+In this way, we can summarize the usage issues under various scenarios and use them to update these software to avoid the proliferation of problems. 
+We look forward to establish an open source system, use new and mature microservice architecture, and rationally introduce new technologies.
+Following payment product requirement, Cocolian Framework helps to realize a payment system with a reasonable architecture, elegant codes and easy to use.
+
+</div>
+
+<div class="session_list">
+	<section><header><a href="dev/">Knowledge Base</a></header>
+	<article>
+	This is an active community. Every day, the community shares and discusses payment domain knowledge. 
+	Our volunteers will organize and publish content shared by guests in the group to the WeChat.
+	We hope that through our efforts, universal payment knowledge will be used to enhance the overall product, technology, and innovation capabilities of the payment domain. 
+	Visit the <a href="http://doc.cocolian.cn/wechat/">Knowledge Base</a> to see all history sharing.
+	<ul>
+{% assign posts = site.categories['wechat'] | sort : "date" | reverse %}
+{% for post in posts limit:5 %}
+	{% assign  display = false  %}
+		{% for tag in post.tags %}
+			{% if tag == "publish"  %} {% assign display = true %}  {%endif %}
+		{% endfor %}
+	{% if display %}
+    <li><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a> </li>
+	{% endif %}
+{% endfor %}
+	</ul>
+	</article>
+	</section>
+</div>
+
+<div class="session_list">	
+	<section>
+	<header>Join Us</header>
+	<article>
+	At present, more than 200 product designers and developers have participated in this project. If you are:
+<ul>
+<li>Senior payment product manager: Welcome to join the organization to provide guidance for the project team so that everyone can achieve your ideas together;</li>
+<li>Software Architect: Introduce the latest software architecture to make your design a reality. </li>
+<li>Development Engineer: Learn the latest architectural design ideas and improve your technical skills through code practice. </li>
+</ul>
+Please scan code to link the "Phoenix Old Bear" public number, or leave a message <strong>"join the cocolian project development"</strong>. The project team will contact you as soon as possible.
+	<div>
+	<img src="http://static.cocolian.cn/img/reward/weixin.jpg" width="300px" height="300px"/></div>
+	</article>
+	</section>
+</div>
+
+
+ 
+</div>
+</div>

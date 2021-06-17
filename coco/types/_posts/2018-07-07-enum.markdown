@@ -1,0 +1,58 @@
+---
+layout: 	coco  
+title: 		"枚举类型"  
+date: 		2018-08-04 12:00:00  
+author: 	"shamphone"  
+chapter:	"7"
+---
+
+## 一、枚举类型
+
+枚举是Solidity中用户自定义的类型之一。
+使用enum关键字，并且要求至少有一个枚举值。
+如下， EmptyEnum会编译不通过。 
+enum不是ABI支持的原生数据类型，所以在输入输出接口中， enum在编译后会被转换为无符号整数(uint8)。 
+
+
+```
+contract TestEnum {    
+
+	// 这个编译不通过， 
+	// 提示 ParserError: enum with no members is not allowed.
+	// 枚举类型定义必须至少有一个枚举值。 
+	// enum EmptyEnum {} 
+	
+	//定一个货币枚举值；
+	enum Currency {
+	    RMB, 
+	    USD, 
+	    JPY, 
+	    EUR 
+	    
+	}
+	
+	function examples() public pure returns (Currency, Currency, Currency, uint8) {
+	    Currency defaultCurrency;
+	    Currency initVar = Currency.JPY;
+	    Currency int2Enum = Currency(2);
+	    uint8 enum2Int= uint8(Currency.EUR);
+		return (defaultCurrency, initVar, int2Enum, enum2Int);
+	} 
+}
+ 
+```
+
+返回值：
+
+```
+0: uint8: 0
+1: uint8: 2
+2: uint8: 2
+3: uint8: 3
+```
+
+但在使用中， 枚举不会自动转换为uint，需要显式转换， 如```uint8(Currency.EUR)```。 
+这个转换， 是按照定义的顺序，第一个枚举值转换为0，第二个为1...以此类推。 
+
+
+

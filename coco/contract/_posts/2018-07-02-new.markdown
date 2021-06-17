@@ -1,0 +1,50 @@
+---
+layout: 	coco
+title: 		"概念"
+date: 		2018-06-12 12:00:00
+author: 	"shamphone"
+status: 	"hidden"  
+chapter:	"1"
+---
+
+
+二、New操作符
+```
+pragma solidity 0.4.8; 
+
+/*
+* @title Example the for Solidity Course
+* @author Ethereum Community
+*/
+
+// A contract can create a new contract using the new keyword. 
+// The full code of the contract being created has to be known in advance, 
+// so recursive creation-dependencies are not possible.
+
+// lets define a simple contract D with payable modifier
+contract D {
+    uint x;
+    function D(uint a) payable {
+        x = a;
+    }
+}
+
+
+contract C {
+    // this is how you can create a contract using new keyword
+    D d = new D(4); 
+    // this above line will be executed as part of C's constructor
+
+    // you can also create a contract which is already defined inside a function like this
+    function createD(uint arg) {
+        D newD = new D(arg);
+    }
+
+
+    // You can also create a conract and at the same time transfer some ethers to it.
+    function createAndEndowD(uint arg, uint amount) {
+        // Send ether along with the creation of the contract
+        D newD = (new D).value(amount)(arg);
+    }
+}
+```

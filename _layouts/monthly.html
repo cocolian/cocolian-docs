@@ -1,0 +1,83 @@
+---
+layout: default
+description: "来自微信群‘支付产品技术交流群’的聊天记录整理"
+---
+
+<aside class="content-aside">
+<ul>
+<li><a href="http://doc.cocolian.cn/wechat/">支付交流群首页</a></li>
+{% assign posts =  site.categories["group"] | reverse %}
+{% for post in posts  %}
+<li><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></li>
+{% endfor %}
+</ul>
+
+<ul>
+{% assign posts =  site.categories["monthly"] | sort:"month" | reverse %}
+{% for post in posts  %}
+<li><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></li>
+{% endfor %}
+</ul>
+</aside>
+<header class="intro-header">
+	<div class="post-heading">                  
+		<h1>{{ page.title }}</h1>                
+		<ul class="meta">
+			<li><i class="icon-sitemap"></i><a href="/wechat">分享记录</a></li>
+			<li><i class="icon-user"></i>{% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %}  </li>
+			<li><i class="icon-time"></i>{{ page.date | date: "%Y-%m-%d" }}</li>
+		</ul>                
+	</div>           
+</header>
+<!-- Post Content -->
+<article class="post-content"> 
+
+{{ content }}
+    <!-- Post Container -->
+            <div class="post-container">
+
+{% assign posts = site.categories['wechat'] | sort:'date' %}
+{% for post in  posts %}
+	{% assign  display = false  %}
+	{% assign postMonth = post.date | date: "%Y-%m" %}
+	{% if postMonth == page.month %}
+		{% for tag in post.tags %}
+			{% if tag == "publish"  %} {% assign display = true %}  {%endif %}
+		{% endfor %}
+	{% endif %}
+    {% if display %}
+<div class="post-preview">   
+        <h2 class="post-title">
+             <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h2> 
+
+        <div class="post-content-preview">
+           {% if post.description %}{{ post.description }}{% else %} {{ post.content | strip_html | split:'#' | first | strip }} {% endif %}
+        </div>
+  
+</div>
+<hr>
+	{% endif %}
+{% endfor %}
+
+		<hr/>              
+		<ul class="pager">
+			{% if page.previous.url %}
+			<li class="previous">
+				<a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">
+				Previous<br>
+				<span>{{page.previous.title}}</span>
+				</a>
+			</li>
+			{% endif %}
+			{% if page.next.url %}
+			<li class="next">
+				<a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">
+				Next<br>
+				<span>{{page.next.title}}</span>
+				</a>
+			</li>
+			{% endif %}
+		</ul>				
+	</div>  
+</article>

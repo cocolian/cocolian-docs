@@ -1,0 +1,71 @@
+---
+layout:     source 
+title:      "2019-01-15-WeChat"
+date:       2019-01-15 12:00:00
+author:     None
+lines:      15 
+tag:       [chat]
+---
+> 08:02:09  ark-雪球-开发  
+   
+[2019-01-15 王慧文回应美团招聘游戏人才、张羽确认加盟字节跳动任副总裁、马云谈打造海南“淘金热”
+](http://mp.weixin.qq.com/s?__biz=MzU4Mzc5NTAzNQ==&amp;amp;amp;mid=2247483803&amp;amp;amp;idx=1&amp;amp;amp;sn=c210e4024703b01e5c2a0551f0b2d041&amp;amp;amp;chksm=fda2e9afcad560b9b5138fb96f9ab81d78e26c70ae0601c4b18ae47a73b0df523bc5c994e67d&amp;amp;amp;mpshare=1&amp;amp;amp;scene=1&amp;amp;amp;srcid=0115VPlfU2MG5PRDh9VmXeDb#rd)  
+   
+> 08:10:55  右军  
+   
+[阿里巴巴数据库分库分表的实践
+](http://mp.weixin.qq.com/s?__biz=MzIxMzEzMjM5NQ==&amp;amp;amp;mid=2651031145&amp;amp;amp;idx=1&amp;amp;amp;sn=00938dd0ece5d1ce24d0d6c7b186445a&amp;amp;amp;chksm=8c4c536dbb3bda7ba6ccc7f4fc9706f0b01747da2310ffd221e036b4f1d73127f3b45c96cc12&amp;amp;amp;mpshare=1&amp;amp;amp;scene=1&amp;amp;amp;srcid=0115fIpAlijyeeZP9iSbvRwW#rd)  
+   
+> 10:11:28  张叶-付费通-产品-上海  
+   
+![2019-01-15 10:11:28](http://static.cocolian.cn/img/20190115_101128.png) 
+   
+> 10:14:01  Ben-富友-产品  
+   
+这个存款有利息么  
+   
+> 10:14:25  小北-安邦-技术  
+   
+。。。。。。  
+   
+> 10:17:53  修--产品  
+   
+有吸收存款的资质？  
+   
+> 10:18:26  小北-安邦-技术  
+   
+他们申请资质容易一些？  
+   
+> 10:18:33  张叶-付费通-产品-上海  
+   
+是依靠三方的支付账户做的吧  
+   
+> 10:21:58  Ben-富友-产品  
+   
+那就没利息  
+   
+> 10:22:17  Ben-富友-产品  
+   
+那也不能用存款这个词  
+   
+> 10:22:19  Ben-富友-产品  
+   
+违规  
+   
+> 10:22:23  Ben-富友-产品  
+   
+举报去  
+   
+> 10:46:05  亿达-支付+税务筹划-产品-田科  
+   
+群里有富民银行的朋友吗  
+   
+> 11:03:56  vniuv  
+   
+[深圳市金融办关于印发《关于促进深圳市供应链金融发展的意见》的通知
+](http://mp.weixin.qq.com/s?__biz=MzU2NTA0NjEwMw==&amp;amp;amp;mid=2247484465&amp;amp;amp;idx=1&amp;amp;amp;sn=2f3325b49e00681b6475c14e455f7729&amp;amp;amp;chksm=fc40fa09cb37731f62f7e474295a0636a8db5eb722f139af2ec6d6e6b753cb491e89c25d23c9&amp;amp;amp;mpshare=1&amp;amp;amp;scene=1&amp;amp;amp;srcid=0114LffuNCG415Gm7FgtVeP0#rd)  
+   
+> 15:20:15  张泽雄-民生金服-研发-北京  
+   
+群里有做融资担保业务的朋友吗，有业务勾兑  
+   

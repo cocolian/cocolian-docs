@@ -1,0 +1,44 @@
+---
+layout: essay
+title:      "Hello 2016"
+subtitle:   " \"Hello World, Hello Blog\""
+date:       2016-08-01 12:00:00
+author:     "shamphone"
+header-img: "img/home-bg-post.jpg"
+catalog:	true
+tags:		[Fintech]
+---
+
+> “Yeah It's on. ”
+
+
+## 前言
+
+Shamphone 的 Blog 就这么开通了。
+
+[跳过废话，直接看技术实现 ](#build) 
+
+
+
+2016 年，总算找个地方可以记录东西了。
+
+
+曾经搞过[新浪博客](http://blog.sina.com.cn/slixf)，新浪就这么个好东西，被广告糟蹋了。 在技术博客上卖各种女性用品，也是醉了。广告比博客内容还多，不知道新浪博客运营人员是怎么想的。 
+
+
+<p id = "build"></p>
+---
+
+## 正文
+
+特别感谢github，以及Hux同学。这个博客是直接把Hux同学的博客模板扒下来，改吧改吧，就开始不要脸的上路了。 
+
+技术同学，有兴趣的话，可以逐步研究起来相关技术。
+
+## 后记
+
+如果你恰好逛到了这里，希望你也能喜欢这个博客主题。
+
+—— Shamphone Lee, 2016-8-1
+
+

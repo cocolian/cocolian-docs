@@ -1,0 +1,70 @@
+---
+layout: dev
+title: "文档编写规范"
+subtitle: "指南"
+date: 2017-10-08 12:00:00
+author: "shamphone"
+chapter: "11"
+
+---
+
+## Markdown语法
+产品和技术文档都放在dev目录下，以markdown的格式来编辑。 可以先阅读[markdown文档格式入门](https://guides.github.com/features/mastering-markdown/)。
+
+## 文件名规范
+
+文件名必须以如下方式命名：
+```bash
+2017-10-04-github-1.markdown
+2017-10-08-doc-guide.markdown
+```
+格式是
+ 
+```bash
+[日期]-[文档标题].markdown
+```
+
+- 日期： 必须是YYYY-MM-DD的格式， 选择当前文件编写的日期。 
+- 文档标题： 必须是英文字符，字符之间用-号连接。注意标题控制在3个单词以内，并且容易让人看明白 。
+
+## 元数据
+
+```xml
+layout: 	post
+title: 		"文档编写规范"
+subtitle: 	"指南"
+date: 		2017-10-08 12:00:00
+author: 	"shamphone"
+header-img: "img/home-bg-post.jpg"
+catalog: 	true
+tag: 		[bootcamp, specification]
+```
+
+| 标签 		| 说明 
+|-----		| -----------------	
+|layout 	| 在 _layouts 目录下定义的文档模板，默认都使用 post
+| title 	| 文档标题，将显示在页面上，使用中文，表达需规范简洁。 
+|subtitle 	| 副标题，对标题的补充说明
+| date 		| 文档编写日期，注意这个日期需保持和文件名上的日期一致，并且文档之间的日期不能重复。同一天的文档，务必保证时间不同。 
+|author		| 作者，可以写中文，可以用昵称。 
+|header-img	|标题图片，可以自己定义，需要1440*232尺寸（改版后可能会弃用，默认都使用"img/home-bg-post.jpg"）
+|catelog	| 默认为true,不要更改
+|tag		| 标签，用来在首页面显示对应的类别，文章可以放到多个类别中。 参考下表。 
+
+## Tag标签
+
+| 标签 			| 说明 
+|-----			| -----------------	
+|bootcamp 		| 新员工必读
+|specification 	| 规范
+|design			| 设计文档
+
+和项目相关的文档，请把项目名称也加入到Tag中，比如jigsaw-rpc-user项目的设计文档， tag值应该是 [design, jigsaw-rpc-user]。
+
+## 图片
+
+markdown支持所有HTML支持的图片，jpg，png等都可以。 图片放在 /img/in-post 目录下。注意图片命名需要唯一。
+
+## 附件
+
+请勿上传直接可执行文件到服务器上。 附件放到 attach目录下。 

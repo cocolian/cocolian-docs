@@ -1,0 +1,150 @@
+---  
+layout:     post   
+title:      "20180910-IntellIJ IDEA 使用技巧"  
+date:       2018-09-10 12:00:00  
+author:     "支付产品开发群"  
+tag:		[publish] 
+---
+
+
+俗话说：工欲善其事必先利其器。所以今天跟大家一起分享的主题：IntelliJ IDEA 的使用技巧。  
+![image](http://static.cocolian.cn/img/20180910_210213.png)  
+分享的内容大致分为下面10个方面：
+### 一、介绍和基本信息  
+第一部分比较简单，我就快速的过一下。  
+补充说一句，本次分享的IntellIJ IDEA 是mac版。  
+![image](http://static.cocolian.cn/img/20180910_210358.png)  
+![image](http://static.cocolian.cn/img/20180910_210409.png)  
+![image](http://static.cocolian.cn/img/20180910_210452.png)
+IntellIJ IDEA 的产品基本介绍，现在InteliJ IDEA 公司出品的应该比下面所列的更多：
+![image](http://static.cocolian.cn/img/20180910_210547.png)  
+IntellIj IDEA 的页面简单说明：
+![image](http://static.cocolian.cn/img/20180910_210622.png)
+![image](http://static.cocolian.cn/img/20180910_210637.png)
+IntelliJ IDEA 常见图标认识，这点跟eclipse有很大的区别 特别是下面我圈红框的几个图标
+![image](http://static.cocolian.cn/img/20180910_210744.png)
+![image](http://static.cocolian.cn/img/20180910_210757.png)
+以上就是第一部分的简单介绍。
+
+---
+
+### 二、神奇的快捷键
+我最早接触IntellIJ IDEA 在2014年，现在已经差不多快使用4年多了，没有刻意去背过快捷键，但是一般的快捷键都能熟练的敲出来，就算不知道，稍微尝试一下，也能知道。  
+最主要的原因是IntelliJ IDEA 很多的快捷键都是根据快捷键的作用的英文单词开头的，下面我们打开英文快捷键的文档：
+![image](http://static.cocolian.cn/img/20180910_211231.png)
+如果大家正在使用idea,可以打开：
+![image](http://static.cocolian.cn/img/20180910_211324.png)
+#### 2.1 记住IntellIJ IDEA的快捷键的技巧
+我现在就列举几个常用的快捷键，但是非常的好记，只要记住英文单词，基本上快捷键就不会忘记，切记不要自己去修改IntellIJ idea的快捷键，特别是从eclipse转过的同学，我们要学会去适应IntellIJ IDEA 的风格和习惯。
+![image](http://static.cocolian.cn/img/20180910_211752.png)
+- 上图这组快捷键，我平时用的比较多。看一下就能全部记住，而且不会忘记，因为他有很强的规律可寻。
+
+- 第一个是抽取方法，方法的单词是Method ,所以是command+Alt+M ；同理下一个 抽取变量，抽取字段，抽取常量，抽取方法参数等
+- 再看我们平常使用比较多的查询快捷键。也是非常的人性化。  
+![image](http://static.cocolian.cn/img/20180910_212127.png)
+- 快捷键的字母都是英文单词的首字母；
+![image](http://static.cocolian.cn/img/20180910_212207.png)
+- 再看这组，重新方法，实现接口的快捷键，也是英文首字母；    
+
+**这种类似的快捷键在IntellIJ IDEA有很多；所以学习IntellIJ IDEA 的快捷键，个人推荐直接看英文的解释，有助于记忆和理解，比看中文翻译的效果会好很多。**
+
+#### 2.2 比较重要的快捷键
+下面是我罗列的快捷键，是比较重要，操作频率是非常高的。
+![image](http://static.cocolian.cn/img/20180910_212632.png)
+每组快捷键的演示动态，我就不在这里发了，后面大家可以直接去看看ppt. 里面有每一种快捷键的演示效果动态
+![image](http://static.cocolian.cn/img/20180910_212806.png)
+![image](http://static.cocolian.cn/img/20180910_212820.png)
+
+以上就是快捷键部分；快捷键用的好，可以提高你的开发效率和准确率， 最高的进阶是你可以达到代码是一段一段的出来的，而不是一行行死敲出来的。特别是熟练掌握重构的代码操作技巧。
+
+---
+
+### 三、疑难杂症 
+#### 3.1 常见问题
+下面我们来说说在使用IDEA时遇到的坑。
+![image](http://static.cocolian.cn/img/20180910_213337.png)
+- **第一个坑** 是从Eclipse转动InteliJ IDEA 的观念的转变，刚开始使用的特别不习惯
+![image](http://static.cocolian.cn/img/20180910_213450.png)
+- **第二个坑** 是因为IDEA里面的文件有颜色，不同的颜色有不同的意思，如果不知道，有可能采坑。
+![image](http://static.cocolian.cn/img/20180910_213549.png)
+比如这个红色的文件夹，如果把你的代码的某一文件被标记了这个颜色，恭喜你入坑了；  
+项目跑起来的时候会提示此类不存在，但是代码编译的时候有可能不报错。  
+基本的办法是在设置里面取消排除就行了。  
+
+- **第三个坑** 在idea里面几个重要的概念理解： make, compile , buid, rebuild, Artifacts，这边我引用了英文的解释，英文解释说的比较清楚，我就不再翻译了。
+![image](http://static.cocolian.cn/img/20180910_213915.png) 
+
+#### 3.2 常见问题解决办法
+![image](http://static.cocolian.cn/img/20180910_213935.png)
+![image](http://static.cocolian.cn/img/20180910_213953.png)  
+
+---
+
+### 四、版本控制
+这一部分是我认为IDEA比较强大的功能之一，版本控制的支持，不管是++SVN++还是++GIT++,他都完美支持。无需安装任何的插件，**idea默认自动集成**。
+![image](http://static.cocolian.cn/img/20180910_214141.png)
+这里分享一个小**技巧**，可能大家都知道。
+![image](http://static.cocolian.cn/img/20180910_214219.png)
+这个小技巧很实用，如果勾选了，文件下子文件被修改了，父文件的颜色也会随之改变，很方便；
+![image](http://static.cocolian.cn/img/20180910_214352.png)
+如果你不知道不同的文件的颜色代表什么，可以在设置里面查看文件的状态。  
+什么颜色的文件是新增，什么颜色的文件是被修改了等等
+![image](http://static.cocolian.cn/img/20180910_214425.png)
+如果你的项目有版本控制，一般都会有这个图标，这个是文件的颜色意思，可以看文件名  
+![image](http://static.cocolian.cn/img/20180910_214518.png)  
+idea 还有一个比较人性的功能，在版本冲突的时候，解决冲突很方便。编辑冲突文件，会弹出这个框。  
+![image](http://static.cocolian.cn/img/20180910_214655.png)  
+![image](http://static.cocolian.cn/img/20180910_214739.png)  
+这个图比较清楚，不同文件的颜色代表不同的状态。    
+版本控制这块介绍的比较简单，但是这个很重要，几乎每天都要进行大量的操作，里面的内容也很多。可以专门组织一次来分享，我这里就不再展开。  
+
+---
+
+### 五、常用的插件介绍
+这部分是idea的一些常用的插件介绍，非常的好用，大家有兴趣的可以去尝试一下，应该可以帮助你提高不少的工作效率，减少一些重复和低效的操作。    
+![image](http://static.cocolian.cn/img/20180910_215120.png)  
+特别说明一下这个插件：**RestfulTookit** 非常好用，特别是前后端联调的时候，往往前端回说接口报错了，一般情况下，都是前端直接发一个接口地址给后端。但是这个接口可能不是你写的，不知道在哪个类里面，可以用这个插件，快速定位到或者还有一组快捷键也可以办到。  
+
+---
+
+### 六、重构代码快捷键
+这部分介绍重构代码时常用的快捷键：  
+![image](http://static.cocolian.cn/img/20180910_215432.png)  
+每一组快捷键如何操作，都在ppt里面有动态，我这边就简单的带过了。  
+
+---
+
+### 七、代码模板制作
+![image](http://static.cocolian.cn/img/20180910_215602.png)  
+制作模板和模板的演示在ppt里面都有动态的演示  
+
+---
+
+### 八、idea的快速补全功能
+这部分是我平时使用最高的操作一下，利用idea的快速补全功能，可以帮我减少一些不必要的操作  
+![image](http://static.cocolian.cn/img/20180910_215747.png)  
+![image](http://static.cocolian.cn/img/20180910_215759.png)  
+ppt里面都有动态，这里就不展开了。  
+
+---
+
+### 九、前端小技巧
+该部分是前端的小技巧，如果大家用idea写前端，可以去看看  
+![image](http://static.cocolian.cn/img/20180910_215910.png)  
+
+---
+
+### 十、综合  
+![image](http://static.cocolian.cn/img/20180910_215952.png)  
+![image](http://static.cocolian.cn/img/20180910_220013.png)  
+
+---
+
+---
+
+## 补充
+1. IntellIJ IDEA 使用技巧分享ppt文件下载地址：百度云链接:
+https://pan.baidu.com/s/1mAxTuH6AF9ibOP_ShpKh_w 密码: 2byg  
+2. 推荐两个插件，maven help和ideavim，一个是管理版本冲突的好插件，一个是能让你尽可能释放鼠标的插件；  
+3. Wakatime记录工作耗时的；  
+4. jrebel也推荐一个；  

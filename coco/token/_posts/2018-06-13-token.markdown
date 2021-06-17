@@ -1,0 +1,583 @@
+---
+layout: 	coco
+title: 		"在以太坊上发行数字货币"
+date: 		2018-06-13 12:00:00
+author: 	"shamphone"
+chapter:	"9"
+---
+
+本文参考 [ethereum token](https://www.ethereum.org/token) ，以发行数字货币为案例，介绍solidity语言和以太坊编程。 
+
+
+## 一、数字货币
+
+在以太坊，Token可以用来表示各种可以交易的商品： 数字货币、积分、证书、IOU、游戏虚拟物品等。这些Token在实现上有一些共性，可以提炼成通用接口，这样以太坊钱包和其他的一些应用也可以兼容使用这些共性。 
+
+
+### 1.1 Token的一个极简实现
+
+要实现一个标准的合约，会相当复杂。我们由浅入深，先实现一个非常简单的合约。 
+
+```
+{% include_relative solidity/token-minimal.sol %}
+```
+
+### 1.2 完整代码
+
+这里是一份完整的合约代码：
+
+```
+{% include_relative solidity/token-erc20.sol %}
+```
+
+### 1.3 阅读代码
+
+我们从最简单的合约代码开始。 
+
+```
+    contract MyToken {
+        /* This creates an array with all balances */
+        mapping (address => uint256) public balanceOf;
+    }
+```
+
+这里定义了一个余额Map，注意的要点：  
+
+1. address： 是指账户地址，16进制格式的。   
+2. uint256： 2^256 = 10^77 无符号整数，指账户余额，基本能满足各路壕的需求。 
+3. public：  所有账户余额都是公开的。 **链上任何人都可以查询其他人的账户余额**。 
+
+如果这个合约能够正常发布出来，它就可以正常的工作，但是没什么用。 只是一个能够查询余额的合约，其他什么事都做不了，包括获取一个数字货币。 所有账户余额都返回0。 
+所以我们需要在启动的时候，预置一些数字货币进来。 于是有这么几行代码： 
+
+```
+    function MyToken() public {
+        balanceOf[msg.sender] = 21000000;
+    }
+```
+
+这是一个构造函数，方法名和类名是一样的。 构造函数仅仅在这个合约**被部署到网络上**的时候**运行一次**。它将给**msg.sender**，即发布这个合约的人，设置余额。 21000000是一个任意设定的数字。 
+当然，也可以将这个数字作为参数来传进来。 
+
+```
+    function MyToken(uint256 initialSupply) public {
+        balanceOf[msg.sender] = initialSupply;
+    }
+```
+
+这样在部署的时候，比如使用Ethereum Wallet来部署，就他会让你选择这个初始参数的值。 
+
+现在至少已经有一个账户拥有初始数字货币余额了。接下来就需要添加一个方法，让这些数字货币能够交易。 
+
+```
+    /* Send coins */
+    function transfer(address _to, uint256 _value) public {
+        /* Add and subtract new balances */
+        balanceOf[msg.sender] -= _value;
+        balanceOf[_to] += _value;
+    }
+```
+
+这是一个相当直观的方法：
+1. _to： 	收款人的账户地址；  
+2. _value:  送出的金额。 
+
+实现也很简单，就是增减收付款人的账户余额。 但这个实现是有问题的，如果出款人账户余额不足怎么办？ 还有就是如果收款人是个土豪，再接收一笔巨款，就把账户打爆了，怎么办？
+所以我们需要增加一个校验。 校验的代码并不复杂，问题是，如果校验发现参数确实有问题，那应该怎么办？ 在以太坊上，终止程序执行有两种方法：  
+1. 直接通过return来返回某个错误信息。 这会节省一点gas，但也有个头疼的问题， 已经执行的代码产生的任何变更，都会被保存到链上。  
+2. 通过throw 来抛出异常， 这会将本次产生的所有变更都回滚，但也会导致发送者的gas都被消耗。 不过Wallet能够检测出来可能抛的异常，他会显示一个警告，避免以太币被浪费掉。 
+
+```
+    function transfer(address _to, uint256 _value) public {
+        /* Check if sender has balance and for overflows */
+        require(balanceOf[msg.sender] >= _value && balanceOf[_to] + _value >= balanceOf[_to]);
+
+        /* Add and subtract new balances */
+        balanceOf[msg.sender] -= _value;
+        balanceOf[_to] += _value;
+    }
+```
+
+这个合约本身还需要一些基本信息。 以后我们会通过Token注册表来处理这些合约，现在我们先直接上代码吧。 
+```
+    string public name;
+    string public symbol;
+    uint8 public decimals;
+```
+
+修正下构造函数，添加上述合约信息。 
+
+```
+/* Initializes contract with initial supply tokens to the creator of the contract */
+function MyToken(uint256 initialSupply, string tokenName, string tokenSymbol, uint8 decimalUnits) public {
+	balanceOf[msg.sender] = initialSupply;              // Give the creator all initial tokens
+	name = tokenName;                                   // Set the name for display purposes
+	symbol = tokenSymbol;                               // Set the symbol for display purposes
+	decimals = decimalUnits;                            // Amount of decimals for display purposes
+    }
+
+```
+
+最后，我们需要设置一些“事件”。 这是以太坊特有的，它可以让以太坊钱包这样的应用来跟踪合约上发生的活动。 所有事件的第一个字符必须是大写的，并且放在合约代码的起始部分。 
+
+```
+    event Transfer(address indexed from, address indexed to, uint256 value);
+```
+
+这里我们设置了一个转账的事件。然后在转账代码实现的最后，发出这个事件。 
+
+And then you just need to add these two lines inside the "transfer" function:
+
+```
+        /* Notify anyone listening that this transfer took place */
+        emit Transfer(msg.sender, _to, _value);
+```
+
+这样，一个合约就开发完成了。 
+
+### 1.4 关于注释
+
+和java一样，solidity也支持注释标签，比如@notice和@param。这些注释可以让以太坊钱包等应用可以将注释的内容显示给用户。 [这里有关于注释的详细说明](https://github.com/ethereum/wiki/wiki/Ethereum-Natural-Specification-Format)。
+
+
+## 二、改进一下
+
+现在这个加密货币可以上线了。可我们总要折腾，把这个货币做的更有意思一点。 
+
+### 2.1 完善基础功能
+
+在基础功能上，我们还有很多事情要做，比如approve, sendFrom等功能。 
+
+考虑这么一个场景： 把数字货币卖给交易所，不可能就把数字货币发送到交易所给的账号就完事了， 他们还得知道是谁发的数字货币，也不会去订阅这些事件。 
+所以，我们需要增加如下支持：  
+
+1. 增加批准approve功能，批准交易所从你的账户里面扣款。   
+2. 或者更进一步，提供approveAndCall功能，在approve之后，通知交易所做后续的事情。 
+
+在这些待实现的功能里面， 转账是最基本的公用功能。 我们把它修改为内部函数，供其他方法实现时调用。 
+
+```
+    /* Internal transfer, can only be called by this contract */
+    function _transfer(address _from, address _to, uint _value) internal {
+        require (_to != 0x0);                               // Prevent transfer to 0x0 address. Use burn() instead
+        require (balanceOf[_from] >= _value);                // Check if the sender has enough
+        require (balanceOf[_to] + _value >= balanceOf[_to]); // Check for overflows
+        require(!frozenAccount[_from]);                     // Check if sender is frozen
+        require(!frozenAccount[_to]);                       // Check if recipient is frozen
+        balanceOf[_from] -= _value;                         // Subtract from the sender
+        balanceOf[_to] += _value;                           // Add the same to the recipient
+        emit Transfer(_from, _to, _value);
+    }
+```
+
+这是一个非常危险的方法，一不小心钱就没了。 所以调用这个transfer方法需要非常谨慎，确保要经过许可才可以。 
+
+### 2.2 集中管理
+
+所有的Dapps默认是非集中式管理。 
+这并非意味着不能做集中管理。 如果需要控制能够获取数字货币的人， 控制数字货币的使用，这就得需要集中式的管理。 
+我们可以用一个账户，或者一个合约来控制， 使用的策略，可以是民主的投票，也可以采用限制数字货币所有者的权力的方式。 
+针对这些场景，我们需要使用到合约的一个非常有用的属性： **inheritance**。 合约的继承属性使得它可以得到父合约的所有特性，而且不需要重新定义。
+
+```
+    contract owned {
+        address public owner;
+
+        function owned() {
+            owner = msg.sender;
+        }
+
+        modifier onlyOwner {
+            require(msg.sender == owner);
+            _;
+        }
+
+        function transferOwnership(address newOwner) onlyOwner {
+            owner = newOwner;
+        }
+    }
+```
+
+这里创建一个非常简单的，申明数字货币owner的合约。 然后就把自己发行的数字货币关联过来： 
+
+```
+    contract MyToken is owned {
+        /* the rest of the contract as usual */
+```
+
+这意味着在MyToken里面所有的方法都可以使用owner这个属性和可以继承的方法onlyOwner。 并且可以调用transferOwnership这个方法来修改所有者。 
+注意一下onlyOwner的实现，有一个“-”标识，子类需要覆盖实现这个方法时，子类的函数体将放在这里。 
+可以在MyToken的构造函数里面增加这个参数来设置owner： 
+
+```
+    function MyToken(
+        uint256 initialSupply,
+        string tokenName,
+        uint8 decimalUnits,
+        string tokenSymbol,
+        address centralMinter
+        ) {
+        if(centralMinter != 0 ) owner = centralMinter;
+    }
+```
+
+### 2.3 印钞造币
+
+在现实中，货币的总量不是恒定的，往往会随着经济的发展而不断地增加。 央行会不断注入流动性， 印钞厂开足马力印刷钞票... 就数字货币而言，我们也希望能够像央行那样进行管控，根据价格的增减而控制货币总量。 我们来看看这个怎么做。 
+
+首先，我们需要有一个字段来存储总供应链：**totalSupply**， 并且在构造函数中初始化：
+
+```
+    contract MyToken {
+        uint256 public totalSupply;
+
+        function MyToken(...) {
+            totalSupply = initialSupply;
+            ...
+        }
+        ...
+    }
+```
+
+添加一个方法来印钞造币： 
+
+```
+    function mintToken(address target, uint256 mintedAmount) onlyOwner {
+        balanceOf[target] += mintedAmount;
+        totalSupply += mintedAmount;
+        emit Transfer(0, owner, mintedAmount);
+        emit Transfer(owner, target, mintedAmount);
+    }
+```
+注意，这个方法后面的**onlyOwner**， 表示它将覆盖实现父类中的 **modifier onlyOwner** 这个方法。 这是和其他语言不一样的地方，可以对覆盖的方法重新命名，甚至修改输入输出参数。 在**编译**时，这个方法的实现会替换到onlyOwner的"_"位置。
+
+
+### 2.4 冻结资产
+
+在实践中，有时候需要对数字货币做一些管控，冻结或者解冻账户就是常见的操作。 
+
+```
+    mapping (address => bool) public frozenAccount;
+    event FrozenFunds(address target, bool frozen);
+
+    function freezeAccount(address target, bool freeze) onlyOwner {
+        frozenAccount[target] = freeze;
+        emit FrozenFunds(target, freeze);
+    }
+```
+
+在这个实现中，我们假定所有账户刚开始都是未冻结状态。 之后，可以通过freezeAccount指令来冻结账户，或者解冻账户。 此外，我们还需要修改下transfer方法，转账之前，需要确认账户是否没有冻结。 
+
+```
+    function transfer(address _to, uint256 _value) {
+        require(!frozenAccount[msg.sender]);
+```
+
+这样，冻结后， 账户的余额是不变的，但无法执行转账操作。 
+这种方式是默认账户都是未冻结状态，可以转账。 还有一个场景是默认账户都是冻结的，只有白名单中的账户才可以转账。这种情况下，我们只要把frozenAccount方法替换成approvedAccount，并将上述实现替换成验证账户： 
+
+```
+        require(approvedAccount[msg.sender]);
+```
+
+### 2.5 买卖货币
+
+到目前为止，我们这个新币种还是自己内部循环使用，体现不出价值来。 最简单的给数字货币定价的方法，就是和以太币挂钩起来。 提供一个方法，可以在市场上以市场价自动买卖，就和本外币交换一样。 
+
+首先，我们需要定一个买卖的牌价： 
+
+```
+    uint256 public sellPrice;
+    uint256 public buyPrice;
+
+    function setPrices(uint256 newSellPrice, uint256 newBuyPrice) onlyOwner {
+        sellPrice = newSellPrice;
+        buyPrice = newBuyPrice;
+    }
+```
+
+对于币值波动不大的货币，这种做法是可以接受的。毕竟每一次调整币值都需要耗费一定的以太币。 如果要设置固定的币值， 可以考虑研究下 [standard data feeds](https://github.com/ethereum/wiki/wiki/Standardized_Contract_APIs#data-feeds)
+然后实现下货币买卖的功能： 
+
+```
+    function buy() payable returns (uint amount){
+        amount = msg.value / buyPrice;                    // calculates the amount
+        _transfer(this, msg.sender, amount);
+        return amount;
+    }
+
+    function sell(uint amount) returns (uint revenue){
+        require(balanceOf[msg.sender] >= amount);         // checks if the sender has enough to sell
+        balanceOf[this] += amount;                        // adds the amount to owner's balance
+        balanceOf[msg.sender] -= amount;                  // subtracts the amount from seller's balance
+        revenue = amount * sellPrice;
+        msg.sender.transfer(revenue);                     // sends ether to the seller: it's important to do this last to prevent recursion attacks
+        Transfer(msg.sender, this, amount);               // executes an event reflecting on the change
+        return revenue;                                   // ends function and returns
+    }
+```
+
+注意，这种方式并不会创建新的数字货币， 只是在原始账户和数字货币owner之间做了转账。 
+合约既可以持有自己的token，也可以持有以太币。
+但不管是设置币值，还是投放新币，都无法接触真正的银行发行的货币，或者以太币。 
+合约能做的事情就是在自己的货币体系中转移货币。 
+
+注意， 币值并非以Ether为单位来设置，一般是使用wei单位，即以太币的最小单位来设置。 一个ether等于10^18个wei，所以如果货币是以ether来定价，那需要加18个0转成wei定价。 
+在创建合约的时候，注意要凑集足够的以太币作为准备金来应对可能的兑换，否则这个货币会由于无法兑换而没人买了。 
+这个例子描述了一个简单的中心化的交易中心来买卖数字货币。一个更有意思的市场应该是任何人都可以出不同的价格来买卖货币。 
+
+### 2.6 Gas自动支付
+
+在以太坊体系中，每一次交易或者合约都需要支付一定的费用（Gas）, [以后有可能会调整这个策略](https://github.com/ethereum/EIPs/issues/28)。 
+到目前为止，挖矿费用还只能通过以太币来支付，这样所有的数字货币用户就需要使用以太币来完成合约或者交易。 
+这样的话，用户体验就不好了。我们希望数字货币用户在交易时，也能够直接使用数字货币，不需要去考虑以太币、区块链以及如何获取以太币。 一个可行的方法是需要自动监测账户余额，如果余额不足，就禁止交易。 
+
+这样，需要首先创建一个阈值变量，并提供一个方法来修改这个变量。 这个变量初始值设置为**5 finney (0.005 Ether)**，即约等于一笔交易用的Gas。
+
+```
+    uint public minBalanceForAccounts;
+
+    function setMinBalance(uint minimumBalanceInFinney) onlyOwner {
+         minBalanceForAccounts = minimumBalanceInFinney * 1 finney;
+    }
+```
+
+之后，修改transfer方法， 对售币用户做充值。 
+
+```
+    /* Send coins */
+    function transfer(address _to, uint256 _value) {
+        ...
+        if(msg.sender.balance < minBalanceForAccounts)
+            sell((minBalanceForAccounts - msg.sender.balance) / sellPrice);
+    }
+```
+
+或者直接把费用支付给sender。
+
+```
+    /* Send coins */
+    function transfer(address _to, uint256 _value) {
+        ...
+        if(_to.balance<minBalanceForAccounts)
+            _to.send(sell((minBalanceForAccounts - _to.balance) / sellPrice));
+    }
+```
+
+这就确保了这些账户不会由于余额不足而导致交易失败。 
+
+
+### 2.7 Proof of Work
+
+在工作量证明体系中（POW， Proof of Work）， 一个简单的方法是实现和以太币一起“合并挖矿”，即矿工不仅获得以太币简历，也会同时得到新数字货币的奖励。 
+参考这里[special keyword coinbase](https://solidity.readthedocs.io/en/latest/units-and-global-variables.html#block-and-transaction-properties) 来了解如何获取某个入链区块的矿工账户。 
+
+```
+    function giveBlockReward() {
+        balanceOf[block.coinbase] += 1;
+    }
+```
+
+当然，也可以尝试去设置一些数据难题，任何人解决这个问题就可以获取数字货币奖励。 在下一个例子中，你需要计算一个挑战数据的立方根， 计算成功后，获取奖励，并设置下一个挑战数据。 
+
+```
+    uint public currentChallenge = 1; // 需要计算出这个数据的立方根?
+
+    function rewardMathGeniuses(uint answerToCurrentReward, uint nextChallenge) {
+        require(answerToCurrentReward**3 == currentChallenge); // If answer is wrong do not continue
+        balanceOf[msg.sender] += 1;         // Reward the player
+        currentChallenge = nextChallenge;   // Set the next challenge
+    }
+```
+
+当然，计算立方根，对人来说可能比较难，但对计算机来说是很容易的事情。 由于最后一个赢家可以选择下一个挑战数据，他们可以选择一个对自己有利的数据，这样对其他矿工来说是不公平的。 
+这种POW的计算公式，最好是选择对计算机来说，有计算难度，但是很容易验证计算结果的公式。 
+比特币和以太坊使用的计算哈希值的方式可以说是目前最好的数据难题了。 如果我们要在新的币种中使用哈希计算作为数据难题， 可以参考如下代码： 
+
+```
+    bytes32 public currentChallenge;                         // The coin starts with a challenge
+    uint public timeOfLastProof;                             // Variable to keep track of when rewards were given
+    uint public difficulty = 10**32;                         // Difficulty starts reasonably low
+
+    function proofOfWork(uint nonce){
+        bytes8 n = bytes8(sha3(nonce, currentChallenge));    // Generate a random hash based on input
+        require(n >= bytes8(difficulty));                   // Check if it's under the difficulty
+
+        uint timeSinceLastProof = (now - timeOfLastProof);  // Calculate time since last reward was given
+        require(timeSinceLastProof >=  5 seconds);         // Rewards cannot be given too quickly
+        balanceOf[msg.sender] += timeSinceLastProof / 60 seconds;  // The reward to the winner grows by the minute
+
+        difficulty = difficulty * 10 minutes / timeSinceLastProof + 1;  // Adjusts the difficulty
+
+        timeOfLastProof = now;                              // Reset the counter
+        currentChallenge = sha3(nonce, currentChallenge, block.blockhash(block.number - 1));  // Save a hash that will be used as the next proof
+    }
+```
+
+需要修改下构造函数， 添加初始值： 
+```
+        timeOfLastProof = now;
+```
+
+一旦这个合约开始上线运行， 需要选择一个工作量证明公式， 并设置合适的 **nonce** 值。 
+如果收到 *"Data can't be execute"* ， 则说明 nounce设置不合理，重新调整下。 
+直到账户能够每分钟收到1个数字货币为止，之后计算难度会每10分钟自动调整一次。 
+这就是挖矿的过程。 
+
+## 2.8 改进发行机制
+
+最终版本的代码如下：
+
+```
+{% include_relative solidity/token-advanced.sol %}
+```
+
+
+## 2.9 部署代码
+
+参考上一篇[ “实现一个简单的合约”](http://doc.cocolian.cn/coco/guide/2018/06/12/contract/)， 按照如下步骤来执行： 
+
+1. 将token-advanced.sol内容输入到remix-ide中，或者 在remix-ide中打开这个文件，执行编译。   
+
+2. 在geth客户端执行编译结果， 同时注意设置这些初始值。   
+
+```
+var initialSupply =  0x2000000000000 ;
+var tokenName = "coco" ;
+var tokenSymbol = "COC" ;
+var cocoliantokenContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"newSellPrice","type":"uint256"},{"name":"newBuyPrice","type":"uint256"}],"name":"setPrices","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_value","type":"uint256"}],"name":"burn","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"sellPrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"target","type":"address"},{"name":"mintedAmount","type":"uint256"}],"name":"mintToken","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_value","type":"uint256"}],"name":"burnFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"buyPrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"buy","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"frozenAccount","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"},{"name":"_extraData","type":"bytes"}],"name":"approveAndCall","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"sell","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"target","type":"address"},{"name":"freeze","type":"bool"}],"name":"freezeAccount","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"initialSupply","type":"uint256"},{"name":"tokenName","type":"string"},{"name":"tokenSymbol","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"target","type":"address"},{"indexed":false,"name":"frozen","type":"bool"}],"name":"FrozenFunds","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Burn","type":"event"}]);
+var cocoliantoken = cocoliantokenContract.new(
+   initialSupply,
+   tokenName,
+   tokenSymbol,
+   {
+     from: web3.eth.accounts[0], 
+     data: '0x60806040526003805460ff1916601217905534801561001d57600080fd5b50604051610e00380380610e0083398101604090815281516020808401518385015160008054600160a060020a03191633908117825560035460ff16600a0a86026004819055908252600585529590209490945584018051929490930191849184918491610090916001918501906100b0565b5080516100a49060029060208401906100b0565b5050505050505061014b565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106100f157805160ff191683800117855561011e565b8280016001018555821561011e579182015b8281111561011e578251825591602001919060010190610103565b5061012a92915061012e565b5090565b61014891905b8082111561012a5760008155600101610134565b90565b610ca68061015a6000396000f3006080604052600436106101275763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166305fefda7811461012c57806306fdde0314610149578063095ea7b3146101d357806318160ddd1461020b57806323b872dd14610232578063313ce5671461025c57806342966c68146102875780634b7503341461029f57806370a08231146102b457806379c65068146102d557806379cc6790146102f95780638620410b1461031d5780638da5cb5b1461033257806395d89b4114610363578063a6f2ae3a14610378578063a9059cbb14610380578063b414d4b6146103a4578063cae9ca51146103c5578063dd62ed3e1461042e578063e4849b3214610455578063e724529c1461046d578063f2fde38b14610493575b600080fd5b34801561013857600080fd5b506101476004356024356104b4565b005b34801561015557600080fd5b5061015e6104d6565b6040805160208082528351818301528351919283929083019185019080838360005b83811015610198578181015183820152602001610180565b50505050905090810190601f1680156101c55780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b3480156101df57600080fd5b506101f7600160a060020a0360043516602435610563565b604080519115158252519081900360200190f35b34801561021757600080fd5b506102206105c9565b60408051918252519081900360200190f35b34801561023e57600080fd5b506101f7600160a060020a03600435811690602435166044356105cf565b34801561026857600080fd5b5061027161063e565b6040805160ff9092168252519081900360200190f35b34801561029357600080fd5b506101f7600435610647565b3480156102ab57600080fd5b506102206106bf565b3480156102c057600080fd5b50610220600160a060020a03600435166106c5565b3480156102e157600080fd5b50610147600160a060020a03600435166024356106d7565b34801561030557600080fd5b506101f7600160a060020a036004351660243561078d565b34801561032957600080fd5b5061022061085e565b34801561033e57600080fd5b50610347610864565b60408051600160a060020a039092168252519081900360200190f35b34801561036f57600080fd5b5061015e610873565b6101476108cb565b34801561038c57600080fd5b506101f7600160a060020a03600435166024356108eb565b3480156103b057600080fd5b506101f7600160a060020a0360043516610901565b3480156103d157600080fd5b50604080516020600460443581810135601f81018490048402850184019095528484526101f7948235600160a060020a03169460248035953695946064949201919081908401838280828437509497506109169650505050505050565b34801561043a57600080fd5b50610220600160a060020a0360043581169060243516610a2f565b34801561046157600080fd5b50610147600435610a4c565b34801561047957600080fd5b50610147600160a060020a03600435166024351515610aa0565b34801561049f57600080fd5b50610147600160a060020a0360043516610b1b565b600054600160a060020a031633146104cb57600080fd5b600791909155600855565b60018054604080516020600284861615610100026000190190941693909304601f8101849004840282018401909252818152929183018282801561055b5780601f106105305761010080835404028352916020019161055b565b820191906000526020600020905b81548152906001019060200180831161053e57829003601f168201915b505050505081565b336000818152600660209081526040808320600160a060020a038716808552908352818420869055815186815291519394909390927f8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925928290030190a350600192915050565b60045481565b600160a060020a03831660009081526006602090815260408083203384529091528120548211156105ff57600080fd5b600160a060020a0384166000908152600660209081526040808320338452909152902080548390039055610634848484610b61565b5060019392505050565b60035460ff1681565b3360009081526005602052604081205482111561066357600080fd5b3360008181526005602090815260409182902080548690039055600480548690039055815185815291517fcc16f5dbb4873280815c1ee09dbd06736cffcc184412cf7a71a0fdb75d397ca59281900390910190a2506001919050565b60075481565b60056020526000908152604090205481565b600054600160a060020a031633146106ee57600080fd5b600160a060020a03821660009081526005602090815260408083208054850190556004805485019055805184815290513093927fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef928290030190a3604080518281529051600160a060020a0384169130917fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef9181900360200190a35050565b600160a060020a0382166000908152600560205260408120548211156107b257600080fd5b600160a060020a03831660009081526006602090815260408083203384529091529020548211156107e257600080fd5b600160a060020a0383166000818152600560209081526040808320805487900390556006825280832033845282529182902080548690039055600480548690039055815185815291517fcc16f5dbb4873280815c1ee09dbd06736cffcc184412cf7a71a0fdb75d397ca59281900390910190a250600192915050565b60085481565b600054600160a060020a031681565b6002805460408051602060018416156101000260001901909316849004601f8101849004840282018401909252818152929183018282801561055b5780601f106105305761010080835404028352916020019161055b565b6000600854348115156108da57fe5b0490506108e8303383610b61565b50565b60006108f8338484610b61565b50600192915050565b60096020526000908152604090205460ff1681565b6000836109238185610563565b15610a27576040517f8f4ffcb10000000000000000000000000000000000000000000000000000000081523360048201818152602483018790523060448401819052608060648501908152875160848601528751600160a060020a03871695638f4ffcb195948b94938b939192909160a490910190602085019080838360005b838110156109bb5781810151838201526020016109a3565b50505050905090810190601f1680156109e85780820380516001836020036101000a031916815260200191505b5095505050505050600060405180830381600087803b158015610a0a57600080fd5b505af1158015610a1e573d6000803e3d6000fd5b50505050600191505b509392505050565b600660209081526000928352604080842090915290825290205481565b6007543090820281311015610a6057600080fd5b610a6b333084610b61565b6007546040513391840280156108fc02916000818181858888f19350505050158015610a9b573d6000803e3d6000fd5b505050565b600054600160a060020a03163314610ab757600080fd5b600160a060020a038216600081815260096020908152604091829020805460ff191685151590811790915582519384529083015280517f48335238b4855f35377ed80f164e8c6f3c366e54ac00b96a6402d4a9814a03a59281900390910190a15050565b600054600160a060020a03163314610b3257600080fd5b6000805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0392909216919091179055565b600160a060020a0382161515610b7657600080fd5b600160a060020a038316600090815260056020526040902054811115610b9b57600080fd5b600160a060020a0382166000908152600560205260409020548181011015610bc257600080fd5b600160a060020a03831660009081526009602052604090205460ff1615610be857600080fd5b600160a060020a03821660009081526009602052604090205460ff1615610c0e57600080fd5b600160a060020a03808416600081815260056020908152604080832080548790039055938616808352918490208054860190558351858152935191937fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef929081900390910190a35050505600a165627a7a72305820f7f6b688121aa972e4b856d96ac1a348cf90e16ea394a123f419cf1434defea10029', 
+    gas: '4700000',
+	gasPrice: '50000000000'
+   }, function (e, contract){
+    console.log(e, contract);
+    if (typeof contract.address !== 'undefined') {
+         console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
+    }
+ })
+```
+
+3. 根据返回的address来获取接入点地址。 如果有问题，也可以通过本次交易的id，通过getTransactionReceipt来获取接入点地址： 
+
+```
+> eth.getTransactionReceipt("0x150d273aa63b005b38f1fa44a6487964e6c2f43a11d31daddd48df75a81bb06d")
+{
+  blockHash: "0xf6def440d2207fd125fa8b5737feb6fd4d8e8163ebe73c4e93fa38c900bde303",
+  blockNumber: 74939,
+  contractAddress: "0x0d4e5a1af88789df6625d1a641d4d7ad8ead8695",
+  cumulativeGasUsed: 1058472,
+  from: "0xfb31c98b4f04488828f3b601da19182401e864b5",
+  gasUsed: 1058472,
+  logs: [],
+  logsBloom: "0x00000000000000000000000000000000000000000000000000000000000000000000 000000000000000000000000000000000000000000000000000000000000000000000000000000000000                                                                        000000000000000000000000000000000000000000000000000000000000000000000000000000000000                                                                        000000000000000000000000000000000000000000000000000000000000000000000000000000000000                                                                        000000000000000000000000000000000000000000000000000000000000000000000000000000000000                                                                        000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  status: "0x1",
+  to: null,
+  transactionHash: "0x150d273aa63b005b38f1fa44a6487964e6c2f43a11d31daddd48df75a81bb06d",
+  transactionIndex: 0
+}
+```
+
+部署完成。 0x0d4e5a1af88789df6625d1a641d4d7ad8ead8695 即为接入点地址。 
+
+
+## 三、使用新货币
+
+完成新货币的部署后， 就可以调用上述接口来使用货币。 使用前，需要注意先设置下缺省账户：
+
+```
+web3.eth.defaultAccount = web3.eth.coinbase
+```
+
+根据上一步返回的调用地址， 创建调用入口：
+
+```
+var abi = web3.eth.contract([{"constant":false,"inputs":[{"name":"newSellPrice","type":"uint256"},{"name":"newBuyPrice","type":"uint256"}],"name":"setPrices","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_value","type":"uint256"}],"name":"burn","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"sellPrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"target","type":"address"},{"name":"mintedAmount","type":"uint256"}],"name":"mintToken","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_value","type":"uint256"}],"name":"burnFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"buyPrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"buy","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"frozenAccount","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"},{"name":"_extraData","type":"bytes"}],"name":"approveAndCall","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"sell","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"target","type":"address"},{"name":"freeze","type":"bool"}],"name":"freezeAccount","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"initialSupply","type":"uint256"},{"name":"tokenName","type":"string"},{"name":"tokenSymbol","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"target","type":"address"},{"indexed":false,"name":"frozen","type":"bool"}],"name":"FrozenFunds","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_owner","type":"address"},{"indexed":true,"name":"_spender","type":"address"},{"indexed":false,"name":"_value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Burn","type":"event"}]);
+
+caller = abi.at("0x0d4e5a1af88789df6625d1a641d4d7ad8ead8695");
+
+```
+
+### 3.1 设置价格
+
+这个必须在创建token的账户上执行。 注意，我们货币挂钩到ether(= 10^8 wei)， 而不是wei上。这里买入价和卖出价都以wei为单位。 
+
+```
+ caller.setPrices(1010000000000000000,990000000000000000)
+```
+
+### 3.2 转账
+
+先执行个转账：
+
+```
+> caller.transfer("0xfaac28931297d26355404aead21312384168d459", 200)
+"0xb3aba6b71c3bfd0275f2748885dfa4ec816f35153f09fda018bd74ece0ad0a9b"
+
+```
+
+如果出现如下错误，则需要设置下defaultAccount。 
+
+```
+> caller.transfer("0xfaac28931297d26355404aead21312384168d459", 200)
+Error: invalid address
+    at web3.js:3930:15
+    at web3.js:3756:20
+    at web3.js:5025:28
+    at map (<native code>)
+    at web3.js:5024:12
+    at web3.js:5050:18
+    at web3.js:5075:23
+    at web3.js:4137:16
+    at apply (<native code>)
+    at web3.js:4223:16
+
+> web3.eth.defaultAccount = web3.eth.coinbase
+"0xfb31c98b4f04488828f3b601da19182401e864b5"
+```
+
+查看余额：
+
+```
+> caller.balanceOf("0xfaac28931297d26355404aead21312384168d459")
+200
+```
+
+### 3.3 买卖货币
+
+在账户 0xfa3142b2e51e84cdebda4e4976e013988c3a1c4a 上，执行买入。注意buy方法的参数。它定义为payable，接受json格式的输入参数，收款人为当前合约地址。 
+
+```
+> caller.balanceOf(eth.coinbase)
+29800
+
+>  caller.buy({value: web3.toWei(101,"ether")})
+"0x6a82b8db2cae240ce690b28b1fdf75ce3115dac20a85f86588f22eabdac95d4a"
+
+...[10秒钟后]
+
+> caller.balanceOf(eth.coinbase)
+29902
+```
+
+耗费的101个以太币，转入到这个合约地址的账户上了（0x0d4e5a1af88789df6625d1a641d4d7ad8ead8695）：
+
+```
+> web3.fromWei(eth.getBalance("0x0d4e5a1af88789df6625d1a641d4d7ad8ead8695"),'ether')
+
+0.01
+> web3.fromWei(eth.getBalance("0x0d4e5a1af88789df6625d1a641d4d7ad8ead8695"),'ether')
+
+101.01
+
+```
+
+卖出货币也是类似的情况。 
+
+
+

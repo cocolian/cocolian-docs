@@ -1,0 +1,24 @@
+---
+layout:     source 
+title:      "2017-12-10-WeChat"
+date:       2017-12-10 12:00:00
+author:     "PaymentGroup"
+tag:		  [chat]
+header-img: "img/post-bg-wechat.jpg"
+---
+> 09:51:41  FLD  
+   
+加上jrabel区别不大  
+   
+> 10:16:43  Leo Qin  
+   
+周末来一发??  
+   
+> 10:16:44  Leo Qin  
+   
+产品懂技术，上帝挡不住？  
+   
+> 15:56:20  地平线-文思-产品  
+   
+哪位大神有开放平台的技术方案啊[抱拳]  
+   

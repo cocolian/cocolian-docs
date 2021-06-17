@@ -1,0 +1,74 @@
+---
+layout:     source 
+title:      "2019-01-02-WeChat"
+date:       2019-01-02 12:00:00
+author:     None
+lines:      17 
+tag:       [chat]
+---
+> 09:05:11  马春林-工品汇-研发  
+   
+多谢多谢。  
+   
+> 09:26:20  常盼  
+   
+不错不错  
+   
+> 10:57:40  曹天龙-生活空间-高级软件工程师  
+   
+[强]  
+   
+> 10:57:54  刘江-现在支付-开发  
+   
+很不错  
+   
+> 11:02:52  沈佳杰_金运通_HR  
+   
+[罗振宇2018“时间的朋友”跨年演讲精华版全文
+](http://mp.weixin.qq.com/s?__biz=MzAwNjYxNzc0OA==&amp;amp;amp;mid=2649543350&amp;amp;amp;idx=1&amp;amp;amp;sn=e45732925f6ac3f64125a2e5ac2ef671&amp;amp;amp;chksm=8312dd4db465545b65090a1d0f262e314276b21c388160848de7f7061d5c61f5ab5127795178&amp;amp;amp;mpshare=1&amp;amp;amp;scene=1&amp;amp;amp;srcid=0101VWj3tnorwO0YjecHrrvg#rd)  
+   
+> 11:03:13  沈佳杰_金运通_HR  
+   
+[吴晓波：预见2019（演讲全文）| 吴晓波年终秀
+](http://mp.weixin.qq.com/s?__biz=MzA3OTM5NTkxNA==&amp;amp;amp;mid=2652467076&amp;amp;amp;idx=1&amp;amp;amp;sn=d8a529b145a9f3a9d43edb35049e3911&amp;amp;amp;chksm=8459e2a1b32e6bb70dbb49bca9f401d61e9c8a7f58c7e2ce6ebb1846a8ac32338b3f82ffc941&amp;amp;amp;mpshare=1&amp;amp;amp;scene=1&amp;amp;amp;srcid=0102uYr4PwIslP9aNNwFCT7j#rd)  
+   
+> 11:05:27  沈佳杰_金运通_HR  
+   
+没时间看视频的同学也可以看文字版。内容和观点不一定完全正确，但毕竟是他们/他们的团队花了不少时间准备的，或多或少能有所启发~  
+   
+> 11:09:53  刘江-现在支付-开发  
+   
+[OK]，感谢  
+   
+> 16:15:15  赵铭-链石-研发  
+   
+pci dss 怎么查  
+   
+> 16:19:51  和讯私财-产品-肆伍  
+   
+不是有官网吗？  
+   
+> 16:21:05  赵铭-链石-研发  
+   
+我的意思是怎么查一个网站是不是过了pci dss  
+   
+> 16:27:19  和讯私财-产品-肆伍  
+   
+https://myssl.com/  
+   
+> 16:50:40    
+   
+> 16:50:42    
+   
+> 16:51:43  赵铭-链石-研发  
+   
+![2019-01-02 16:51:43](http://static.cocolian.cn/img/20190102_165143.png) 
+   
+> 16:51:53  赵铭-链石-研发  
+   
+这个证书质量怎么样  
+   
+> 16:52:15  赵铭-链石-研发  
+   
+@和讯私财-产品-肆伍 感谢大佬！  
+   

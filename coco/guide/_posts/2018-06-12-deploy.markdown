@@ -1,0 +1,190 @@
+---
+layout: 	coco
+title: 		"实现一个简单的合约"
+subtitle: 	"区块链开发-2"
+date: 		2018-06-12 12:00:00
+author: 	"shamphone"
+chapter:	"2"
+---
+
+在Ethereum中，处理合约比交易略复杂点，需要一些开发工作。 ethereum本身实现了一个EVM，就是虚拟机。
+合约可以使用多种语言开发，包括Solidity。开发完成后，使用编译器编译成EVM的二进制代码，放到链上去运行。 
+所以，首先需要安装一个IDE， 可以写代码，并编译代码。 Ethereum推荐使用Remix IDE。
+
+## 一、安装remix-ide
+
+从ethereum 1.6版本开始， ethereum内置的solidity编译器已经不再提供了。 eth指令也找不到getCompiler命令。 
+[ethereum社区自己的tutor](https://github.com/ethereum/go-ethereum/wiki/Contract-Tutorial)也还没更新。 
+开发contract，需要使用外置的IDE了。 ethereum社区推荐的是remix-ide，这是一个基于浏览器的开发环境。 开发私链的话，建议自己安装一个。 
+
+```hbs
+sudo apt-get install -y npm
+sudo apt-get install -y nodejs
+npm install -g solc
+npm install remix-ide -g
+```
+
+安装成功后，执行remix-ide即可启动服务。
+```hbs
+cocolian@ubuntu:~$ remix-ide
+setup notifications for /home/cocolian
+Shared folder : /home/cocolian
+Starting Remix IDE at http://localhost:8080 and sharing /home/cocolian
+Tue Aug 07 2018 12:16:16 GMT+0800 (CST) Remixd is listening on 127.0.0.1:65520
+```
+
+在本机访问http://localhost:8080即可
+
+
+## 二、编写个简单的合约
+
+在remix-ide中，新建一个文件calculate.sol， 输入如下内容：
+
+```bash
+pragma solidity ^0.4.0;
+
+contract calculator { 
+    function multiply(uint a, uint b) public pure returns(uint c)   { 
+        return a * b; 
+        
+    } 
+    
+}
+
+```
+
+右侧选择Compile标签，点击“Start to Comiple" 按钮，开始编译。 如果有错误，这里也会提示。按照提示来修正错误即可。 
+![remix-ide](http://static.cocolian.cn/img/coco/remix-1.png)
+
+
+## 三、在Remix中执行合约
+
+首先需要进入到geth控制台，这样同时也启动了json-rpc服务。注意不要退出。 
+
+```bash
+cocolian@ubuntu:~/eth$ sh run.sh
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.8.13-stable-225171a4/linux-amd64/go1.10.1
+coinbase: 0xfb31c98b4f04488828f3b601da19182401e864b5
+at block: 81016 (Tue, 14 Aug 2018 17:16:26 CST)
+ datadir: /home/cocolian/eth/data
+ modules: admin:1.0 clique:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
+
+>
+```
+
+连接remix-ide到本地节点。 确保remix和ethereum客户端安装在一台机器上。当然，也可以通过IP地址来远程连接。 
+在remix-ide，选择Run标签，在Environment中选择Web3 Provider，可以连接到本地节点。 
+![remix-ide](http://static.cocolian.cn/img/coco/solidity/remix-0.png)
+
+确认本地连接地址：
+
+![remix-ide](http://static.cocolian.cn/img/coco/solidity/remix-1.png)
+
+注意这里的端口号，如果使用cocolian的配置文件，端口是3088:
+
+![remix-ide](http://static.cocolian.cn/img/coco/solidity/remix-2.png)
+
+连接成功后，会显示本地的账户和gasPrice:
+
+![remix-ide](http://static.cocolian.cn/img/coco/solidity/remix-3.png)
+
+连接成功后，会显示本地的账户和gasPrice:
+
+![remix-ide](http://static.cocolian.cn/img/coco/solidity/remix-3.png)
+
+选择calculator这个协议，在Run Tab下执行Deploy
+
+![remix-ide](http://static.cocolian.cn/img/coco/solidity/remix-9.png)
+
+注意命令行窗口，可以显示部署的进度。 出现如下提示，意味着部署成功：
+
+![remix-ide](http://static.cocolian.cn/img/coco/solidity/remix-5.png)
+
+这里显示的是本次Transaction信息，可以点开看看详情：
+
+![remix-ide](http://static.cocolian.cn/img/coco/solidity/remix-6.png)
+
+接下来就可以执行这个合约了，右侧会出现Deployed Contracts，在这里可以执行所有的合约方法。 
+在unit256 a, unit256 b 提示框中输入5,6 作为输入参数， 点击multiple（即合约中的方法名）按钮，就能看到结果：
+
+![remix-ide](http://static.cocolian.cn/img/coco/solidity/remix-8.png)
+
+
+## 四、通过命令行执行合约
+
+建议通过命令行来再试一遍，有利于理解ethereum合约是如何部署的。 从1.6版本开始，ethereum不再内嵌solidity编译器。需要借助remix或者其他的ide来编译，将编译结果部署到ethereum上。 
+
+
+ 这里显示各个场景下的一些操作。将WEB3DEPLOY的代码复制出来（点击标题右侧的复制按钮）。
+![remix-ide](http://static.cocolian.cn/img/coco/remix-2.png)
+
+
+进入geth的控制台，开始执行合约。 
+
+```bash
+
+var calculatorContract = web3.eth.contract([{"constant":true,"inputs":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"name":"multiply","outputs":[{"name":"c","type":"uint256"}],"payable":false,"stateMutability":"pure","type":"function"}]);
+var calculator = calculatorContract.new(
+   {
+     from: web3.eth.accounts[0], 
+     data: '0x608060405234801561001057600080fd5b5060c58061001f6000396000f300608060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063165c4a16146044575b600080fd5b348015604f57600080fd5b5060766004803603810190808035906020019092919080359060200190929190505050608c565b6040518082815260200191505060405180910390f35b60008183029050929150505600a165627a7a723058206b35ee1daeb3e82acf94eb5929935dc92a28d7506d7dfd39a11019a55ff9dda50029', 
+     gas: '4700000'
+   }, function (e, contract){
+    console.log(e, contract);
+    if (typeof contract.address !== 'undefined') {
+         console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
+    }
+ })
+
+```
+注意， gasPrice是给矿工的执行合约的报酬，如果不提供，默认为0，或者值太少， 这个合约就无法发布出来了。 
+执行成功后，会按照console.log来输出合约的地址。 
+
+```bash
+
+Contract mined! address: 0x2059970bec9c919d0d2c2cc478e1ba2d0b582509 transactionHash: 0xad8ef29babc63b0a313d60831cbc608067b07f3f81326438b3637d21582299f6
+
+```
+
+
+下一步就可以验证合约是否成功部署了。 
+
+
+```bash
+
+> func = web3.eth.contract([{"constant":true,"inputs":[{"name":"a","type":"uint256"},{"name":"b","type":"uint256"}],"name":"multiply","outputs":[{"name":"c","type":"uint256"}],"payable":false,"stateMutability":"pure","type":"function"}]);
+{
+  abi: [{
+	...[忽略信息]
+  }],
+  eth: {
+    accounts: ["0xfa3142b2e51e84cdebda4e4976e013988c3a1c4a"],
+    blockNumber: 52514,
+    coinbase: "0xfa3142b2e51e84cdebda4e4976e013988c3a1c4a",
+	...[忽略信息]
+  },
+	...[忽略信息]
+}
+> caller = func.at("0x2059970bec9c919d0d2c2cc478e1ba2d0b582509");
+{
+  abi: [{
+	...[忽略信息]
+  }],
+  address: "0x2059970bec9c919d0d2c2cc478e1ba2d0b582509",
+  transactionHash: null,
+  allEvents: function(),
+  multiply: function()
+}
+> caller.multiply.call(5,6);
+30
+
+```
+
+最终的值是30，说明调用成功了。 
+
+这是一个简单的例子，验证交易和contract都可以在coco/ethereum链上运行了。 
+ 
+
+

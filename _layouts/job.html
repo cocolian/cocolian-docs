@@ -1,0 +1,112 @@
+---
+layout: default
+---
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+		height: 240px;
+    }
+
+   .post_footer{ 
+		display: table; 
+		table-layout: fixed; 
+		width: 100%; 
+		list-style: none; 
+		margin:0px; 
+		padding:0px; 
+	} 
+	.post_footer li { 
+		display: table-cell; 
+		text-align: center;
+	}
+	.post_footer li.left-sep { 
+		border-left: 1px dashed #a0a0a0
+	}
+	
+</style>
+<header class="intro-header" >
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags"><!--
+                        {% for tag in page.tags %}
+                        <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
+                        {% endfor %} -->
+                    </div>
+                    <h1>{{ page.title }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				{{ content }}
+				<hr/>
+				<ul class="post_footer">
+				   <li>长按或者扫描二维码来打赏，感谢支持群管理工作！<br/>
+						<img src="http://static.cocolian.cn/img/reward/jigsaw.jpg" /> 
+				   </li>
+				    <li class="left-sep">请扫码关注“凤凰牌老熊”的微信公众号。<br/>
+						<img src="http://static.cocolian.cn/img/reward/weixin.jpg" /> 
+					</li>
+				</ul>
+				<ul class="post_footer">
+				  <li>	</li>
+				  <li>	</li>
+				</ul>
+				<hr/>
+              
+                <ul class="pager">
+                    {% if page.previous.url %}
+                    <li class="previous">
+                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">
+                        Previous<br>
+                        <span>{{page.previous.title}}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if page.next.url %}
+                    <li class="next">
+                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">
+                        Next<br>
+                        <span>{{page.next.title}}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+				
+            </div>  
+
+    <!-- Side Catalog Container -->
+        {% if page.catalog %}
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        {% endif %}
+        </div>
+    </div>
+</article>

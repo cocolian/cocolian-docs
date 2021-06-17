@@ -1,0 +1,128 @@
+---
+layout: 	coco
+title: 		"字符串"  
+date: 		2018-08-04 12:00:00
+author: 	"shamphone"  
+chapter:	"4"  
+---
+
+
+## 一、字符串定义
+
+相对于在其他语言中大量使用string的情况， 在solidity中，我们更倾向于使用bytes和bytes数组。 那这两者之间有什么区别呢？ 根据solidity的官方文档： 
+1. 使用bytes来表示任意长度的原始byte数据，string来表示任意长度的UTF-8字符串； 
+2. 如果字符串的长度是已知的且不会超过32个byte，则优先使用bytes1~bytes32。因为他们在计算时耗费更少的gas。
+3. string没有length属性，无法得知其长度；无法通过序号来访问第N个字符。 
+
+```
+	string name = "可可链";
+	require(name.length == 3); //编译不通过，没有length属性；
+	require(name[2]=="链"); //编译不通过，无法通过序号来访问；
+```
+
+## 二、字符串常量
+
+
+字符串常量是指由单引号，或双引号引起来的字符串 (“foo” or ‘bar’)。字符串并不像C语言，包含结束符，”foo”这个字符串大小仅为三个字节。和整数常量一样，字符串的长度类型可以是变长的。字符串可以隐式的转换为byte1,…byte32 如果适合，也会转为bytes或string。
+```
+string foo = "foo"; 
+string bar = 'bar';
+```
+并可以使用转译字符，比如 \n, \xNN, \uNNNN。\xNN是16进制的字节；而\uNNNN一般是用来表示UTF-8字符。 
+这两种表示字符串的编码在Solidity中都是支持的。 我们来验证下string和bytes的区别。 
+
+## 三、 bytes与String
+
+bytes和string是一种特殊的数组。bytes类似byte[]，但在外部函数作为参数调用中，会进行压缩打包，更省空间，所以应该尽量使用bytesM。
+string类似bytes，但不提供长度和按序号的访问方式。
+
+由于bytes与string，可以自由转换，可以将字符串s通过bytes(s)转为一个bytes。
+但需要注意的是通过这种方式访问到的是UTF-8编码的码流，并不是独立的一个个字符。
+比如中文编码是多字节，变长的，所以你访问到的很有可能只是其中的一个代码点。
+
+```
+ function string2bytes() public pure returns(uint,byte, byte){
+	 string memory name="可可链";
+	 bytes memory byteName = bytes(name);
+	 return (byteName.length,byteName[0], byteName[1]);
+  }  
+```
+输出：
+
+```
+0: uint256: 9
+1: bytes1: 0xe5
+2: bytes1: 0x8f
+
+```
+
+## 四、gas消耗比较
+
+```
+pragma solidity ^0.4.24;
+
+
+contract TestString {    
+    
+    string constant foo = "learning solidity";
+    bytes32 constant bar = "learning solidity";
+  function  getAsString() public payable returns(string) {
+    return foo;
+  }
+
+  function  getAsBytes() public payable returns(bytes32) {
+    return bar;
+  }
+}
+
+```
+
+比较一下交易结果，首先是getAsBytes的结果：  
+![getAsBytes](http://static.cocolian.cn/img/coco/solidity/bytes-1.png)  
+其次是getAsString的结果： 
+![getAsBytes](http://static.cocolian.cn/img/coco/solidity/bytes-2.png)  
+
+这两次调用gas消耗是不一样的， getAsString耗费更多的gas。 虽然在这个例子中并不多，但一旦处理量上来了，这个差异还是非常可观的。 
+
+
+
+## 五、string操作
+
+不像其他语言，在solidity中，关于字符串的操作还比较少。 
+solidity建议是尽量将各种操作放到前端处理，在合约上仅处理最终的结果。 
+这里针对常用的一些操作，介绍在solidity中应该如何实现。 我们将字符串常用操作放到一个库里面，[最终的实现在github上](https://github.com/cocolian/cocolian-eth/blob/master/library/strings.sol)。
+如果项目中有需要，可以直接下载这个文件。 支持字符串比较、拼接、检索等常用功能。 使用示例如下：
+
+```
+pragma solidity ^0.4.24;
+
+import "./strings.sol";
+
+contract TestString {    
+    
+  using strings for string;   
+  
+  // 字符串比较
+  function stringEquals() public pure returns (string, string, int) {
+      string memory foo = "foo";
+      string memory bar = "bar";
+      return (foo,bar, foo.compare(bar));
+  }
+  
+  //字符串拼接
+  function stringConcat() public pure returns (string, string, string) {
+      string memory foo = "foo";
+      string memory bar = "bar";
+      return (foo,bar, foo.concat(bar));
+  }
+  //解析整数
+  function parseInt() public pure returns (uint, uint) {
+      string memory foo = "123";
+      string memory bar = "123.456";
+      return (foo.parseInt(), bar.parseInt(3));
+  }
+  
+}
+
+```
+

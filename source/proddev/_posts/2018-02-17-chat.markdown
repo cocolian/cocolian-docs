@@ -1,0 +1,16 @@
+---
+layout:     source 
+title:      "2018-02-17-WeChat"
+date:       2018-02-17 12:00:00
+author:     "PaymentGroup"
+lines:      2 
+tag:		  [chat]
+---
+> 08:44:42  龚正-滴滴-支付金融  
+   
+![2018-02-17 08:44:42](http://static.cocolian.cn/img/201802/20180217_084442.png) 
+   
+> 08:47:30  Daniel  
+   
+[强][强]  
+   

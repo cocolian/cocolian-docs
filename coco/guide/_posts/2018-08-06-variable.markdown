@@ -1,0 +1,349 @@
+---
+layout: 	coco
+title: 		"变量"
+date: 		2018-08-06 12:00:00
+author: 	"shamphone"
+chapter:	"7"
+---
+
+
+## 一、变量定义 
+
+在Solidity中，每一个变量都有类型（type）， 在声明变量时，变量的类型在变量名之前： 
+
+```
+uint8 age;
+boolean done;
+uint32 salary;
+```
+变量申明必须以分号结束，他们也是一条完整的语句；
+
+当然，也可以在定义变量的时候对其初始化：
+
+```
+uint8 age = 12;
+boolean done = false;
+uint32 salary = 10293894;
+```
+
+在Solidity中，变量声明尽可能靠近其第一次使用的地方。这是一个良好的编写风格。 Solidity中变量分为：
+1. 状态变量，定义在contract中的属性，用于跟踪contract的变化；  
+2. 输入参数， 在函数调用时提供输入参数；  
+3. 输出参数， 即返回值；   
+4. 局部变量，在函数实现内部使用。  
+
+```
+contract Calculator {
+	uint public seed = 0; //状态变量seed
+
+	function random(uint range) public //输入参数 range  
+		returns(uint p) { //输出参数p
+		uint next = seed * 1103515245 ; //局部变量next
+		next +=12345;
+		next = (next/65535)%2048;
+		seed = next;
+		return seed % range;
+	}
+```
+
+## 二、初始值
+
+在solidity中，所有变量在定义的时候，如果未指定初始值，系统都会默认其值为所有字节都是0的初始值，也就是典型的 0状态 默认值。 
+
+- 布尔类型默认为 false；
+- 有符号和无符号整型默认为0; 
+- 固定大小数组，所有元素都按类型默认为0;
+- 动态数组，默认为为空数组或者字符串。 
+
+我们将在各个类型介绍时说明初始值。 
+
+
+## 三、状态变量
+
+状态变量是永久地存储在合约存储中的值。合约中的状态类似类中的属性变量。 如上述例子中的
+
+```
+uint public seed = 0 ;
+```
+
+uint 说明这是一个整形。
+
+在contract中， 状态变量的使用，和其他语言不一样，不需要this指针。
+注意，合约的状态变量和合约实例一样，只有一个运行时实例。 所有调用这个合约的行为都操作的是同一个实例。 
+所以如果有变量是和账户或者用户相关的，则不能定义为状态变量。 
+我们将在contract一章中详细介绍状态变量。 
+
+## 四、局部变量
+
+了解solidity的局部变量，需先了解块的概念。 
+
+### 4.1 块
+
+在solidity中，由{}括起来的若干条简单语句就是块。 它确定了变量的作用域。 
+一个块可以嵌套的另一个块里面，在solidity中，如果在子块中重新定义了父块中的变量，则会出现编译错误，remix会编译不通过：
+
+```
+   function testBlock() public {
+        uint a = 12;
+        uint b = 13;
+        if(b>1){
+            uint a = 14; //变量a已经定义过了。 
+            return ;
+        }
+    }
+```
+
+## 4.2 作用域
+
+注意，solidity和其他语言不同地方在于：
+1. 局部变量在函数中可以先使用后声明；   
+2. 一个局部变量的作用域，不是在它声明的块中，而是在其声明的整个函数中。   
+3. 局部变量在任何一个地方声明，那在这个函数进入时，就会被初始化，初始化为系统默认值，而不是变量声明的时候指定的值。 
+4. 同一个局部变量在一个函数中不能被重复声明。 
+5. 状态变量作用域为整个contract或者library。局部变量不能和状态变量同名。 
+
+```
+contract ScopingErrors {
+    function scoping() {
+        uint i = 0;
+
+        while (i++ < 1) {
+            uint same1 = 0; // 作用域是从这里开始，到本函数结束。 
+        }
+
+        while (i++ < 2) {
+            uint same1 = 0;// 这是错误的，重复声明了same1;
+        }
+    }
+
+    function minimalScoping() {
+        {
+            uint same2 = 0;
+        }
+
+        {
+            uint same2 = 0;// 这是错误的，重复声明了same2;
+        }
+    }
+
+    function forLoopScoping() {
+        for (uint same2 = 0; same2 < 1; same2++) { //这是没问题的，和上一个i是在不同函数中，作用域是到这个函数结束
+        }
+
+        for (uint same2 = 0; same2 < 1; same2++) {// 这是错误的，重复声明了same2。 
+        }
+    }
+
+    function initVariables() returns (uint,uint) {
+        uint bar = 5; //注意，这里声明和初始化了bar，值为5。但foo也会在函数开始的时候初始化，值是0。 
+        if (true) {
+            bar += foo; //虽然foo 在后面声明，但这里已经可以使用了。 
+        } else {
+            uint foo = 10;// 这个语句不会被执行。foo会在函数开始的时候执行初始化，值是0，而不是10。
+        }
+        return bar,foo;// returns 5,0 , foo被初始化为0
+    }
+}
+
+```
+
+## 五、变量的存储
+
+在 Solidity 中，变量的存储有三种位置： memory，storage和calldata。
+- calldata比较特殊，一般只有外部函数的参数可以被指定为calldata，即设置为只读的，不会持久化到区块链上。 
+- storage 变量是指永久存储在区块链中的变量。 
+- memory 变量则是临时的，存储位置同我们普通程序的内存类似。即分配，即使用，越过作用域即不可被访问，等待被回收。当外部函数对某合约调用完成时，内存型变量即被移除。
+
+状态变量（在函数之外声明的变量）默认为“storage”形式，并永久写入区块链。
+默认的函数参数，包括返回的参数，是``memory``类型。
+默认的局部变量，是storage类型。 
+
+然而也有一些情况下，需要人工设置下存储类型，主要用于处理函数内的结构体和数组的时候。 
+
+### 5.1 参数和局部变量 
+
+以下代码：
+```
+contract MyStudent{
+    
+  struct Student{
+      string name ;
+      uint age;
+  }
+  
+  function assign(Student inMemory) internal{
+
+      Student varInStorage = inMemory; 
+  }
+}
+```
+
+remix会提示编译错误：
+
+```
+
+TypeError: Type struct LocationTest.Student memory is not implicitly convertible to expected type struct LocationTest.Student storage pointer.
+
+```
+由于输入的参数inMemory是在内存中，而临时变量varInStorage是在区块链的storage上，导致赋值错误。 
+
+## 5.2 storage转换为storage
+
+当我们把一个storage类型的变量赋值给另一个storage时，我们只是修改了它的指针。
+
+```
+pragma solidity ^0.4.24;
+
+
+contract VarLocation {
+    
+  struct Student{
+      string name ;
+      uint age;
+  }
+  
+  Student varState= Student("mike", 25);
+  
+  function storage2Storage() public returns (string, string){
+    varState.age = 5 ;
+	Student storage varLocal = varState;
+	varState.name = "NewName";
+    return (varState.name, varLocal.name);
+  }  
+}  
+  
+```
+
+如上述示例， varLocal是通过指针指向varState，这意味着对varState的属性修改，也是对varLocal属性的修改。 最终输出是:
+```
+{
+	"0": "string: NewName",
+	"1": "string: NewName"
+}	
+```
+
+## 5.3 memory变量赋值给状态变量
+
+状态变量是storage类型存储。 当将memory赋值给状态变量，实际是做了一个内存拷贝。
+
+```
+pragma solidity ^0.4.24;
+
+
+contract VarLocation {
+    
+  struct Student{
+      string name ;
+      uint age;
+  }
+  
+  Student varState= Student("mike", 25);
+    
+  
+  function memory2Storage() public  returns (string, string){
+      Student memory inMemory = Student("OldName", 20);
+      varState=inMemory;
+	  inMemory.name="NewName";
+      return (varState.name, inMemory.name);
+  }
+}
+```
+
+最终输出的输出是：
+
+```
+{
+	"0": "string: OldName",
+	"1": "string: NewName"
+}
+```
+
+## 5.3 memory变量赋值给局部变量
+
+在以太坊上，storage必须是静态分配存储空间。
+局部变量虽然是一个storage的，但它仅仅是一个storage类型的指针。
+如果将memory变量赋值给storage局部变量，会产生编译错误。 
+
+
+```
+pragma solidity ^0.4.24;
+
+contract StorageError {
+    
+  struct Student{
+      bytes32 name ;
+      uint age;
+  }
+  
+  function memoryToLocal(Student foo) internal{
+	// Student bar = foo; //这有编译错误，输入参数foo默认是在内存中的， 局部变量bar默认是在storage中的；
+	Student memory bar = foo; //需要加memory修饰。 
+  }
+
+}
+```
+
+## 5.4 storage变量赋值给memory变量
+
+将storage转为memory，会做一个拷贝。 
+
+```
+pragma solidity ^0.4.24;
+
+
+contract MyStudent {
+    
+  struct Student{
+      bytes32 name ;
+      uint age;
+  }
+  
+  Student inStorage= Student("mike", 25);
+  
+  function storage2Memory() public returns (uint foo, uint bar) {
+      Student memory inMemory = inStorage;
+      inStorage.age = 20;
+      return (inMemory.age, inStorage.age);
+  }
+```
+如上，输出：
+```
+	foo: 25
+	bar: 20
+```
+
+## 5.5 memory变量赋值给memory变量
+
+memory变量之间是引用传递，不会拷贝数据。 
+```
+pragma solidity ^0.4.24;
+
+
+contract VarLocation {
+    
+  struct Student{
+      string name ;
+      uint age;
+  }
+  
+  Student varState= Student("mike", 25);
+  
+  function memory2memory() public pure returns (string, string ){
+      Student memory foo = Student("foo", 10);
+	  Student memory bar = foo;
+	  bar.name = "bar";
+	  return (foo.name, bar.name);
+  }
+}
+
+```
+
+在这个示例中， bar和foo指向同一个内存区块，对bar进行修改时，foo的值也会跟着变化。 输出是：
+
+```
+0: string: bar
+1: string: bar
+```
+
+solidity当前版本对memory和storage的区分还做的不好，个人认为这算是设计上的一个不足。可以参考其他语言，默认在内存里跑程序，需要数据可以从链上或者其他地方加载。 
+

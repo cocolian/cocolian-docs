@@ -1,0 +1,30 @@
+---
+layout: default
+---
+<aside class="content-aside">
+<ul>
+<li><a href="/source/">群管理指南</a></li>
+<li><a href="/source/devarch/">支付产品开发群</a></li>
+<li><a href="/source/prodarch/">支付产品架构群</a></li>
+<li><a href="/source/proddev/">支付产品技术群</a></li>
+<li><a href="/source/prodrd/">支付产品研发群</a></li>
+<li><a href="/source/list">已整理的记录</a></li>
+</ul>
+</aside>
+<header class="intro-header">
+	<div class="post-heading">                  
+		<h1>{{ page.title }}</h1>                
+		<ul class="meta">
+			<li><i class="icon-sitemap"></i>{% for pcat in page.categories%}{{site.modules[pcat]}}{% endfor%}  </li>
+			<li><i class="icon-user"></i>{% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %}  </li>
+			<li><i class="icon-time"></i>{{ page.date | date: "%Y-%m-%d" }}</li>
+		</ul>                
+	</div>           
+</header>
+<!-- Post Content -->
+<article class="post-content"> 
+    <!-- Post Container -->
+            <div class="post-container">
+				{{ content }}
+            </div>  
+</article>

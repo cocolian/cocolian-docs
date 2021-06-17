@@ -1,0 +1,101 @@
+---
+layout:     source 
+title:      "2019-01-16-WeChat"
+date:       2019-01-16 12:00:00
+author:     None
+lines:      22 
+tag:       [chat]
+---
+> 07:42:50  张彦龙-光大电子银行-郑州  
+   
+[北京监狱开通支付宝扫码存款：每月一次，每次最多1000元
+](http://mp.weixin.qq.com/s?__biz=MzU2MDExNDQyNw==&amp;amp;amp;mid=2247501470&amp;amp;amp;idx=2&amp;amp;amp;sn=a0c825801cd58c7d3d15e5a8cbc31c06&amp;amp;amp;chksm=fc0e790acb79f01c9bf108bfa56042eff3940bef6b4df18d67fc37dfdab3831d85f5afc66e3e&amp;amp;amp;mpshare=1&amp;amp;amp;scene=24&amp;amp;amp;srcid=0116wppwwYKo3H4SBWZMiFGq#rd)  
+   
+> 08:02:39  ark-雪球-开发  
+   
+[2019-01-16 三社交软件大战微信、支付宝：集五福的活动将于1月25日开启、抖音：日活突破2.5亿，月活突破5亿
+](http://mp.weixin.qq.com/s?__biz=MzU4Mzc5NTAzNQ==&amp;amp;amp;mid=2247483816&amp;amp;amp;idx=2&amp;amp;amp;sn=61b13e540f761cfec8b8a6cd8183bde0&amp;amp;amp;chksm=fda2e99ccad5608a93b017fbe59a4f2192f74f6d516f6dda6b49ca6343b78ef26bcf578d2b67&amp;amp;amp;mpshare=1&amp;amp;amp;scene=1&amp;amp;amp;srcid=01166lS5fvFAWH05ccjBlbDJ#rd)  
+   
+> 08:07:13  ark-雪球-开发  
+   
+[60后 VS 90后 张小龙与张一鸣的终极之战
+](http://mp.weixin.qq.com/s?__biz=MzU4Mzc5NTAzNQ==&amp;amp;amp;mid=2247483816&amp;amp;amp;idx=1&amp;amp;amp;sn=c86f62dbaadac95c09e320ef4e4268a9&amp;amp;amp;chksm=fda2e99ccad5608a4e3f9eb10d2ec61c1fbca4663ac3afd0417104a24bed9acb934c2691759a&amp;amp;amp;mpshare=1&amp;amp;amp;scene=1&amp;amp;amp;srcid=0116oHQCsqSJHtusrkCuNtGl#rd)  
+   
+> 08:09:24  右军  
+   
+红包，升级版的秒杀系统，红包系统应当具备秒杀系统所具备的特性。  大量用户抢红包带来了系统的高并发压力；大量用户抢同一红包带来了数据一致性问题：红包不能超发，漏发，重复发；而由于红包涉及到资金，也会带来资金安全问题。  由上述可见，一套红包系统，主要的技术挑战在于：系统的高并发，一致性，高响应，安全性等。  
+   
+> 08:09:26  右军  
+   
+[探秘苏宁金融升级版秒杀系统
+](http://mp.weixin.qq.com/s?__biz=MzIxMzEzMjM5NQ==&amp;amp;amp;mid=2651031161&amp;amp;amp;idx=1&amp;amp;amp;sn=49fd6fa56754e45d2145706451156686&amp;amp;amp;chksm=8c4c537dbb3bda6be973394a802aa18b778611942d87233df87ef680cd198ecef8adcbb12969&amp;amp;amp;mpshare=1&amp;amp;amp;scene=1&amp;amp;amp;srcid=01162a7qnGocGXdtwNdqztZS#rd)  
+   
+> 11:54:27  程小剑-群管理  
+   
+有没有人分享过网联的交易规范，网联应该不是8583的这种规范吧  
+   
+> 11:58:36  小北-安邦-技术  
+   
+只有pos才是  
+   
+> 11:58:57  小北-安邦-技术  
+   
+好早了  
+   
+> 12:00:07  程小剑-群管理  
+   
+「 小北-安邦-技术: 只有pos才是 」 - - - - - - - - - - - - - - - 说的是银联只有pos 才用8583么？  
+   
+> 12:01:31  小北-安邦-技术  
+   
+我印象中是  
+   
+> 12:03:30  程小剑-群管理  
+   
+你这边接的都是xml么  
+   
+> 12:03:59  程小剑-群管理  
+   
+我们这边看到的都是8583,行内系统也都是按照这个标准来  
+   
+> 13:56:59  MasterChao-产品  
+   
+![2019-01-16 13:56:59](http://static.cocolian.cn/img/20190116_135659.png) 
+   
+> 13:57:17  MasterChao-产品  
+   
+看了几个价格，比美团上的便宜  
+   
+> 13:58:29  MasterChao-产品  
+   
+太猛了。字节跳动的业务已经发展到电商，餐饮，社交。。什么时候做打车。。  
+   
+> 14:07:28  vniuv  
+   
+全领域突破  
+   
+> 15:11:47  Aaron-ctrip-上海  
+   
+要学支付宝做个放心付  
+   
+> 15:54:19  小北-安邦-技术  
+   
+互联网时代流量为王？  
+   
+> 20:59:08  龚晓冬-银联-产品-上海  
+   
+[2018年消费金融ABS发行规模超2800亿元 年末出现“小高峰”
+](https://c.m.163.com/news/a/E5LQI9IC0512B07B.html?spss=newsapp)  
+   
+> 21:23:19  龚晓冬-银联-产品-上海  
+   
+亿欧物流1月16日消息，“顺丰速运月结服务”微信公众号显示，顺丰月结管家“寄大件”功能正式上线，以20kg公斤段以上的货物为主。从推送信息可以了解到，客户可以从“顺丰速运月结服务”公众号操作寄递大件货物，并可以预约上门收货时间。  
+   
+> 21:23:36  龚晓冬-银联-产品-上海  
+   
+物流新模式  
+   
+> 21:24:43  vniuv  
+   
+业务细分也是创新  
+   

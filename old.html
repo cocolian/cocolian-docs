@@ -1,0 +1,68 @@
+---
+layout: default
+---
+<!-- Page Header -->
+<header class="intro-header">
+	<div class="post-heading"> 
+         <h1>在这里读懂支付</h1>                             
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+	<div class="row">
+
+<div class="session_list">
+	<section><header><a href="essay/">入门： 现代支付系统设计</a></header>
+	<article>
+	由于域名报备的原因，访问blog.lixf.cn、doc.cocolian.org域名，都会被导航到这个网站。 没错，这里就是老熊的博客，doc.cocolian.cn。 这是一系列关于支付系统设计经验的文章。 还在不断的丰富和完善中。<br/>
+	最新分享： 
+	<ul>
+{% assign posts = site.categories['essay'] | sort : "date"  %}
+{% for post in posts limit:5 %}
+	{% unless  post.status  %}
+   <li>{{ post.chapter}}.  <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></li>
+	{% endunless %}
+{% endfor %}
+	</ul>
+	</article>
+	</section>
+</div>
+
+<div class="session_list">
+	<section><header><a href="wechat/">进阶：支付产品与技术的交流分享</a></header>
+	<article>
+	这是一个活跃的社区，每天群里都有关于领域知识的分享和讨论。 我们的志愿者们会把群里嘉宾分享的内容整理并发布到微信公众号、头条号、知乎等媒体上。 
+	希望通过我们的努力，普及支付知识，并通过这种方式来提升支付领域整体的产品、技术和创新能力。 访问<a href="wechat/">支付交流群</a> 来查看所有历史分享。最新分享记录： 
+	<ul>
+{% assign posts = site.categories['wechat'] | sort : "date" | reverse %}
+{% for post in posts limit:10 %}
+	{% assign  display = false  %}
+		{% for tag in post.tags %}
+			{% if tag == "publish"  %} {% assign display = true %}  {%endif %}
+		{% endfor %}
+	{% if display %}
+    <li><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a> </li>
+	{% endif %}
+{% endfor %}
+	</ul>
+	</article>
+	</section>
+</div>	
+	
+	
+
+	
+<!-- Main Content -->
+<div class="session_list">
+	<section><header><a href="dev/">实践：关于cocolian项目</a></header>
+	<article>
+	为了帮助组织机构能够更好更快的建立一个安全、可靠、高可用、易于维护的支付系统，我们发起了Cocolian开源项目。 
+Cocolian取两个意思，第一我们是一个联盟，或者说团队，共同来完成这个项目。 第二是可可链，我们希望这个项目不仅仅是常规的系统，他能够将区块链的技术应用到支付领域上。 在完善支付基础设施建设之上，通过这个开源项目来探索区块链在支付领域的各种可能应用。  
+
+	</section>
+</div>
+
+ 
+</div>
+</div>

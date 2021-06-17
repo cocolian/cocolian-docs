@@ -1,0 +1,67 @@
+---
+layout: 	coco
+title: 		"继承"
+date: 		2018-06-12 12:00:00
+author: 	"shamphone"
+status: 	"hidden"  
+chapter:	"2"
+---
+
+```
+pragma solidity 0.4.8;
+
+// Solidity supports multiple inheritance by copying code including polymorphism.
+
+// All function calls are virtual, which means that the most derived function is called, 
+// except when the contract name is explicitly given.
+
+// Even if a contract inherits from multiple other contracts, only a single contract 
+// is created on the blockchain, the code from the base contracts is always copied into the final contract.
+
+// In general inheritance system in solidity is very similar to Python’s, 
+// especially concerning multiple inheritance.
+
+// Lets checkout one example
+
+// We will create a simple base class first
+contract owned {
+    function owned() { owner = msg.sender; }
+    address owner;
+}
+
+// Now we can extende the owned using is keyword like this
+contract mortal is owned {
+
+	// here kill will have the access of owner the variable 
+	// which is available in the owned contract
+	// please note that owned contract's constructor will be 
+	// executed at the time of mortal's initialization
+    function kill() {
+        selfdestruct(owner);
+    }
+}
+
+// Multiple inheritance is also possible. Note that "owned" is
+// also a base class of "mortal".
+// in such cases the order of inheritance is important to avoid the 
+// Diamond problem (which is know in multiple inheritance)
+// Let's take an example.
+
+
+contract User is mortal, owned {
+
+    string public UserName;
+
+    function User(string _name){
+        UserName = _name;
+    }
+    // here User inherits both the cntracts owned & mortal which is resulting in diamond problem
+    // Changing the order of inheritance might resolve the issue of this diamond problem.
+    // The reason for this is that "User" requests "owned" to override 
+    // "mortal" (by specifying mortal, owned in this order), but "mortal" itself 
+    // requests to override "owned", which is a contradiction that cannot be resolved.
+    // Here reverting the order will solve this problem
+    // A simple rule to remember is to specify the base classes 
+    // in the order from “most base-like” to “most derived”.
+}
+```

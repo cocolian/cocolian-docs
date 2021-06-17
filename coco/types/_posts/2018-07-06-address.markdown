@@ -1,0 +1,285 @@
+---
+layout: 	coco
+title: 		"地址address"  
+date: 		2018-08-04 12:00:00  
+author: 	"shamphone"  
+chapter:	"6"  
+---
+
+## 一、地址类型  
+
+
+地址类型使用``address``来定义。 
+以太坊地址的长度是160位，20个字节，也可以用一个uint160编码来表示地址。
+地址是所有合约的基础，所有的合约都可以转化为地址对象，可以使用这个对象来调用相关的方法。 
+当然地址代表一个普通帐户时，就没有这么多丰富的功能啦。  
+地址类型可以使用如下操作符：  
+
+ ``<=``， ``<``， ``==``， ``!=``， ``>=`` 和 ``>``
+
+
+从0.5.0 版本开始， 合约不会从地址类型派生，但仍然可以显式地转换成地址类型。
+
+```
+   
+function getBalance() constant public returns (uint256){
+	return this.balance;
+}
+```
+
+调用this.balance会得到如下编译报警：
+
+```
+Warning: Using contract member "balance" inherited from the address type is deprecated. Convert the contract to "address" type to access the member, for example use "address(contract).balance" instead.
+        return this.balance;
+```
+
+正确的做法是：
+
+```
+   
+function getBalance() constant public returns (uint256){
+	return (address(this)).balance;
+}
+
+```
+
+
+## 二、地址常量
+
+不能直接使用从geth客户端获取到的地址作为常量来使用。 
+Solidity要求地址常量需要满足地址数据校验的标准参考[EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md)。
+比如像 ``0xFB31C98b4F04488828f3b601dA19182401e864B5`` 这样的通过了地址校验和测试的十六进制常数属于 ``address`` 类型。
+不符合这个标准的数据会被当做整型常量。 
+
+```
+pragma solidity ^0.4.24;
+
+contract AddressType {
+
+    function getBalance() public  view returns(uint256){
+		//这个定义会被警告：
+		// Invalid Warning: This looks like an address but has an invalid checksum
+	//	address wrong = 0xfb31c98b4f04488828f3b601da19182401e864b5; 
+		// 这是正确的定义
+        address addr  = 0xFB31C98b4F04488828f3b601dA19182401e864B5;
+        return addr.balance;
+    }   
+}
+
+```
+
+上述wrong变量指向是一个原始的地址，通过geth客户端的获取：
+
+```
+> eth.accounts[0]
+"0xfb31c98b4f04488828f3b601da19182401e864b5"
+```
+
+会得到编译警告。要把原始地址转换为符合标准的地址， 一个比较容易的转换方式，是通过etherscan.io来进行。
+如下一个原始address常量``0xfb31c98b4f04488828f3b601da19182401e864b5``
+构造URL地址： ``https://etherscan.io/address/0xfb31c98b4f04488828f3b601da19182401e864b5``
+从这里可以获取处理后的地址：
+![address](http://static.cocolian.cn/img/coco/solidity/address-1.png)
+
+
+## 三、属性
+
+address类型的变量，作为一个复合类型，和java中的String对象一样，有自己的属性和方法。 
+
+### 3.1 balance
+
+通过它能得到一个地址的余额， 单位是wei。这里先看一个在很多教程中被使用的例子： 
+
+```
+pragma solidity ^0.4.24;
+
+contract BalanceBug {
+
+    function getBalance() public  constant returns(uint256){
+        address addr  = 0xFB31C98b4F04488828f3b601dA19182401e864B5;
+        return addr.balance;
+    }   
+}
+
+```
+
+返回结果
+
+```
+0: uint256: 115792089237316195423570985008687907853269984665640564039457434007913129639935
+```
+
+这个返回值是不对的。实际上这是eth/api_backend.go文件中定义的一个常量：
+
+```
+func (b *EthAPIBackend) GetEVM(ctx context.Context, msg core.Message, state *state.StateDB, header *types.Header, vmCfg vm.Config) (*vm.EVM, func() error, error) {
+	state.SetBalance(msg.From(), math.MaxBig256)
+	vmError := func() error { return nil }
+	context := core.NewEVMContext(msg, header, b.eth.BlockChain(), nil)
+	return vm.NewEVM(context, state, b.eth.chainConfig, vmCfg), vmError, nil
+}
+```
+其中： math.MaxBig256 == 115792089237316195423570985008687907853269984665640564039455084007913129639935 
+
+这是solidity 的 [2325 bug](https://github.com/ethereum/solidity/issues/2325)。 在非payable方法中获取余额，会触发这个bug。
+
+一个参考做法，是在payable方法中获取balance，然后在通过其他方法来输出：
+
+```
+
+pragma solidity ^0.4.24;
+
+contract AddressType {
+    
+    mapping(address => uint256) balances;
+
+    function calcBalance() public payable {
+        balances[ msg.sender]= msg.sender.balance;        
+    }
+    
+    function getBalance() constant public returns (uint256) {
+        return balances[msg.sender];
+    }
+    
+}
+
+```
+
+## 四、函数
+
+address 中有三个方法可以用来实现币的转移： transfer， send和call。这里介绍他们的区别。 
+
+### 4.1 transfer
+
+使用 ``transfer`` 函数向一个地址发送以太币 （以 wei 为单位）。 
+```
+     
+    function testTransfer() public payable returns (uint256){
+        address sender  = msg.sender; //调用这个服务的账户
+        sender.transfer(10); //从合约账户扣10个wei到调用者账户上。 
+        address receiver = address(this); //获取合约账户
+        return receiver.balance; //合约账户余额。 
+    }
+  
+```
+
+在remix中，设置value为``4gwei``，执行这个方法。同时登录到eth客户端，查看合约账户余额的变化。
+在示例中，合约账户地址是``0x1c71d163f44a2fa391192217b764dc2f3aa512e8``  。 
+```
+> eth.getBalance("0x1c71d163f44a2fa391192217b764dc2f3aa512e8")
+3999999990
+> eth.getBalance("0x1c71d163f44a2fa391192217b764dc2f3aa512e8")
+7999999980
+```
+
+执行前余额是``3999999990``, 执行后余额是``7999999980``。 怎么计算来的呢？
+执行这个payable方法，转账金额是4gwei = 4,000,000,000 wei，这是从msg.sender账户发送给合约账户的。 
+之后调用sender.transfer方法转10个wei，这是从合约账户发给msg.sender账户。 
+所以合约账户的变更金额是 `` + 4,000,000,000 - 10 `` 。 
+
+我们再来看支出账户的余额，即msg.sender账户。 执行前： 
+```
+> eth.getBalance(eth.coinbase).toString(10)
+"2005298448992000000020"
+```
+
+执行后：
+```
+> eth.getBalance(eth.coinbase).toString(10)
+"2005297270108000000030"
+```
+
+交易的详情： 
+```
+> eth.getTransaction("0x9249bae9fe83138729e5c1428d4557f0152952335bc1beea49020e84a32a5fe0")
+{
+  blockHash: "0x0c3af13bcbb0664a5b7ea2aa5f99c13733935ba9a9de55234491f091dcf6e6d9",
+  blockNumber: 131860,
+  from: "0xfb31c98b4f04488828f3b601da19182401e864b5",
+  gas: 31244,
+  gasPrice: 40000000000,
+  hash: "0x9249bae9fe83138729e5c1428d4557f0152952335bc1beea49020e84a32a5fe0",
+  input: "0xd591221f",
+  nonce: 88,
+  r: "0x75493b98551738850f51bdc23ee6c7bb835d2e32a602be10d90ec89dc39b3145",
+  s: "0x5c83ac6137ae5f5b65d37358681312de5d5a4b61a790bf5cf991b4b9355f2d1b",
+  to: "0x1c71d163f44a2fa391192217b764dc2f3aa512e8",
+  transactionIndex: 0,
+  v: "0x181a3",
+  value: 4000000000
+}
+> eth.getTransactionReceipt("0x9249bae9fe83138729e5c1428d4557f0152952335bc1beea49020e84a32a5fe0")
+{
+  blockHash: "0x0c3af13bcbb0664a5b7ea2aa5f99c13733935ba9a9de55234491f091dcf6e6d9",
+  blockNumber: 131860,
+  contractAddress: null,
+  cumulativeGasUsed: 29472,
+  from: "0xfb31c98b4f04488828f3b601da19182401e864b5",
+  gasUsed: 29472,
+  logs: [],
+  logsBloom: "...",
+  status: "0x1",
+  to: "0x1c71d163f44a2fa391192217b764dc2f3aa512e8",
+  transactionHash: "0x9249bae9fe83138729e5c1428d4557f0152952335bc1beea49020e84a32a5fe0",
+  transactionIndex: 0
+}
+
+```
+
+交易的Gas费用，即支付给矿工的费用是：
+
+```
+gasUsed*gasPrice = 29472 * 40000000000 = 1178880 000 000 000
+```
+
+sender，即调用合约的账户的收支情况是：
+
+![address](http://static.cocolian.cn/img/coco/solidity/address-3.png)
+
+
+而在EVM中，这两个操作是同时进行的，也就是它是一个事务处理。 
+如果在执行过程中用光了 gas 或者因为任何原因执行失败， 交易会被打回，当前的合约也会在终止的同时抛出异常。
+这个操作的Gas费用是``29472``， 其中``2300`` 是固定支出。 
+- 如果交易失败，比如gas在这过程中用完了，会抛出异常。  
+- ``2300`` Gas是固定支出，这是为了避免交易重入。 
+- 适合大部分的交易场景。 
+
+### 4.2 send  
+
+``send`` 是这三个方法中第一个被引入到solidity中用来支持交易的。 可以把``send``看做 ``transfer`` 的低级版本。它有如下特性： 
+- 引入了``2300`` Gas 的最低限制来执行交易。但这个限制很低，只够创建一个事件。 
+- 如果执行失败，send是返回``false``，而不是抛出异常。 如果处理不当，那会导致当前已经完成的变更不会被回滚。所以可以考虑将send放到``request``断言中。 
+
+在使用 ``send`` 的时候会有些风险：如果调用栈深度是 ``1024`` 会导致发送失败（这总是可以被调用者强制），如果接收者用光了 gas 也会导致发送失败。
+所以为了保证 以太币 发送的安全，一定要检查 ``send`` 的返回值。 大部分场景下，应该使用 ``transfer``。
+
+### 4.3 call
+
+这是最灵活的一个接口， 支持设置gas费用。 如果涉及到复杂的计算逻辑，可以通过这个方法来添加gas费用。 
+
+```
+    function testCall() public payable returns (uint256){
+        address sender  = msg.sender;
+        require(sender.call.value(30).gas(2000000)());
+        address receiver = address(this);
+        return receiver.balance;
+    }
+```
+
+``call`` 返回的布尔值表明了被调用的函数已经执行完毕（``true``）或者引发了一个 EVM 异常（``false``）。
+无法访问返回的真实数据（为此我们需要事先知道编码和大小）。
+
+可以使用 ``.gas()`` modifier 调整提供的 gas 数量 
+```
+    sender.call.gas(2000000)();
+```
+类似地，也能控制提供的以太币（wei）的值 ::
+```
+   sender.call.value(30)(); 
+```
+最后一点，这些 ``modifier``可以联合使用。每个修改器出现的顺序不重要:  
+```
+   sender.call.gas(2000000).value(30)(); 
+```
+

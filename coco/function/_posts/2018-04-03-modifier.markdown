@@ -1,0 +1,252 @@
+---
+layout: 	coco
+title: 		"修改器"
+date: 		2018-04-03 12:00:00
+author: 	"shamphone"
+chapter:	"3"
+
+---
+
+我们终于开始讨论Solidity最难理解又是最有意思的一个课题了，函数修改器(Function Modifiers）。
+它和java语言的Annotation、Python的装饰器有点类似，可以方便的控制函数的逻辑，比如可以在某个函数执行前检查某个前置条件。 
+但功能更强大。 solidity的函数修改器支持继承和重写。
+整个区块链运行环境是透明的、分布式的、图灵完备的。为保证其上运行的代码安全，在实现上，需要做大量的检查。 
+将这方面的支持升级为语言特性可以让检查代码复用，开发起来也更简洁，提升可维护性。 
+
+## 一、定义  
+
+在虚币系统中，我们经常需要对调用者进行一些限制。比如，只能是合约的所有者才能改变虚币账户的余额。
+我们一起来看看如何用函数修改器实现这一限制：
+
+```
+pragma solidity ^0.4.24;
+
+contract owned {
+    address public owner;
+
+    constructor() public {
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner {
+        require(msg.sender == owner);
+        _;
+    }
+
+    function transferOwnership(address newOwner) onlyOwner public {
+        owner = newOwner;
+    }
+}
+```
+修改器使用``modifier``关键字来定义，后接函数修改器名``onlyOwner``，这就定义了一个函数修改器。
+在函数修改器代码块内，使用``require``来验证是否当前合约的所有者，如果不是，``require``会抛出异常。 
+否则执行占位符``_``处代码，``_``代指的是使用函数修改器的函数体。
+在使用时，以``transferOwnership``的调用为例，由于使用了函数修改器``onlyOwner``，会先执行``_``之前的代码，即判断是否是合约的所有者。如果是，才会执行``transferOwnership()``的函数体，允许修改为新所有者。
+
+注意，solidity在0.4.0以后，``_``必须要写为``_;``。
+
+## 二、参数
+
+函数修改器同函数类似，支持各种参数。
+直接在函数修改器的参数中传入即可。下面来看一个例子：
+
+```
+pragma solidity ^0.4.24;
+
+contract checker{
+
+  uint balance = 0;
+
+  modifier check(uint withdraw){
+    require( withdraw >= 0 &&  withdraw < balance);
+    _;
+  }
+
+  //含参数的函数修改器
+  function withdraw(uint amount) check(amount) public returns (uint){
+	balance -=amount;
+    return balance;
+  }
+}
+```
+
+在上面的例子中，``widthdraw``函数定义了一个修改器``check``()，传入入参withdraw，用于在提现前验证余额是否足够。
+
+## 三、修改器内函数调用
+
+函数修改器的参数支持任意的表达式。 
+只要在上下文中可见的变量和函数， 均可在函数修改器中使用。
+而在函数修改器中引入的符号，在函数中不可见。
+
+```
+
+contract checker{
+
+  uint public balance = 0;
+  
+  modifier check(uint amount){
+    if(amount > 0)
+      _;
+  }
+
+  function exchange(uint amount, uint rates) private pure returns(uint){
+    return amount * rates ;
+  }
+
+  function withdraw(uint amount) check(exchange(amount, 2)) public returns(uint){
+  	balance -=amount* 2;
+    return balance;
+  }
+}
+
+```
+
+
+上例中，我们在函数修改器``check``中，调用了``exchange``函数。
+
+## 四、 修改器与返回值
+
+到当前版本，修改器还不支持返回值。 这意味着，如果在修改器的流程中中断了函数的执行，如果这时候还未设置返回值，那返回值都会处于初始化的状态。 
+
+```
+
+pragma solidity ^0.4.0;
+
+contract ModifierRoutine{
+
+  uint public balance = 10;
+  
+  modifier check(){
+    if(balance > 100)
+      _;
+  }
+
+
+  function withdraw() check public returns(uint rest){
+	balance = 17;
+    return balance;
+  }
+}
+
+```
+
+如上， 在``check``里面，``balance``的值一直小于``100``，所有``withdraw``的实现上是不会被调用的。 返回值``rest``被赋予默认值0。 执行结果是：
+```
+{
+	"0": "uint256: rest 0"
+}
+```
+
+Solidity社区正在讨论是否在新版本中支持modifier有返回值。 
+
+## 五、执行流程  
+
+函数体内执行``return``语句，只会退出当前代码块， modifier中在``_``之后的语句仍然会继续执行。 
+
+```
+contract ModifierRoutine2{
+
+  uint public balance = 10;
+  
+  modifier check(){
+    balance = 15; // 1. 执行赋值， 
+    _;        //  
+    balance = 17;  // 4. 最后这句话还会继续执行。 
+  }
+
+
+  function withdraw() check public returns(uint rest){
+	balance = 16; // 2. 执行赋值
+    return balance; // 3. 将返回值rest设置为当前的balance值，即16
+  }
+}
+```
+
+这里我们先执行下``widthdraw``， 执行的顺序如上标注。 ``widthdraw``执行完成后，返回值rest=16，但是``balance``是17。 在remix-ide中可以获取这个值。 
+
+
+## 六、多个modifier
+
+如果一个函数有多个modifier，定义时依次填写，并用空格隔开。函数被调用时，将modifier按定义顺序依次执行。下面是一个简单的例子：
+
+```
+contract ModifierRoutine2{
+
+  uint public balance = 10;
+  
+  modifier check1(){
+    balance += 1; // 1. balance = 11
+    _;
+    balance +=4;  // 6. balance = 33
+  }
+
+  modifier check2(){
+    balance +=2; // 2. balance = 13
+    _;
+    balance +=3;  // 5. balance = 29
+  }
+
+
+  function withdraw() check1 check2  public returns(uint rest){
+	balance *=2; // 3. balance = 26
+    return balance; // 4. rest = 26
+  }
+}
+```
+
+如上，执行顺序是从check1开始，然后是check2。 注意，在执行check1的时候， ``_``替换掉的是 ``check2``的代码，而不是widthdraw的代码。 在check2里面的``_``替换掉的代码才是widthdraw的代码。 
+
+```
+//check1展开后的代码： 
+
+balance += 1; // 1. balance = 11
+ ---- check1 替换代码开始， 即check2展开后的代码 ----
+  balance +=2; // 2. balance = 13
+ ---- check2 替换代码开始， 即widthdraw的代码 ----
+	balance *=2; // 3. balance = 26
+    return balance; // 4. rest = 26
+ ---- check2 替换代码结束 ----	
+  balance +=3;  // 5. balance = 29
+ ---- check1 替换代码结束 ----	
+balance +=4;  // 6. balance = 33
+```
+
+## 七、Override Modifier  
+
+我们可以重写父类的函数修改器。来改变父类的修改器行为。下面来看一个例子：
+
+```
+contract GrandModifier{
+
+  uint public balance = 10;
+  
+  modifier check(){
+    balance += 1; 
+    _;
+    balance +=3;  
+  }
+}
+
+contract FatherModifier is GrandModifier{
+  
+  modifier check(){
+    balance += 2; // 1. balance = 12;
+    _;
+    balance +=4;  // 4. balance = 28
+  }
+}
+
+contract MyModifier is FatherModifier{
+
+ function withdraw() check  public returns(uint rest){
+	balance *=2; // 2. balance = 24;
+    return balance;  // 3. rest = 24; 
+  }
+}
+
+```
+
+上例中，我们在FatherModifier覆写了父类GrandModifier的函数修改器check， 这样在子类MyModifier中调用的时候，就只是执行了FatherModifier::check。 
+最后widthdraw的执行结果是24， balance的值是28。 
+
+

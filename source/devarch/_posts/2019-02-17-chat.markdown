@@ -1,0 +1,21 @@
+---
+layout:     source 
+title:      "2019-02-17-WeChat"
+date:       2019-02-17 12:00:00
+author:     None
+lines:      3 
+tag:       [chat]
+---
+> 11:01:09  周胜-贝络-产品-北京  
+   
+深网视界这个事儿，是个潜在的大BOMB，不知道未来几天会不会  
+   
+> 17:29:34  右军-蚂蚁金服-成都  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MzIxMzEzMjM5NQ==&amp;amp;mid=2651031372&amp;amp;idx=1&amp;amp;sn=5d499f7f0d3ab2789c516aa2fbdcab33&amp;amp;chksm=8c4c5248bb3bdb5e87a9a4b8082b9c44c48eeb0b7eb7226487a3f8ccf5d726caff13fffe4665&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=0217WKU2LJa7jeYNyEGNaF5r#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;支付系统订单模型该如何设计？&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;wxid_bi89p0zlua5q21)  
+   
+> 17:39:11  上海-上海中钢银联通-董路-技术  
+   
+和我设计的思路一样 只做到支持混合支付 不支持多订单支付场景  
+   

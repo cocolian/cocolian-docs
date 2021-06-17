@@ -1,0 +1,64 @@
+---
+layout:     source 
+title:      "2018-07-04-WeChat"
+date:       2018-07-04 12:00:00
+author:     PaymentGroup
+lines:      12 
+tag:       [chat]
+---
+> 11:18:46  泽西-趋恒-架构师  
+   
+大哥们，问个很简单问题  
+   
+> 11:19:07  泽西-趋恒-架构师  
+   
+![2018-07-04 11:19:07](http://static.cocolian.cn/img/201807/20180704_111907.png) 
+   
+> 11:19:41  泽西-趋恒-架构师  
+   
+mongodb java date自动转isodate差了8个小时，你们怎么解决的  
+   
+> 11:36:27  Neil  
+   
+呃，我们当时是直接用robotMongo工具查看，这个工具可以自动转换为当前时区的时间  
+   
+> 11:38:39  泽西-趋恒-架构师  
+   
+明白了。  
+   
+> 12:07:11  张学刚-京东-研发  
+   
+代码质量管理，大家一般用什么呢  
+   
+> 12:07:23  张学刚-京东-研发  
+   
+Sonar?  
+   
+> 12:14:47  曹祺-Airwallex上海-技术打杂  
+   
+sonarqube，蛮好用的  
+   
+> 17:15:18  bigger.xu  
+   
+求助：谁能提供小程序开发？我有需求，欢迎call我报价。  
+   
+> 17:16:12  bigger.xu  
+   
+[微信红包](https://wxapp.tenpay.com/mmpayhb/wxhb_personalreceive?showwxpaytitle=1&amp;amp;msgtype=1&amp;amp;channelid=1&amp;amp;sendid=1000039401201807047016181532003&amp;amp;ver=6&amp;amp;sign=5bbdfc854508b6f81de79177b462c6a74594db8dec387caeec9aad261c73654dbcab24d45bb94abd017f983a6114c38a788778dda9ae26f79a1ce5ec39fdbdf3ed8645604cae8500c480797c6247d402)  
+   
+> 17:16:20  Suley Lu  
+   
+@bigger.xu 我们可以做~  
+   
+> 17:16:34  bigger.xu  
+   
+@卢章-联逸科技（企业SaaS）-CEO?OK，给我报价  
+   
+> 17:16:47  bigger.xu  
+   
+谢谢  
+   
+> 17:16:58  Suley Lu  
+   
+加微信 聊需求  
+   

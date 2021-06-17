@@ -1,0 +1,54 @@
+---
+layout:     source 
+title:      "2018-12-26-WeChat"
+date:       2018-12-26 12:00:00
+author:     None
+lines:      11 
+tag:       [chat]
+---
+> 08:27:44  右军-蚂蚁金服-成都  
+   
+[另一个角度看『异常』
+](http://mp.weixin.qq.com/s?__biz=MzIxMzEzMjM5NQ==&amp;amp;amp;mid=2651030990&amp;amp;amp;idx=1&amp;amp;amp;sn=a8890bbabf329eb0864c446bd4b030cf&amp;amp;amp;chksm=8c4c50cabb3bd9dcbd5801de9704e0df29893b8e253c6d213338abce4f3276741d2441cc660d&amp;amp;amp;mpshare=1&amp;amp;amp;scene=1&amp;amp;amp;srcid=1226KAWqCi9A8w2tg023Gavh#rd)  
+   
+> 08:56:12  上海-上海中钢银联通-董路-技术  
+   
+dubbo为什么用result说的很清楚  
+   
+> 11:07:54  tonny-csii-pl-北京  
+   
+除了双层循环，还有没有更简便的方法呢？请教大家  
+   
+> 11:08:22  tonny-csii-pl-北京  
+   
+![2018-12-26 11:08:22](http://static.cocolian.cn/img/20181226_110822.png) 
+   
+> 11:14:00  张杨-航天电子-研发-北京  
+   
+求target=9的组合列， 例如1+8，2+7，3+6，4+5 然后去数组找满足组合列的角标  
+   
+> 11:20:49  Codefor-YMT-TechLead-BJ  
+   
+先排序，同时头和尾遍历一次就可以了。找到值再找对应的角标。  1，2，3，4，5 5,4,3,2,1 排序复杂度O(lgn),遍历都是O(n)  
+   
+> 11:27:50  张杨-航天电子-研发-北京  
+   
+或者根据该数组构建哈弗曼树，然后去树中查找target,  
+   
+> 11:45:09  tonny-csii-pl-北京  
+   
+OK，多谢  
+   
+> 14:05:08  阿里云-技术-北京  
+   
+[阿里毕玄：阿里十年，从分布式到云时代的架构演进之路
+](http://mp.weixin.qq.com/s?__biz=MzA5MDYwNzM4Nw==&amp;amp;amp;mid=2650754607&amp;amp;amp;idx=1&amp;amp;amp;sn=0b227123f5c45b6aa97aef243012c2b5&amp;amp;amp;chksm=8802f45bbf757d4d5a4a3d12010a63cf664d6e0316663cbe165362bb8ad9823966f6a59a33e5&amp;amp;amp;scene=0&amp;amp;amp;xtrack=1#rd)  
+   
+> 15:21:10  上海-上海中钢银联通-董路-技术  
+   
+![2018-12-26 15:21:10](http://static.cocolian.cn/img/20181226_152110.png) 
+   
+> 15:21:20  上海-上海中钢银联通-董路-技术  
+   
+![2018-12-26 15:21:20](http://static.cocolian.cn/img/20181226_152120.png) 
+   

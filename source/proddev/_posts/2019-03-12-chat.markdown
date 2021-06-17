@@ -1,0 +1,314 @@
+---
+layout:     source 
+title:      "2019-03-12-WeChat"
+date:       2019-03-12 12:00:00
+author:     None
+lines:      76 
+tag:       [chat]
+---
+> 08:13:55  ark-雪球-开发  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MzU4Mzc5NTAzNQ==&amp;amp;mid=2247484073&amp;amp;idx=1&amp;amp;sn=50c86323b9c0cdb66cf7a26e9df894d5&amp;amp;chksm=fda2ea9dcad5638bbacd619f2ce51109ea574023a597fcb88a473a74bcc956f4603dccf433c8&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;2019-03-12 政协委员透露蚂蚁金服正在筹备科创板、马云旗下公司成立10亿注册资本新公司&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;wxid_gloh8i9e29ih21)  
+   
+> 08:38:10  老熊-北京  
+   
+除了天眼查，还有哪些渠道能够准确获取企业名称、法人等信息的呢？ 天眼查数据准确度也不高啊。  
+   
+> 08:39:47  ark-雪球-开发  
+   
+找到app  
+   
+> 08:40:06  ark-雪球-开发  
+   
+企企查  
+   
+> 08:40:09  李飞－掌众金融～pm－北京  
+   
+企查查  
+   
+> 08:40:09  Ben-富友-产品  
+   
+工商网站  
+   
+> 08:40:18  Ben-富友-产品  
+   
+直接查政府的  
+   
+> 08:40:30  Ben-富友-产品  
+   
+第三方都有误差  
+   
+> 08:40:37  温启明 贵阳银行 专业打酱油  
+   
+对公人行征信 或者直连工商 税务局  
+   
+> 08:40:43  龚晓冬-银联-产品-上海  
+   
+工商总局官网  
+   
+> 08:40:45  Ben-富友-产品  
+   
+误差时间三天到一周不等  
+   
+> 08:41:01  龚晓冬-银联-产品-上海  
+   
+工商的最准最及时  
+   
+> 08:41:14  龚晓冬-银联-产品-上海  
+   
+企查查也是爬虫爬的  
+   
+> 08:44:02  coral-v-产品-深圳  
+   
+企查查好像有点滞后，钱多的话可以两个结合起来用[呲牙]  
+   
+> 08:44:32  老熊-北京  
+   
+打算结合起来用，不差钱。 [呲牙]  
+   
+> 08:44:35  老熊-北京  
+   
+要准确性。   
+   
+> 08:45:20  龚晓冬-银联-产品-上海  
+   
+工商总局一直在限制爬虫工具哦  
+   
+> 08:45:23  coral-v-产品-深圳  
+   
+那就启信宝 企查查 天眼查一起，都各有千秋[偷笑]  
+   
+> 08:45:49  shawn孔-北京-上海  
+   
+不差钱啥事都好办  
+   
+> 08:46:06  龚晓冬-银联-产品-上海  
+   
+启信宝是百度旗下的  
+   
+> 08:46:10  哈木-快钱-产品-上海  
+   
+不差钱[强][强][强]  
+   
+> 08:55:45  亨利-农信互联-开发经理-北京  
+   
+[强]  
+   
+> 08:57:17  龚晓冬-银联-产品-上海  
+   
+推荐几个大家日常查询的网站吧  
+   
+> 08:57:22  龚晓冬-银联-产品-上海  
+   
+http://wenshu.court.gov.cn/ 裁判文书网  
+   
+> 08:57:44  龚晓冬-银联-产品-上海  
+   
+http://www.sipo.gov.cn/ 国家知识产权局  
+   
+> 08:58:07    
+   
+> 08:58:13  龚晓冬-银联-产品-上海  
+   
+http://shixin.court.gov.cn/ 中国执行信息网  
+   
+> 08:58:52  龚晓冬-银联-产品-上海  
+   
+http://www.gsxt.gov.cn/index.htm 工商企业信息查询网站  
+   
+> 08:59:08  阿森-NULS-产品  
+   
+[强]  
+   
+> 08:59:42  Ben-富友-产品  
+   
+我一般用134  
+   
+> 09:00:12  丁丁  
+   
+已添加[强]  
+   
+> 09:00:29  龚晓冬-银联-产品-上海  
+   
+http://sbj.saic.gov.cn/ 商标查询网站  
+   
+> 09:00:31  coral-v-产品-深圳  
+   
+[强][强]  
+   
+> 09:00:47  龚晓冬-银联-产品-上海  
+   
+http://www.ncac.gov.cn/ 国家版权局  
+   
+> 09:02:18  龚晓冬-银联-产品-上海  
+   
+http://samr.saic.gov.cn/ 国家市场监督管理总局  
+   
+> 09:03:12  龚晓冬-银联-产品-上海  
+   
+![2019-03-12 09:03:12](http://static.cocolian.cn/img/20190312_090312.png) 
+   
+> 09:05:03  龚晓冬-银联-产品-上海  
+   
+![2019-03-12 09:05:03](http://static.cocolian.cn/img/20190312_090503.png) 
+   
+> 09:05:10  龚晓冬-银联-产品-上海  
+   
+家里有宝宝的可以经常登录这里查查~  
+   
+> 09:06:09  哈木-快钱-产品-上海  
+   
+[强][强][强]  
+   
+> 09:09:26  橄榄-齐商-山东  
+   
+[强]  
+   
+> 09:12:36  中行 互联网金融  
+   
+龚老师是 手头都是宝库～要啥有啥～  
+   
+> 09:13:31  koci-银联-上海  
+   
+@龚晓冬-银联-产品-上海?龚老师说到这，突然想到我们公司是除了工商局自己的公司外，唯一一家直连他们企业信息查询系统的企业，实时更新的。不过一直没用起来，只在商户管理平台用来后台核验。  
+   
+> 09:14:03  龚晓冬-银联-产品-上海  
+   
+@koci-银联-上海 是的。。。但是，算了，还是不要提了  
+   
+> 09:17:30  shawn孔-北京-上海  
+   
+哈哈哈  
+   
+> 09:33:02  MasterChao-产品  
+   
+各地工商的数据现在是实时同步给工商总局的不，我记得以前是有几天的延时。  
+   
+> 09:33:17  龚晓冬-银联-产品-上海  
+   
+一般1周以上  
+   
+> 09:34:25  Rocky-点融-上海  
+   
+工商还好吧，税务数据地方同步到国税要很久。  
+   
+> 09:35:26  张叶-付费通-产品-上海  
+   
+企查查这类公司的工商数据是怎么来的呢。。。  
+   
+> 09:36:18  MasterChao-产品  
+   
+爬的  
+   
+> 09:36:25  施李荣-平安壹账通-上海  
+   
+[强][强][强]  
+   
+> 09:37:08  施李荣-平安壹账通-上海  
+   
+龚老师威武，什么材料库都有  
+   
+> 09:37:44  Rocky-点融-上海  
+   
+企查查这种有限制的，只有公开信息，比如企业选择不公开财务就无法获取  
+   
+> 09:38:02  Rocky-点融-上海  
+   
+财务=财报  
+   
+> 09:40:19  橄榄-齐商-山东  
+   
+龚老师=MR.百科  
+   
+> 09:42:01  施李荣-平安壹账通-上海  
+   
+龚老师是我们的多啦爱梦[捂脸]  
+   
+> 09:44:19  橄榄-齐商-山东  
+   
+龚老师以一己之力，扭转银联在支付行业的传统印象  
+   
+> 09:44:58  李杰辉-支付-产品  
+   
+[强]  
+   
+> 09:46:04  程昱_群管理  
+   
+老熊这是打算做企业端了？  
+   
+> 10:12:39  龚晓冬-银联-产品-上海  
+   
+[&amp;lt;a href=&amp;quot;https://c.m.163.com/news/a/EA0J6VTQ00097U7R.html?spss=newsapp&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;张勇卸任阿里创投公司法人 阿里：这是常规管理动作&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;zhijiezhang2011)  
+   
+> 10:15:24  Geoff-腾讯-产品  
+   
+原来我们还到处找商户信息自动化检验核对的接口呢 好多全靠人肉去工商查[撇嘴]  
+   
+> 10:15:43  龚晓冬-银联-产品-上海  
+   
+我们这边有。。  
+   
+> 10:15:54  龚晓冬-银联-产品-上海  
+   
+考虑后面怎么运用起来吧  
+   
+> 10:16:42  Geoff-腾讯-产品  
+   
+境外有没有这种类似的东东。。  
+   
+> 10:16:56  龚晓冬-银联-产品-上海  
+   
+境外没有  
+   
+> 10:17:16  龚晓冬-银联-产品-上海  
+   
+国际统一法人的问题我记得发过一篇文章的  
+   
+> 10:17:34  Geoff-腾讯-产品  
+   
+跪求 龚老师  
+   
+> 10:18:15  龚晓冬-银联-产品-上海  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MzU5NDQ1NjYzMQ==&amp;amp;mid=2247483723&amp;amp;idx=1&amp;amp;sn=bd39b38a1089640f80a2ef4073389cef&amp;amp;chksm=fe01b813c976310590fdec59b29e32669d581ec5d033fa403e40d5d6b2dabff3482299bbaa2c&amp;amp;scene=0#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;国际金融监管规则重塑&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;gxd1987)  
+   
+> 10:18:19  龚晓冬-银联-产品-上海  
+   
+@Geoff-腾讯-产品   
+   
+> 10:19:00  龚晓冬-银联-产品-上海  
+   
+金融市场法人识别码系统（LEI系统）  
+   
+> 10:19:49  龚晓冬-银联-产品-上海  
+   
+http://www.leichina.org/cei/index.html  
+   
+> 10:20:06  Geoff-腾讯-产品  
+   
+> 10:22:12  龚晓冬-银联-产品-上海  
+   
+[[文件:关于收集法人机构关系数据（直接母公司最终母公司）的说明.pdf]&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;gxd1987)  
+   
+> 10:22:13  龚晓冬-银联-产品-上海  
+   
+@Geoff-腾讯-产品   
+   
+> 10:24:46  Geoff-腾讯-产品  
+   
+??多谢龚老师  
+   
+> 19:44:37  龚晓冬-银联-产品-上海  
+   
+[&amp;lt;a href=&amp;quot;https://c.m.163.com/news/a/E7RG2PMO051982TB.html?spss=newsapp&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;银行不良资产管理11大违规问题（财政部福建专员办）&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;xiaozhu833768)  
+   
+> 21:38:29  meet-支付圈-北京  
+   
+[&amp;lt;a href=&amp;quot;http://m.zjbyte.com/sbfp/finance/article?groupId=6667497599571853827&amp;amp;itemId=6667497599571853827&amp;amp;timestamp=1552397847&amp;amp;article_category=stock&amp;amp;group_id=6667497599571853827&amp;amp;wxshare_count=1&amp;amp;tt_from=weixin&amp;amp;utm_source=weixin&amp;amp;utm_medium=toutiao_android&amp;amp;utm_campaign=client_share&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;拉卡拉支付招股书预披露更新，2018年收入达到56.79亿元！ - 今日头条&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;gxd1987)  
+   

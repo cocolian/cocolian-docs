@@ -1,0 +1,389 @@
+---
+layout: dev 
+title: "安装Kubernetes(Master)"  
+subtitle: "infra文档"  
+date: 2017-10-17 12:00:00  
+author: "shamphone"  
+chapter: "3"
+catalog: true  
+tag: [infra]  
+---
+
+> 注意，这个文件必须以UTF-8无BOM格式编码。 
+
+这里描述如何使用Kubeadm安装Kubernetes服务器端
+
+> 注意k8s的版本，不是所有的版本都适合这种安装方式。安装KubeAdm的时候需要访问google，需要使用一个http/https代理。
+> 注意，客户端不需要这个安装过程，这仅在kube-master上安装。这里记录这个安装过程做备份。 
+
+## 一、安装docker
+
+注意，docker有多个版本，最新的docker分为docker-ce和docker-ee版本。这里安装的是1.12.6版本的，使用yum直接安装
+
+```bash
+sudo yum install -y docker 
+sudo systemctl enable docker 
+sudo systemctl start docker
+```
+运行docker version确认版本
+
+```bash
+[jigsaw@kube-master ~]$ docker version
+Client:
+ Version:         1.12.6
+ API version:     1.24
+ Package version: docker-1.12.6-61.git85d7426.el7.centos.x86_64
+ Go version:      go1.8.3
+ Git commit:      85d7426/1.12.6
+ Built:           Tue Oct 24 15:40:21 2017
+ OS/Arch:         linux/amd64
+
+Server:
+ Version:         1.12.6
+ API version:     1.24
+ Package version: docker-1.12.6-61.git85d7426.el7.centos.x86_64
+ Go version:      go1.8.3
+ Git commit:      85d7426/1.12.6
+ Built:           Tue Oct 24 15:40:21 2017
+ OS/Arch:         linux/amd64
+```
+
+## 二、修改docker源
+
+docker默认使用docker.io的源，国内访问慢，容易出错。修改为国内的源：
+
+访问 [阿里云的开发者平台](http://dev.aliyun.com/search.html),登录后，进入管理中心，首次登录会让用户设置密码。然后就会看到如下页面：
+![aliyun](http://static.cocolian.cn/img/in-post/aliyun-docker.png)
+阿里云为每个人分配一个加速器地址。 我的地址是 https://n76bgciz.mirror.aliyuncs.com 
+修改 /etc/docker/daemon.json 
+
+```bash
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://n76bgciz.mirror.aliyuncs.com"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+## 三、配置yum源
+
+```bash
+
+vim /etc/yum.repos.d/kubernetes.repo
+
+[kubernetes]
+name=Kubernetes
+baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+enabled=1
+gpgcheck=0
+```
+
+## 四、修改防火墙
+
+```bash
+sudo setenforce 0
+sudo systemctl disable iptables-services firewalld
+sudo systemctl stop iptables-services firewalld
+```
+
+修改 /etc/sysctl.conf  文件，添加内容
+```bash
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+```
+
+执行如下内容让其生效
+
+```bash
+
+sudo modprobe br_netfilter
+sudo sysctl -p 
+```
+
+
+注意，修改后，需要*重启系统*， 以让设置生效。 
+
+
+## 五、设置代理服务器
+
+这里使用ssh来做隧道代理，但这个是socks代理，不能直接用，需要使用privoxy来转换。
+
+kubeadm只接受http/https代理，不接受socks代理。使用ssh隧道的话，还需要做一个转发。 可以使用privoxy来实现。 
+运气好的话，可以直接安装：
+
+
+
+```bash 
+# 添加一个用户给 Privoxy
+echo 'privoxy:*:7777:7777:privoxy proxy:/no/home:/no/shell' >> /etc/passwd
+# 分配个组给 Privoxy
+echo 'privoxy:*:7777:' >> /etc/group
+# 开始安装
+sudo yum install -y privoxy 
+```
+
+如果报告找不到依赖包包 libxxx.so， 恭喜，需要从源代码开始弄了。 
+```bash
+[jigsaw@kube-master ~]$ sudo yum install privoxy
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * epel: mirror.dmmlabs.jp
+Resolving Dependencies
+--> Running transaction check
+---> Package privoxy.x86_64 0:3.0.24-2.el6 will be installed
+--> Processing Dependency: libpcre.so.0()(64bit) for package: privoxy-3.0.24-2.el6.x86_64
+--> Finished Dependency Resolution
+Error: Package: privoxy-3.0.24-2.el6.x86_64 (epel)
+           Requires: libpcre.so.0()(64bit)
+ You could try using --skip-broken to work around the problem
+ You could try running: rpm -Va --nofiles --nodigest
+```
+到 [sourceforege源码库](https://sourceforge.net/projects/ijbswa/files/)下载对应的版本。 
+
+
+
+```bash
+# 默认是没有wget命令，可以yum来安装；
+wget http://jaist.dl.sourceforge.net/project/ijbswa/Sources/3.0.23%20%28stable%29/privoxy-3.0.23-stable-src.tar.gz
+# 解压文件
+tar -xzf privoxy-3.0.23-stable-src.tar.gz
+cd privoxy-3.0.23-stable
+
+# sudo yum install -y gcc
+# sudo yum install -y autoconf
+
+autoconf
+./configure
+make
+sudo make -s install
+```
+
+修改配置文件
+```bash
+vi /usr/local/etc/privoxy/config
+```
+
+```bash
+#找到listen-address，配置HTTP代理的端口
+listen-address  127.0.0.1:18880
+# 找到forward-socks5，配置要转发的端口，及特地规则。具体使用场景可以参考官方配置里写上。
+# 这里我们配置全局转发，目前是18888端口(ssh客户端端口)
+forward-socks5   /         127.0.0.1:18888 .
+```
+
+> 在使用 privoxy 对 sock5 等代理协议进行转发成 http 的时候 forward-socks5 和 forward-socks5t 区别虽然不是很大，但是有时候却非常头疼，只能 GET  不能 POST。经过排查发现，forward-socks5 的 DNS 解析会在远程服务器上进行，而 forward-socks5t 却不会，这就导致使用后者访问境外网站的时候 ，国内 DNS 无法解析境外网址的情况，从而也就不知道去访问哪个IP。一般来说，还是建议使用 forward-socks5。
+
+
+## 六、 安装kubeadm
+
+```bash
+sudo yum install -y kubelet kubeadm kubectl
+sudo systemctl enable kubelet 
+sudo systemctl start kubelet
+```
+
+## 七、下载相关镜像
+
+非常关键，这些镜像无法从gcr.io下载，可以先从国内源下载。 
+创建 docker.sh文件，内容如下， 然后执行 sudo docker.sh 即可。 
+
+```bash
+docker pull registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/pause-amd64:3.0
+docker pull registry.cn-hangzhou.aliyuncs.com/jhr-k8s/k8s-dns-sidecar-amd64:1.14.8
+docker pull registry.cn-qingdao.aliyuncs.com/zdd_k8s/kube-apiserver-amd64:v1.7.5
+docker pull registry.cn-qingdao.aliyuncs.com/zdd_k8s/kube-controller-manager-amd64:v1.7.5
+docker pull registry.cn-hangzhou.aliyuncs.com/google-containers/kube-scheduler-amd64:v1.7.5
+docker pull registry.cn-qingdao.aliyuncs.com/zdd_k8s/kube-proxy-amd64:v1.7.5
+docker pull registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/flannel:v0.8.0-amd64
+docker pull registry.cn-hangzhou.aliyuncs.com/jhr-k8s/k8s-dns-kube-dns-amd64:1.14.8
+docker pull registry.cn-hangzhou.aliyuncs.com/jhr-k8s/k8s-dns-dnsmasq-nanny-amd64:1.14.8
+docker pull registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/etcd-amd64:3.0.17
+
+docker tag registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/etcd-amd64:3.0.17  gcr.io/google_containers/etcd-amd64:3.0.1
+docker tag registry.cn-qingdao.aliyuncs.com/zdd_k8s/kube-apiserver-amd64:v1.7.5 gcr.io/google_containers/kube-apiserver-amd64:v1.7.5
+docker tag registry.cn-qingdao.aliyuncs.com/zdd_k8s/kube-controller-manager-amd64:v1.7.5  gcr.io/google_containers/kube-ager-amd64:v1.7.5
+docker tag registry.cn-hangzhou.aliyuncs.com/google-containers/kube-scheduler-amd64:v1.7.5 gcr.io/google_containers/kube64:v1.7.5
+docker tag registry.cn-hangzhou.aliyuncs.com/jhr-k8s/k8s-dns-dnsmasq-nanny-amd64:1.14.8 gcr.io/google_containers/q-nanny-amd64:1.14.8
+docker tag registry.cn-hangzhou.aliyuncs.com/jhr-k8s/k8s-dns-kube-dns-amd64:1.14.8 gcr.io/google_containers/k8s-dd64:1.14.8
+docker tag registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/flannel:v0.8.0-amd64 gcr.io/google_containers/flannel:v0.8.0
+docker tag registry.cn-qingdao.aliyuncs.com/zdd_k8s/kube-proxy-amd64:v1.7.5 gcr.io/google_containers/kube-proxy-amd64:v1
+docker tag registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/pause-amd64:3.0 gcr.io/google_containers/pause-amd64:3.0
+docker tag registry.cn-hangzhou.aliyuncs.com/jhr-k8s/k8s-dns-sidecar-amd64:1.14.8 gcr.io/google_containers/k8s-dn4:1.14.8
+
+docker rmi -f registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/pause-amd64:3.0
+docker rmi -f registry.cn-hangzhou.aliyuncs.com/jhr-k8s/k8s-dns-sidecar-amd64:1.14.8
+docker rmi -f registry.cn-qingdao.aliyuncs.com/zdd_k8s/kube-apiserver-amd64:v1.7.5
+docker rmi -f registry.cn-qingdao.aliyuncs.com/zdd_k8s/kube-controller-manager-amd64:v1.7.5
+docker rmi -f registry.cn-hangzhou.aliyuncs.com/google-containers/kube-scheduler-amd64:v1.7.5
+docker rmi -f registry.cn-qingdao.aliyuncs.com/zdd_k8s/kube-proxy-amd64:v1.7.5
+docker rmi -f registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/flannel:v0.8.0-amd64
+docker rmi -f registry.cn-hangzhou.aliyuncs.com/jhr-k8s/k8s-dns-kube-dns-amd64:1.14.8
+docker rmi -f registry.cn-hangzhou.aliyuncs.com/jhr-k8s/k8s-dns-dnsmasq-nanny-amd64:1.14.8
+docker rmi -f registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/etcd-amd64:3.0.17
+```
+
+## 八、为docker配置代理
+
+ 编辑/etc/systemd/system/docker.service.d/http-proxy.conf文件，内容： 
+
+```bash  
+[Service]
+Environment="HTTP_PROXY=http://127.0.0.1:18880/" "HTTPS_PROXY=http://127.0.0.1:18880/" "NO_PROXY=localhost,127.0.0.1,192.168.0.0/16,172.16.0.0/16,.jigsaw,.mirror.aliyuncs.com,10.96.0.0/16,10.244.0.0/16"
+```
+
+
+## 八、使用proxy来运行init
+
+新建 run_kubeadm.sh文件，内容
+
+```bash
+
+#!/bin/bash
+
+# 重启privoxy
+/etc/init.d/privoxy restart
+export http_proxy="http://127.0.0.1:18880/"
+export https_proxy="http://127.0.0.1:18880/"
+export no_proxy="localhost,127.0.0.1,192.168.0.0/16,172.16.0.0/16,.jigsaw,.mirror.aliyuncs.com,10.96.0.0/16,10.244.0.0/16"
+echo $http_proxy
+echo $https_proxy
+echo $no_proxy
+systemctl daemon-reload
+systemctl restart kubelet
+kubeadm init  --pod-network-cidr=10.244.0.0/16 --kubernetes-version=v1.10.0  --apiserver-advertise-address=192.168.1.112 --token=jigsaw.paymentkubetoken  --ignore-preflight-errors=Swap
+
+```
+
+然后执行：
+
+```bash
+## 建立ssh隧道
+ssh -N -f -C -D 18888 deploy.lixf.cn
+## 执行初始化
+sudo sh run_kubeadm.sh
+```
+
+成功后，能看到
+```bash
+Stopping Privoxy, OK.
+Starting Privoxy, OK.
+http://127.0.0.1:18880/
+http://127.0.0.1:18880/
+localhost,127.0.0.1,192.168.0.0/16,172.16.0.0/16,.jigsaw,.mirror.aliyuncs.com,10.96.0.0/16,10.244.0.0/16
+[init] Using Kubernetes version: v1.10.0
+[init] Using Authorization modes: [Node RBAC]
+[preflight] Running pre-flight checks.
+        [WARNING SystemVerification]: docker version is greater than the most recently validated version. Docker version: 18.03.0-ce. Max validated version: 17.03
+        [WARNING FileExisting-crictl]: crictl not found in system path
+Suggestion: go get github.com/kubernetes-incubator/cri-tools/cmd/crictl
+[certificates] Generated ca certificate and key.
+[certificates] Generated apiserver certificate and key.
+[certificates] apiserver serving cert is signed for DNS names [kube-master.jigsaw kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 192.168.1.112]
+[certificates] Generated apiserver-kubelet-client certificate and key.
+[certificates] Generated etcd/ca certificate and key.
+[certificates] Generated etcd/server certificate and key.
+[certificates] etcd/server serving cert is signed for DNS names [localhost] and IPs [127.0.0.1]
+[certificates] Generated etcd/peer certificate and key.
+[certificates] etcd/peer serving cert is signed for DNS names [kube-master.jigsaw] and IPs [192.168.1.112]
+[certificates] Generated etcd/healthcheck-client certificate and key.
+[certificates] Generated apiserver-etcd-client certificate and key.
+[certificates] Generated sa key and public key.
+[certificates] Generated front-proxy-ca certificate and key.
+[certificates] Generated front-proxy-client certificate and key.
+[certificates] Valid certificates and keys now exist in "/etc/kubernetes/pki"
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/admin.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/kubelet.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/controller-manager.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/scheduler.conf"
+[controlplane] Wrote Static Pod manifest for component kube-apiserver to "/etc/kubernetes/manifests/kube-apiserver.yaml"
+[controlplane] Wrote Static Pod manifest for component kube-controller-manager to "/etc/kubernetes/manifests/kube-controller-manager.yaml"
+[controlplane] Wrote Static Pod manifest for component kube-scheduler to "/etc/kubernetes/manifests/kube-scheduler.yaml"
+[etcd] Wrote Static Pod manifest for a local etcd instance to "/etc/kubernetes/manifests/etcd.yaml"
+[init] Waiting for the kubelet to boot up the control plane as Static Pods from directory "/etc/kubernetes/manifests".
+[init] This might take a minute or longer if the control plane images have to be pulled.
+[apiclient] All control plane components are healthy after 38.004284 seconds
+[uploadconfig]聽Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+[markmaster] Will mark node kube-master.jigsaw as master by adding a label and a taint
+[markmaster] Master kube-master.jigsaw tainted and labelled with key/value: node-role.kubernetes.io/master=""
+[bootstraptoken] Using token: jigsaw.paymentkubetoken
+[bootstraptoken] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+[bootstraptoken] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+[bootstraptoken] Configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+[bootstraptoken] Creating the "cluster-info" ConfigMap in the "kube-public" namespace
+[addons] Applied essential addon: kube-dns
+[addons] Applied essential addon: kube-proxy
+
+Your Kubernetes master has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+You can now join any number of machines by running the following on each node
+as root:
+
+  kubeadm join 192.168.1.112:6443 --token jigsaw.paymentkubetoken --discovery-token-ca-cert-hash sha256:ab3e68f3e3b02c493bcfc34b86fa6183a16783cc3047e  7d5405858d129094648
+
+```
+
+之后按照这个指示，执行
+
+```bash
+ mkdir -p $HOME/.kube
+ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+ sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+
+## 九、验证
+
+```bash
+
+[jigsaw@kube-master ~]$ kubectl get pod  -o wide  --all-namespaces
+NAMESPACE     NAME                                         READY     STATUS    RESTARTS   AGE       IP               NODE
+kube-system   etcd-kube-master.jigsaw                      1/1       Running   0          1d        111.63.112.254   kube-master.jigsaw
+kube-system   kube-apiserver-kube-master.jigsaw            1/1       Running   0          1d        111.63.112.254   kube-master.jigsaw
+kube-system   kube-controller-manager-kube-master.jigsaw   1/1       Running   0          1d        111.63.112.254   kube-master.jigsaw
+kube-system   kube-dns-2425271678-qhk1m                    3/3       Running   0          1d        10.244.0.2       kube-master.jigsaw
+kube-system   kube-flannel-ds-1bm2n                        1/1       Running   0          1d        111.63.112.254   kube-master.jigsaw
+kube-system   kube-proxy-7rk7g                             1/1       Running   0          1d        111.63.112.254   kube-master.jigsaw
+kube-system   kube-scheduler-kube-master.jigsaw            1/1       Running   0          1d        111.63.112.254   kube-master.jigsaw
+kube-system   kubernetes-dashboard-1592587111-42pnb        1/1       Running   0          23h       10.244.0.12      kube-master.jigsaw
+```
+
+## 十、创建Flannel网络
+
+创建flannel网络 1.6开始 必须要增加rbac权限 否则flannel会报错 
+the server does not allow access to the requested resource (get pods kube-flannel-ds-xxxx)
+```bash
+kubectl create -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel-rbac.yml
+kubectl create -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+```
+
+## 十一、docker代理
+
+通过sudo journalctl -x -r -u docker， 如果发现还有连接不上gcr.io的错误，可以考虑给docker配置代理
+到  /etc/systemd/system/docker.service.d/ 目录下，创建 http-proxy.conf 文件， 内容
+
+```bash
+[Service]
+Environment="HTTP_PROXY=http://127.0.0.1:18880/" "HTTPS_PROXY=http://127.0.0.1:18880/" "NO_PROXY=localhost,127.0.0.1,192.168.1.112,192.168.1.115,172.16.2.23, 172.16.2.24,172.16.1.,.jigsaw,.aliyuncs.com"
+
+```
+
+重启docker服务  
+```bash
+sudo vi http-proxy.conf
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+

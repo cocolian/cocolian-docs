@@ -1,0 +1,52 @@
+---
+layout: dev
+title: "Sonar代码审查配置指南"
+date: 2018-04-16 12:00:00
+author: "shamphone"
+chapter: "14"
+---
+
+## 一、Maven 配置
+
+Maven 有两个全局配置， 
+- 安装目录下的conf/settings.xml文件
+- 当前用户目录下的.m2目录下 {home}/.m2/settings.xml文件。 
+根据需要可以修改任何一个文件来做全局配置。 
+
+用于代码审查的sonar配置，需要在settings.xml中配置服务器信息
+将如下信息配置到profiles标签下：
+
+```xml
+   <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!-- Optional URL to server. Default value is http://localhost:9000 -->
+                <sonar.host.url>http://sonar.cocolian.cn</sonar.host.url>
+                <sonar.login>jigsaw</sonar.login>
+                <sonar.password>zaq1XSW@</sonar.password>
+            </properties>
+   </profile>
+```
+## 二、项目配置
+
+每个项目必须添加Sonar的属性信息，即在项目根目录下新建sonar-project.properties文件。 内容如下：
+
+```bash
+sonar.login=jigsaw
+sonar.password=zaq1XSW@
+sonar.projectKey= [请替换为github项目Id，比如 cocolian-rpc]
+sonar.peojectName= [请替换为github项目名称，比如 Cocolian RPC]
+sonar.projectVersion=[请替换为项目版本，比如1.0.0-SNAPSHOT]
+sonar.sources=src
+```
+## 三、运行
+完成配置后，在项目目录下，执行
+
+```bash
+mvn sonar:sonar
+```
+
+访问http://sonar.cocolian.org， 即可看到该项目的分析报告。 

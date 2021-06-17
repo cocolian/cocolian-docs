@@ -1,0 +1,98 @@
+---  
+layout:     post   
+title:      "20180913- 欧盟通用数据保护新规（GDPR）简介"  
+date:       2018-09-13 12:00:00  
+author:     "支付产品技术群"  
+tag:		[publish] 
+---
+
+## 一 GDPR定义
+GDRP（EU General Data Protection Regulation，GDPR）即可理解为“通用数据保护条规”。  
+**注**：最新颁布的欧盟隐私保护法规，号称史上最严格的个人隐私保护法规。  
+
+## 二、GDPR的产生及作用
+欧盟议会于2016年4月通过了GDPR新规，作用是取代1995年发布的过时的数据保护指令（DPD）。
+- GDPR新规将更新欧盟成员国以及任何与欧盟各国进行交易或持有公民（欧洲经济区公民）数据的**公司**必须++安全存储++和++管理个人数据++的方式。
+- GDPR新规在28个欧盟成员国中统一实施生效，这将使欧盟及各成员国的隐私保护法具有一致性的管理条例。
+- GDPR新规的合规要求是相对较高，企业在改造过程中投入占比将会增加。
+
+## 三、GDPR的规则
+**GDPR生效日期**  
+GDPR新规已于++2018年5月25日++生效，目前国内外很多与欧盟有业务往来的的IT行业公司都在做相应的整改。  
+
+**PCI和GDPR的区别**
+- PCI 是保护信用卡数据； GDPR 是保护用户数据。
+- PCI 是compliance；GDPR 是regulation。  
+
+**GDPR与支付业务的关系**   
+GDPR条规和支付只能说有间接关系，GDPR主要是保护customer data。  
+**GDPR的处罚规则**  
+违规机构罚款：  
+Fines for data breaches of up to 4% of global turnover or 20,000,000 (whichever is higher).  
+ps：对其违反GDPR条例的机构罚款可达2000万欧元或者全球营收的4%（两者取数额最高者）。
+
+## 四、GDPR涉及的业务范围
+
+GDPR applies globally whenever personal data of people “in the EU” is handled.  
+ps：GDPR新规适用于全球范围内的用户数据；就是说只要是与欧盟或者在欧盟内的业务涉及到的用户数据。用户可以是欧盟成员，也可以不是。
+
+举个例子，如果中国人到欧洲在Agoda下订单，该用户数据就适用于GDPR。但是德国人跑到中国携程下订单，则不在GDPR生效范围内。
+如果中国人在欧洲下订单，数据被拿出欧洲外处理，也算GDPR管的部分。
+
+## 五、 GDPR新规对机构的影响
+   - 针对小企业---对于小企业来说，这个负担很重。
+   - 针对跨境电商等--跨境电商业务，如： Amazon，Microsft, google, facebook等，最近也在密集整改。
+   - 针对订单转发机构等---尤其做酒店订单转发、涉及欧美业务较多的机构。  
+
+**举例**：  
+以酒店订单为例：GDPR 管的数据是customer data，但是范畴很广：
+   - 姓名，地址等个人基本隐私数据；
+   - 其它与个人行为相关的间接数据，如酒店开房记录等；
+
+所以酒店订单，机票订单等等都要按GDPR要求管控，客户的信用卡数据，和其它支付数据就更不用说了。
+
+## 六 GDPR新规对机构的分类及隐私数据处理原则 
+1. **GDPR对机构的分类** :GDPR把处理个人数据的企业分为两类,Processor和Controller：
+      - Controller就是那些直接通过手机或者其他终端获取客户数据的，比如各种电商网站，记录了客户数据，和客户信息。
+      - Processor不直接获取客户数据，它们替controller 进行数据处理。比如所有的云计算平台，Aws, ali cloud.等 如果电商用了这些Cloud服务，那么就获得了客户数据，服务机构也必须要合规。但是要求比对controller要低。
+2. **机构数据处理原则**  
+   1. **Controller机构数据处理方式及处理规则** 
+      - **处理方式**：  
+         - 加密；
+         - 给用户知情权；
+         - 不能未经用户同意随便保存；
+         - 如果用户要求要随时删除；
+         - 如果数据泄漏要24小时内通知EU 相关部门等等；
+      - **处理原则**，处理客户的数据必须证明符合两条原则之一：  
+         - 1）用户明确授权（ by default都是不授权的） 
+         - 2）客户同意的业务需求  
+         - **注**：customer有权随时获取自己的数据，要求controller把数据删除，或转移到指定地方。
+   2. **processor机构数据处理方式及处理规则**   
+      - 1）处理controller的数据要全部文档化；
+      - 2）提供EU的相关机构(Supervisory Authority)随时查看。
+      - **注**：这个文档叫Records of Processing,有明确的格式要求。
+
+总而言之，GDPR新规给企业带来了相对较高的合规成本。但是GDPR对于在EU有业务的的IT企业都非常重要，这个新的法规刚出炉没多久，会被怎么执行现在很多细节好没有完全磨合好。但是掉以轻心可能让企业面临巨大的法律风险。
+
+--- 
+
+## Q&A
+**Q:** 不过AWS数据一般不会跨国吧？  
+**A:** 完全可能跨国。  
+**Q1:** 新加坡mas自己管理regulation也很严格？  
+**A1:** AWS比较大，这个复杂的系统完全符合GDPR这种繁琐的要求段时间内是不太可能的，只能看怎么解释和应对了。
+
+**Q:** 我这边接触下来说是customer的所有痕迹都是需要删除的，不知道你们怎么界定呢，所有痕迹删除估计不太现实，我们想到的做法就是用户数据删除时也不做物理删除，只是在数据库中操作，Customer数据只保留CustomerID，其余全部不可逆的隐藏，在设计时必须将customer的隐私数据放到一个表中，其余表只能外键关联，不知道是否恰当呢？  
+**A:** 是客户要求才需要删除，但是保存时间也要有上限。  
+**Q1:** 是所有痕迹都要删除吗？  
+**A1:** YES.
+
+## 补充
+1. EU---欧洲联盟（德语：Europäische Union，法语：Union européenne），简称欧盟（EU）。
+2. [GDPR 生效的第一天，几个想赚钱的律所就急急忙忙把facebook 给告了](https://www.theverge.com/2018/5/25/17393766/facebook-google-gdpr-lawsuit-max-schrems-europe)，告Facebook, google违反GDPR，要价$8.8billion,狮子大开口，由此可见这个法规影响之大。 
+3. GDPR的官方网站上写着“ The EU General Data Protection Regulation (GDPR) is the most important change in data privacy regulation in 20 years.”
+4. 很多跨国电商把数据拿到中国处理，这个基本上也是不合规的。
+5. EU 的数据拿到美国处理倒是可以，因为有个 EU-US Privacy Shield。 相关企业certified under EU-US Privacy Shield.所以AWS把EU的数据拿到AWS美国服务器处理，是可以的。拿到Singapore就不可以，因为EU-US Privacy Shield 保护不了新加坡。
+6. 推荐资料查询网站：[网站一](https://en.wikipedia.org/wiki/General_Data_Protection_Regulation)；[网站二](https://eugdpr.org/)；两个网站有很多细节。
+7. GDPR号称20年来最严。其它国家（中国除外）有跟进，出类似法规的可能。
+8. Amazon 宣称自己符合Standard Contractual Clauses ， 而满足Standard Contractual Clauses等同于符合GDPR的要求。实际Amazon的说法并没有得到法律上的承认。

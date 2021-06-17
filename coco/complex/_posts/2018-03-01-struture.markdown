@@ -1,0 +1,193 @@
+---
+layout: 	coco
+title: 		"结构类型"
+date: 		2018-03-01 12:00:00  
+author: 	"shamphone"  
+chapter:	"1"
+---
+
+结构体是将0到多个任意类型的命名变量组合在一起的一种聚合数据类型。 
+每个变量叫做结构体的成员。
+注意，0个变量的结构体目前是deprecated， 后续版本可能会不支持。 
+所以原则上，结构体需要定义至少一个变量。  
+
+## 一、结构体定义
+
+先看个例子： 
+
+```
+	struct Employee {
+		string name;
+		int no;		
+	}
+	struct Department{
+		string name;
+		Employee leader;
+		Employee[] members;		    
+	}
+```
+
+在上面的代码中，我们定义了在企业应用中常用的一个简单的结构体Employee，它包含一些基本的数据类型。
+另外我们还定义了一个稍微复杂一点的结构体Department，使用Employee来定义了负责人和成员。 
+
+
+和其他语言相比，Solidity的结构体在定义上有一些限制： 
+ 1. 如上所示，虽然目前支持空结构体，但很快会deprecated的。
+
+```
+	struct BlankStruct {
+        
+	}
+```
+
+这会产生编译警告：
+
+```
+	Warning: Defining empty structs is deprecated.
+```
+
+
+ 2. 不能循环定义结构体。 即不能在结构体内部使用自己来定义变量属性，或者间接循环定义： 
+
+```
+	struct RecursiveStruct{
+	    string name; 
+	    RecursiveStruct me;
+	}
+	
+ 	
+```
+这会产生编译错误：
+```
+TypeError: Recursive struct definition.
+	struct RecursiveStruct{
+ ^ (Relevant source part starts here and spans across multiple lines).
+```
+
+同样的，如下定义也是不允许的， Employee和Department也是循环定义。 
+```
+
+	struct Employee {
+		string name;
+		int no;
+		Department dept; //这里循环定义了。 
+		
+	}
+	struct Department{
+		string name;
+		Employee leader; //这里循环定义了。 
+		Employee[] members;		//这里循环定义了。     
+	}
+```
+
+## 二、初始化
+
+struct的初始化有两种方式。 
+一个是按照属性定义的顺序逐个完成初始化； 一个是按照命名来完成初始化。 
+
+```
+pragma solidity ^0.4.24;
+
+
+contract StructsExample {
+    
+	struct Employee {
+		string name;
+		uint no;		
+	}
+	struct Department{
+		string name;
+		Employee leader;
+		Employee[] members;		    
+	}
+	
+
+	function initStruct() public pure returns(string){
+		Employee memory mike = Employee("Mike", 1); //按顺序完成初始化
+		Employee memory john = Employee({name:"John", no:2}); //按命名完成初始化
+		Employee memory ben = Employee("Ben", 3); //按顺序完成初始化
+		Department memory dept = Department({name: "Coco", leader: ben, members: new Employee[](2)});//按命名完成初始化
+		dept.members[0] = mike;
+		dept.members[1]=john;
+		
+		return dept.name;
+	}
+  
+}
+```
+
+注意，初始化的时候，不管是按哪一种方式，都必须对所有参数赋值。 如果有参数没有赋值，如 
+```
+Department memory dept = Department({name: "Coco", leader: ben});
+```
+会报告如下编译错误： 
+```
+TypeError: Wrong argument count for struct constructor: 2 arguments given but expected 3.
+```
+
+
+## 三、可见性
+
+``struct``并不是``ABI``支持的类型，还不能作为``public``方法的输入输出参数。 
+目前``experimental ABIEncoderV2``可以支持``struct``作为输入输出参数， 但是正式版本中还没放开支持。 
+
+```
+	Department rd ;
+	
+	function initDepartment() public returns(Department){
+	    return rd;
+	}
+```
+会出现如下编译错误： 
+
+```
+TypeError: This type is only supported in the new experimental ABI encoder. Use "pragma experimental ABIEncoderV2;" to enable the feature.
+	function initDepartment() public returns(Department){
+	
+```
+
+由于结构体是不对外可见的，所以只可以在当前合约，或合约的子类中使用。包含自定义结构体的函数均需要声明为internal的。
+
+
+```
+pragma solidity ^0.4.24;
+
+
+contract StructsExample {
+    
+	struct Employee {
+		string name;
+		int no;		
+	}
+	struct Department{
+		string name;
+		Employee leader;
+		Employee[] members;		    
+	}
+	Department rd;
+	
+	function initDepartment() internal view returns(Department){
+	    return rd;
+	}
+  
+}
+
+contract Inherited is StructsExample {
+	Employee jean;
+	Department pd;
+	
+	function getDepartmentName() public view returns(string){
+		return pd.name;
+	}
+}
+```
+
+结构体，由于是动态内容，不支持跨合约使用。如果涉及到struct的使用，一个方案是把struct的各个属性都拆开了作为输入输出参数。 
+
+```
+function getEmployee(uint no) returns (string name, uint no) {
+		Employee a = ...;
+		return (a.name, a.no);
+}
+```
+

@@ -1,0 +1,47 @@
+{% if page.categories %}
+  {% assign category = page.categories[0] %}
+  {% assign posts = site.categories[category] %}
+  {% assign found = 0 %}
+  {% assign prev_post = None %}
+  {% assign cur_post = None %}
+  {% assign next_post = None %}
+  {% for post in posts %}
+	{% if found<2   %}
+		{% assign prev_post = cur_post %}
+		{% assign cur_post = next_post %}
+		{% assign next_post = post %}
+	{% endif %}		
+	{% if found==1 %}
+		{% assign found = 2 %}
+		{% break %}
+	{% endif %}
+    {% if post.url == page.url %}
+      {% assign found = 1 %}
+    {% endif %}
+  {% endfor %}
+  {% if found == 1  %}
+	{% assign prev_post = cur_post %}
+	{% assign cur_post = next_post %}
+	{% assign next_post = None %}
+  {% endif %}
+{% endif %}
+
+ <ul class="pager">		
+								
+	{% if prev_post %}
+	<li class="previous">
+		<a href="{{ prev_post.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{prev_post.title}}">
+		上一篇<br>
+		<span>{{prev_post.title}}</span>
+		</a>
+	</li>
+	{% endif %}
+	{% if next_post.url %}
+	<li class="next">
+		<a href="{{ next_post.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{next_post.title}}">
+		下一篇<br>
+		<span>{{next_post.title}}</span>
+		</a>
+	</li>
+	{% endif %}
+</ul>				

@@ -1,0 +1,24 @@
+---
+layout:     source 
+title:      "2017-12-24-WeChat"
+date:       2017-12-24 12:00:00
+author:     PaymentGroup
+lines:      3 
+tag:       [chat]
+---
+> 20:20:25  陈春瑜  
+   
+大家在对帐结束后，对历史帐单或依赖的第三方的帐单等数据有什么好的存储或处理机制吗？我们会遇到财务突然需要核对半年甚至一两年前的问题帐单  
+   
+> 20:28:51  巴德妈妈小Gabby  
+   
+历史账单是渠道的对账文件吗？  
+   
+> 20:28:58  巴德妈妈小Gabby  
+   
+存在ftp服务器  
+   
+> 20:39:33  李宝  
+   
+[libaohome:](&amp;lt;?xml version=&amp;quot;1.0&amp;quot;?&amp;gt;)  
+   

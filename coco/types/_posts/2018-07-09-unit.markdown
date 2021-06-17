@@ -1,0 +1,98 @@
+---
+layout: 	coco
+title: 		"时间和货币单位"
+date: 		2018-08-09 12:00:00  
+author: 	"shamphone"  
+chapter:	"9"
+---
+
+和多数编程语言不同， solidity引入了单位的概念， 用来简化开发。 
+
+## 一、以太币单位
+
+以太币默认的单位是wei，即如不说明，在没有提供单位时，默认是wei。可以使用的单位及换算如下所示： 
+
+```
+1 ether  = 10^18 wei  
+1 finney = 10^15 wei  
+1 szabo  = 10^12 wei  
+```
+
+看一下以下示例： 
+
+```  
+pragma solidity ^0.4.24;
+
+
+contract UnitExample {
+    
+	uint price = 2 finney;
+  ///@dev 示例，对价值为price的商品， 买amount，计算找零	
+  ///@param fee 费用
+  ///@param amount 购买数量
+  ///@return 找零
+  function charge(uint256 fee, uint256 amount) internal  view returns (int){
+	if(fee < price * amount)
+		return -1;
+	return int(fee - price * amount);
+  }
+  
+  function buy() public view{
+	 require(charge(4 ether, 2000) == 0);
+	 require(charge(4e-3 ether, 2) == 0);
+	 require(charge(4 ether, 2e-15 ether) == 0);
+	 require(charge(4e3 szabo, 2) == 0);
+	 require(charge(4e15 wei , 2) == 0);
+
+  }  
+  
+}
+```
+
+注意下``charge(4 ether, 2e-15 ether)`` 这一个例子。
+从这里我们可以看到，在编译器的角度， ``ether``, ``finney``, ``szabo`` 并不局限于货币单位的表示，可以把他们当做``10^18``, ``10^15``，``10^12``的别名。 
+
+## 二、 时间单位
+
+时间单位有``seconds``, ``minutes``, ``hours``, ``days``, ``weeks`` 和 ``years``。
+默认单位是``seconds``。 换算关系：
+
+```
+1 == 1 seconds  
+1 minutes == 60 seconds  
+1 hours == 60 minutes == 3600 seconds 
+1 days == 24 hours == 86400 seconds
+1 weeks = 7 days == 604800 seconds
+1 years = 365 days = 31536000 seconds
+
+```
+
+示例程序：
+
+```
+  
+  function times() public pure returns (uint, uint, uint, uint, uint, uint){
+      return (1 seconds, 1 minutes, 1 hours, 1 days, 1 weeks, 1 years);
+  }
+```
+
+运行结果：
+
+```
+    0: uint256: 1
+    1: uint256: 60
+    2: uint256: 3600
+    3: uint256: 86400
+    4: uint256: 604800
+    5: uint256: 31536000
+```
+
+同货币单位一样， 时间单位也可以看做这些数值的别名。如可以使用 1 miuntes来表示60， 而不一定局限于时间上。当然我们不推荐这么使用。 
+
+要注意： 
+- 没有months，一个月不一定只有30天。 
+- years已经deprecated，也就是后续版本可能会取消。 
+
+可以仅仅将这些单位看做对应的数字的别名，在时间计算上的使用时要特别小心。 
+如果当前时间是2018年8月26日， 那 ``now + 4 years``并不是2011年8月26日，而是2018年8月25日， 中间2020年是366天。 
+

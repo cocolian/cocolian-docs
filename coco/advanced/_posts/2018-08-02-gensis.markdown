@@ -1,0 +1,85 @@
+---
+layout: 	coco
+title: 		"创世文件详解"
+date: 		2018-08-01 12:00:00
+author: 	"shamphone"
+chapter:	"3"
+
+---
+
+## 1. 创世文件
+
+coco的创世文件使用puppeth来生成，内容如下：
+
+```rubby
+ {
+  "config": {
+    "chainId": 49344,
+    "clique": {
+      "period": 15,
+      "epoch": 30000
+    }
+  },
+  "nonce": "0x0",
+  "timestamp": "0x5b5ffa7a",
+  "extraData": "0x00000000000000000000000000000000000000000000000000000000000000005f9fdba8de7d3ca407a2dae41525afcc4d660943b6ad12333e3f48f9926d6cd8f407978ea16920d6fa3142b2e51e84cdebda4e4976e013988c3a1c4a0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+  "gasLimit": "0x47b760",
+  "difficulty": "0x1",
+  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "alloc": {
+    "7abc981bc05de59e62168acd37ceef6118a424f0": {
+      "balance": "0x200000000000000000000000000000000000000000000000000000000000000"
+    },
+    "8a99d622d45458e973a213845726702fe30626d9": {
+      "balance": "0x200000000000000000000000000000000000000000000000000000000000000"
+    }
+  },
+  "number": "0x0",
+  "gasUsed": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+}
+```
+
+## 2. chainID
+
+链ID，在全球须唯一，各个链之间ID不同。ETH的ID是1， ETC的id是61。这个值取#C0C0 = 49344。已经在用的ID有：
+
+| `CHAIN_ID`     | Chain(s)                                   |
+| ---------------| -------------------------------------------|
+| 1              | Ethereum mainnet                           |
+| 2              | Morden (disused), Expanse mainnet          |
+| 3              | Ropsten                                    |
+| 4              | Rinkeby                                    |
+| 30             | Rootstock mainnet                          |
+| 31             | Rootstock testnet                          |
+| 42             | Kovan                                      |
+| 61             | Ethereum Classic mainnet                   |
+| 62             | Ethereum Classic testnet                   |
+| 1337           | Geth private chains (default)              |
+
+## 3. 硬分叉设置
+
+以下这几个参数是以太坊各个分叉的设置，具体分叉内容以后详细介绍。 
+- "homesteadBlock"：homesteadBlock硬分叉的高度，设置为0 即可
+- "eip150Block"：	EIP 150硬分叉的高度，设置为0即可。 
+- "eip150Hash"： 	EIP 150的hash值， 设置为0即可。 
+- "eip155Block"： 	EIP 155硬分叉的高度，设置为0即可。 
+- "eip158Block": 	EIP 158硬分叉的高度，设置为0即可。 
+- "byzantiumBlock": Byzantium硬分叉的高度，设置为0即可。 
+
+## 4. POA 挖矿参数
+
+以太坊的官方共识算法是ethash算法，它是基于POW的共识机制的，矿工需要通过计算nonce值，会消耗大量算力来匹配target值。如果在联盟链或者私链的方案里，继续使用ethash就会浪费算力，POW也没有存在的意义。所以以太坊有了另一种共识方案：基于POA的clique。coco采用的是POA的共识机制。 相关配置参数如下： 
+
+- clique是POA的配置
+	- period： 生成块的时间，15秒。 
+	- epoch：  生成DAG的的块大小，默认都是3万。 
+- **mixhash**：与nonce配合用于挖矿，由上一个区块的一部分生成的hash。注意他和nonce的设置需要满足以太坊的Yellow paper, 4.3.4. Block Header Validity, (44)章节所描述的条件。
+- **nonce**: nonce就是一个64位随机数，用于挖矿，注意他和mixhash的设置需要满足以太坊的Yellow paper, 4.3.4. Block Header Validity, (44)章节所描述的条件。
+- **difficulty**: 设置当前区块的难度，如果难度过大，cpu挖矿就很难，这里设置较小难度
+- **alloc**:  预分配的账号，这里给2个账号， 7abc981bc05de59e62168acd37ceef6118a424f0 和 8a99d622d45458e973a213845726702fe30626d9 分配了以太币。 用于支撑系统初始化运营。 
+- **coinbase**: 矿工账户，在这里不设置。 
+- **timestamp**: 设置创世块的时间戳
+- **parentHash**: 上一个区块的hash值，因为是创世块，所以这个值是0
+- **extraData**:  在POA机制下，这里写的是预分配账户。 

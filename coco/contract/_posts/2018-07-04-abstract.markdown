@@ -1,0 +1,29 @@
+---
+layout: 	coco
+title: 		"抽象"
+date: 		2018-07-04 12:00:00
+author: 	"shamphone"
+status: 	"hidden"  
+chapter:	"2"
+---
+
+```
+pragma solidity 0.4.8;
+
+// These abstract contracts are only provided to make the
+// interface known to the compiler. Note the function
+// without body. If a contract does not implement all
+// functions it can only be used as an interface.
+
+// Let me write an abstract contract with a single function and then extend it 
+// in the new contract and then override it there.
+contract Feline {
+	// This is how we write the abstract contract 
+    function utterance() returns (bytes32);
+}
+
+// inherit the contract in cat and then override the function utterance with some full definition
+contract Cat is Feline {
+    function utterance() returns (bytes32) { return "miaow"; }
+}
+```

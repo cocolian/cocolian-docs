@@ -1,0 +1,60 @@
+---
+layout: default
+---
+<aside class="content-aside">
+<ul>
+{% assign posts =  site.categories["reference"] | sort:"date" %}
+{% for post in posts  %}
+<li><a href="{{ post.url | prepend: site.baseurl }}">{{ post.subtitle }}</a></li>
+{% endfor %}
+</ul>
+</aside>
+<header class="intro-header">
+	<div class="post-heading">                  
+		<h1>{{ page.title }}</h1>                
+		<ul class="meta">
+			<li><i class="icon-sitemap"></i>{% for pcat in page.categories%}{{site.modules[pcat]}}{% endfor%}  </li>
+			<li><i class="icon-user"></i>{% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %}  </li>
+			<li><i class="icon-time"></i>{{ page.date | date: "%Y-%m-%d" }}</li>
+		</ul>                
+	</div>           
+</header>
+<!-- Post Content -->
+<article class="post-content"> 
+    <!-- Post Container -->
+            <div class="post-container">
+
+				{{ content }}
+				<hr/> 
+				<p>本文档来自“支付产品架构交流群” 的聊天记录整理，由志愿者整理并发布到本网站。如需要及时收到来自“支付产品架构交流群”的最新消息，请扫码关注“凤凰牌老熊”的微信公众号。目前支付产品架构群还有不少空位。 本群面向支付行业的有经验（2年以上）的产品经理、软件工程师、架构师等，提供交流平台。如想加入本群，请在本文评论中留言（不公开），说明所在的公司、负责的工作、入群分享的主题和时间。 </p>
+				<hr/>
+				<ul class="post_footer">
+				   <li>长按或者扫描二维码来打赏，感谢支持群管理工作！<br/>
+						<img src="http://static.cocolian.cn/img/reward/jigsaw.jpg" /> 
+				   </li>
+				    <li class="left-sep">请扫码关注“凤凰牌老熊”的微信公众号。<br/>
+						<img src="http://static.cocolian.cn/img/reward/weixin.jpg" /> 
+					</li>
+				</ul>
+
+				<hr/>              
+                <ul class="pager">
+                    {% if page.previous.url %}
+                    <li class="previous">
+                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">
+                        Previous<br>
+                        <span>{{page.previous.title}}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if page.next.url %}
+                    <li class="next">
+                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">
+                        Next<br>
+                        <span>{{page.next.title}}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>				
+            </div>  
+</article>

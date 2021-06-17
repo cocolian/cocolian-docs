@@ -1,0 +1,42 @@
+---
+layout: dev
+title: "安装文档编制工具-Jekyll"
+date: 2017-12-06 12:00:00
+author: "shamphone"
+chapter: "06"
+---
+
+## 安装 Jekyll
+
+Jekyll是本项目的文档编辑工具。 在windows操作系统下， 安装Cygwin后，安装如下软件：
+
+```bash
+- Ruby/ruby: Interperted object-oriented script......
+- Ruby/rubygems: Ruby module management system
+- Ruby/ruby-nokogiri: Ruby HTML/XML/SAX library	# 由于cygwin下无法通过编译这个库 1.6.6.2
+- Archive/zip: Info-ZIP compression utility.
+- Libs/crypt: Encryption/Decrypion utility and library
+- Python/python: Python language interpreter.
+- Devel/make: The GNU version of the 'make' utility
+- Devel/gcc-g++: GNU  Compiler Collection(C++)
+- Perl/perl: Perl programming language interpreter
+- libffi6
+- libffi-devel
+- ruby-pkg-config
+```
+
+在Cygwin下执行安装：
+
+```bash
+gem install github-pages 
+```
+
+## 运行Jekyll
+
+成功后，签出jigsaw-payment-doc项目，进入jigsaw-payment-doc目录下， 执行
+
+```bash
+jekyll serve
+```
+
+即可通过http://127.0.0.1:4000 来访问本地的文档服务器了。 

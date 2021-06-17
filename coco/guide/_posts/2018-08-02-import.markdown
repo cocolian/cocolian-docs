@@ -1,0 +1,221 @@
+---
+layout: 	coco
+title: 		"导入文件import"
+date: 		2018-08-01 12:00:00
+author: 	"shamphone"
+chapter:	"5"
+
+---
+
+## 一、 import关键字
+
+solidity和其他语言一样，支持模块化、封装和重用。
+一个项目的代码可以保存在多个.sol文件中。 
+如果一个合约的实现需要依赖其他文件中的合约定义，那可以使用import来引入它。  
+
+```
+pragma solidity ^0.4.7;
+
+import  "./calculator.sol";
+
+
+contract MyToken {
+    
+    Calculator cal;
+    
+    function setCal(Calculator val) public {
+        cal = val;
+    }
+    
+    function calValue(uint a) public view returns(uint c)   { 
+        return cal.multiply(a, 100);         
+    } 
+    
+}
+```
+
+虽然solidity并不限定import的位置， 如下也是可以编译通过：
+
+```
+pragma solidity ^0.4.7;
+
+contract MyToken {
+    
+    Calculator cal;
+    
+    function setCal(Calculator val) public {
+        cal = val;
+    }
+    
+    function calValue(uint a) public view returns(uint c)   { 
+        return cal.multiply(a, 100);         
+    } 
+    
+}
+
+import "./calculator.sol"; //不推荐放在这个位置
+
+```
+
+但我们还是建议，从编码规范的角度，所有的import都应该放在文件头部，在pragma之后。 
+
+## 二、文件路径
+
+import 指令后的文件路径有如下格式要求：
+
+文件目录间以``/``分割，这和windows的路径风格不一样，是Linux的风格。 
+
+```
+	import "github.com/ethereum/dapp-bin/library/iterable_mapping.sol"
+```
+
+以``.`` 标示当前目录、以 ``..`` 表示父目录，这是需要注意的地方。 ``import "./calculator.sol"``  修改为 ``import "calculator.sol"``，编译器会报错。 
+
+### 2.1 访问本地文件
+
+由于remix是在浏览器中处理，为了安全起见，它无法访问本地文件目录。为了支持remix来访问本地文件，需要一个插件remixd的支持。 
+运行 
+
+```
+npm install -g remixd
+```
+
+安装remixd，之后在启动remix-ide时，加上本地文件目录（如/home/cocolian/solidity)作为参数，如下所示：
+
+```
+remix-ide /home/cocolian/solidity
+```
+
+来设置可以访问的路径。 注意，这个路径对当前运行remix的用户必须有读写权限。 这时候访问浏览器，会多一个localhost的目录：
+
+![remixd](http://static.cocolian.cn/img/coco/solidity/remix-10.png)
+
+这里列出共享目录下的所有文件。 
+
+这样，在remix-ide里面，本地文件可以通过localhost来引用： 
+
+```
+pragma solidity ^0.4.7;
+
+import "localhost/calculator.sol";
+
+contract MyToken {
+    
+    Calculator cal;
+    
+    function setCal(Calculator val) public {
+        cal = val;
+    }
+    
+    function calValue(uint a) public view returns(uint c)   { 
+        return cal.multiply(a, 100);         
+    } 
+    
+}
+
+```
+
+### 2.2 访问远程文件
+
+目前remix-ide对远程文件的支持有限。提供了对github源代码平台的映射。   
+
+```  
+  import "http://github.com/ethereum/dapp-bin/standardized_contract_apis/datafeed.so";
+```
+
+
+未来， Remix 可能支持其他源代码平台。
+
+
+
+## 三、别名
+
+默认情况下， 在引入文件中，可以直接访问被引入文件的Contract名字。 如上述例子，引入calculator.sol之后，可以直接使用这个文件中定义的Calculator这个contract。 
+
+```
+Calculator cal; 
+```
+
+但是如果被引入的文件中存在名字相同的contract，或者有其他的考虑，那可以对这个文件设置一个别名，之后可以通过这个别名来访问其中的contract了： 
+
+```
+pragma solidity ^0.4.7;
+
+import "localhost/calculator.sol" as Cal;
+
+
+contract MyToken {
+    
+    Cal.Calculator cal;
+    
+    function setCal(Cal.Calculator val) public {
+        cal = val;
+    }
+    
+    function calValue(uint a) public view returns(uint c)   { 
+        return cal.multiply(a, 100);         
+    } 
+    
+}
+
+```
+
+## 四、引入特定的Contract
+
+默认的``import "file path" as symbolName`` 等同于 ``import * as symbolName from "file path" `` ， 即引入该文件中所有的合约到当前全局作用域中。 
+
+也可以仅引入特定的Contract：
+
+```
+pragma solidity ^0.4.7;
+
+import {Calculator} from "localhost/calculator.sol";
+
+
+contract MyToken {
+    
+    Calculator cal;
+    
+    function setCal(Calculator val) public {
+        cal = val;
+    }
+    
+    function calValue(uint a) public view returns(uint c)   { 
+        return cal.multiply(a, 100);         
+    } 
+    
+}
+```
+
+或者为引入的Contract指定别名： 
+
+```
+pragma solidity ^0.4.7;
+
+import {Calculator as Cal} from "localhost/calculator.sol";
+
+
+contract MyToken {
+    
+    Cal cal;
+    
+    function setCal(Cal val) public {
+        cal = val;
+    }
+    
+    function calValue(uint a) public view returns(uint c)   { 
+        return cal.multiply(a, 100);         
+    } 
+    
+}
+
+```
+
+或者混合使用这些方式来引入多个contract: 
+
+```
+import {symbol1 as alias1, symbol2} from "file path" 
+
+```
+
+

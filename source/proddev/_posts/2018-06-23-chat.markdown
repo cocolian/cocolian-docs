@@ -1,0 +1,64 @@
+---
+layout:     source 
+title:      "2018-06-23-WeChat"
+date:       2018-06-23 12:00:00
+author:     PaymentGroup
+lines:      12 
+tag:		  [chat]
+---
+> 15:50:01  wangbo  
+   
+请教各位专家，现在市面上借记银行有几种通道？除了超网，小额集中代收付，快捷支付，还有什么方式  
+   
+> 15:51:00  龚晓冬  
+   
+大额系统  
+   
+> 15:52:15  wangbo  
+   
+哦，大额即时转账是银联网联特参清算用的，我想问借记个人银行卡的通道  
+   
+> 15:54:29  龚晓冬  
+   
+个人差不多就这些了，2，3类户应该还有一个互联互通的平台  
+   
+> 15:55:09  龚晓冬  
+   
+如果算上前台页面的话，还有网银网关  
+   
+> 15:57:50  Jin He 何瑾  
+   
+Payoneer: Frictionless Marketplace Payments | PYMNTS.com  
+   
+> 15:59:08  Jin He 何瑾  
+   
+Once you start to get your head around the AML puzzle of figuring out how to do diligence on suppliers in 200 countries and territories, then you have to figure out how to deal with the regulatory environment — an environment that was still evolving in many of those places that we were building the business.  
+   
+> 15:59:14  Jin He 何瑾  
+   
+伟大  
+   
+> 15:59:56  wangbo  
+   
+@龚晓冬-银联-产品-上海?互联互通平台是啥，没听说过呢  
+   
+> 16:09:45  龚晓冬  
+   
+@wb-农行-支付系统?针对2，3类账户的  
+   
+> 16:15:22  wangbo  
+   
+多谢，我学习学习  
+   
+> 16:42:21  龚晓冬  
+   
+这个渠道也是在银联cups上的  
+   
+> 16:42:31  龚晓冬  
+   
+你看一下cups规范就知道了  
+   
+> 20:29:25  龚晓冬  
+   
+央行发布消费金融专题报告：31.5万亿余额的消费贷款市场迎来强监管  
+   

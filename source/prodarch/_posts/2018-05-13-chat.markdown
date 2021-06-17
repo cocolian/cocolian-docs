@@ -1,0 +1,16 @@
+---
+layout:     source 
+title:      "2018-05-13-WeChat"
+date:       2018-05-13 12:00:00
+author:     PaymentGroup
+lines:      2 
+tag:		  [chat]
+---
+> 14:57:19  管静_传化支付_风控合规  
+   
+@陈萌萌-付费通-产品-上海?是的  
+   
+> 16:54:17  萌主  
+   
+哦哦，谢谢  
+   

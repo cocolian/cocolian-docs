@@ -1,0 +1,265 @@
+---
+layout: dev 
+title: "安装Kubernetes(Client)"  
+subtitle: "infra文档"  
+date: 2017-10-21 12:00:00  
+author: "shamphone"  
+chapter: "5"
+catalog: true  
+tag: [infra]  
+---
+
+> 注意，这个文件必须以UTF-8无BOM格式编码。 
+
+这里描述如何使用Kubeadm安装Kubernetes的nodes端
+
+> 注意k8s的版本，不是所有的版本都适合这种安装方式。安装KubeAdm的时候需要访问google，需要使用一个http/https代理。
+
+
+## 一、安装docker
+
+注意，docker有多个版本，最新的docker分为docker-ce和docker-ee版本。这里安装的是1.12.6版本的，使用yum直接安装
+
+```bash
+sudo yum install -y docker 
+sudo systemctl enable docker 
+sudo systemctl start docker
+```
+运行docker version确认版本
+
+```bash
+[jigsaw@kube-master ~]$ docker version
+Client:
+ Version:         1.12.6
+ API version:     1.24
+ Package version: docker-1.12.6-61.git85d7426.el7.centos.x86_64
+ Go version:      go1.8.3
+ Git commit:      85d7426/1.12.6
+ Built:           Tue Oct 24 15:40:21 2017
+ OS/Arch:         linux/amd64
+
+Server:
+ Version:         1.12.6
+ API version:     1.24
+ Package version: docker-1.12.6-61.git85d7426.el7.centos.x86_64
+ Go version:      go1.8.3
+ Git commit:      85d7426/1.12.6
+ Built:           Tue Oct 24 15:40:21 2017
+ OS/Arch:         linux/amd64
+```
+
+## 二、修改docker源
+
+docker默认使用docker.io的源，国内访问慢，容易出错。修改为国内的源：
+
+访问 [阿里云的开发者平台](http://dev.aliyun.com/search.html),登录后，进入管理中心，首次登录会让用户设置密码。然后就会看到如下页面：
+![aliyun](http://static.cocolian.cn/img/in-post/aliyun-docker.png)
+阿里云为每个人分配一个加速器地址。 我的地址是 https://n76bgciz.mirror.aliyuncs.com 
+修改 /etc/docker/daemon.json 
+
+```bash
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://n76bgciz.mirror.aliyuncs.com"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+## 三、配置yum源
+
+```bash
+
+vim /etc/yum.repos.d/kubernetes.repo
+
+[kubernetes]
+name=Kubernetes
+baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/
+enabled=1
+gpgcheck=0
+```
+
+## 四、修改防火墙
+
+```bash
+sudo setenforce 0
+sudo systemctl disable iptables-services firewalld
+sudo systemctl stop iptables-services firewalld
+```
+
+注意，修改后，需要*重启系统*， 以让设置生效。 
+修改 /etc/sysctl.conf  文件，添加内容
+```bash
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+```
+
+执行如下内容让其生效
+
+```bash
+
+sudo modprobe br_netfilter
+sudo sysctl -p 
+```
+
+## 五、 安装kubeadm
+
+```bash
+sudo yum install -y kubelet kubeadm kubectl
+sudo systemctl enable kubelet 
+sudo systemctl start kubelet
+```
+
+## 六、下载相关镜像
+
+非常关键，这些镜像无法从gcr.io下载，可以先从国内源下载。 以下是从阿里云上下载的镜像源，亲测可用。 
+创建 docker.sh文件，内容如下， 然后执行 sudo docker.sh 即可。 
+K8s的client端需要安装一些docker，这些docker默认从google的服务器上下载。这些服务器目前从国内无法正常访问。如果不预先下载，cni就无法正常初始化。
+执行：
+```bash
+journalctl -r -u kubelet
+```
+
+日志中会出现如下错误：
+
+```bash
+9161 cni.go:189] Unable to update cni config: No networks found in /etc/cni/net.d
+9161 kubelet.go:2136] Container runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:docke
+Nov 07 12:43:22 kube23.jigsaw dockerd-current[11576]: time="2017-11-07T12:43:22.425674182+08:00" level=error msg="Attempting next endpoint for pull after error: Get https://gcr.io/v1/_ping:
+9161 helpers.go:432] Couldn't load Docker cofig. If sandbox image "gcr.io/google_containers/pause-amd64:3.0" is in a pri
+9161 remote_runtime.go:91] RunPodSandbox from runtime service failed: rpc error: code = 2 desc = unable to pull sandbox
+9161 kuberuntime_sandbox.go:54] CreatePodSandbox for pod "kube-proxy-fx6pf_kube-system(32142190-c370-11e7-b5ca-f0def1214
+9161 kuberuntime_manager.go:618] createPodSandbox for pod "kube-proxy-fx6pf_kube-system(32142190-c370-11e7-b5ca-f0def121
+9161 pod_workers.go:182] Error syncing pod 32142190-c370-11e7-b5ca-f0def12142f8 ("kube-proxy-fx6pf_kube-system(32142190-
+```
+即无法下载 gcr.io/google_containers/pause-amd64:3.0 这个镜像。 以下可以预先下载镜像到本地：
+【TODO： 如何建立本地镜像仓库？】
+
+```bash
+docker pull registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/pause-amd64:3.0
+docker pull registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/k8s-dns-sidecar-amd64:1.14.4
+docker pull registry.cn-qingdao.aliyuncs.com/zdd_k8s/kube-apiserver-amd64:v1.7.5
+docker pull registry.cn-qingdao.aliyuncs.com/zdd_k8s/kube-controller-manager-amd64:v1.7.5
+docker pull registry.cn-hangzhou.aliyuncs.com/google-containers/kube-scheduler-amd64:v1.7.5
+docker pull registry.cn-qingdao.aliyuncs.com/zdd_k8s/kube-proxy-amd64:v1.7.5
+docker pull registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/flannel:v0.8.0-amd64
+docker pull registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/k8s-dns-kube-dns-amd64:1.14.4
+docker pull registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/k8s-dns-dnsmasq-nanny-amd64:1.14.4
+docker pull registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/etcd-amd64:3.0.17
+
+docker tag registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/etcd-amd64:3.0.17  gcr.io/google_containers/etcd-amd64:3.0.17
+docker tag registry.cn-qingdao.aliyuncs.com/zdd_k8s/kube-apiserver-amd64:v1.7.5 gcr.io/google_containers/kube-apiserver-amd64:v1.7.5
+docker tag registry.cn-qingdao.aliyuncs.com/zdd_k8s/kube-controller-manager-amd64:v1.7.5  gcr.io/google_containers/kube-controller-manager-amd64:v1.7.5
+docker tag registry.cn-hangzhou.aliyuncs.com/google-containers/kube-scheduler-amd64:v1.7.5 gcr.io/google_containers/kube-scheduler-amd64:v1.7.5
+docker tag registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/k8s-dns-dnsmasq-nanny-amd64:1.14.4 gcr.io/google_containers/k8s-dns-dnsmasq-nanny-amd64:1.14.4
+docker tag registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/k8s-dns-kube-dns-amd64:1.14.4 gcr.io/google_containers/k8s-dns-kube-dns-amd64:1.14.4
+docker tag registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/flannel:v0.8.0-amd64 gcr.io/google_containers/flannel:v0.8.0-amd64
+docker tag registry.cn-qingdao.aliyuncs.com/zdd_k8s/kube-proxy-amd64:v1.7.5 gcr.io/google_containers/kube-proxy-amd64:v1.7.5
+docker tag registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/pause-amd64:3.0 gcr.io/google_containers/pause-amd64:3.0
+docker tag registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/k8s-dns-sidecar-amd64:1.14.4 gcr.io/google_containers/k8s-dns-sidecar-amd64:1.14.4
+
+docker rmi -f registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/pause-amd64:3.0
+docker rmi -f registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/k8s-dns-sidecar-amd64:1.14.4
+docker rmi -f registry.cn-qingdao.aliyuncs.com/zdd_k8s/kube-apiserver-amd64:v1.7.5
+docker rmi -f registry.cn-qingdao.aliyuncs.com/zdd_k8s/kube-controller-manager-amd64:v1.7.5
+docker rmi -f registry.cn-hangzhou.aliyuncs.com/google-containers/kube-scheduler-amd64:v1.7.5
+docker rmi -f registry.cn-qingdao.aliyuncs.com/zdd_k8s/kube-proxy-amd64:v1.7.5
+docker rmi -f registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/flannel:v0.8.0-amd64
+docker rmi -f registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/k8s-dns-kube-dns-amd64:1.14.4
+docker rmi -f registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/k8s-dns-dnsmasq-nanny-amd64:1.14.4
+docker rmi -f registry.cn-hangzhou.aliyuncs.com/daniel_kubeadm/etcd-amd64:3.0.17
+
+
+```
+
+## 七、加入kubernetes网络
+
+注意，这里的token是在master上执行kubeadm init之后的返回值。 172.16.2.24是kubernetes的master。 
+
+```bash
+[jigsaw@kube23 ~]$ sudo kubeadm join --token jigsaw.paymentkubetoken 172.16.2.24:6443
+[kubeadm] WARNING: kubeadm is in beta, please do not use it for production clusters.
+[preflight] Running pre-flight checks
+[preflight] Starting the kubelet service
+[discovery] Trying to connect to API Server "172.16.2.24:6443"
+[discovery] Created cluster-info discovery client, requesting info from "https://172.16.2.24:6443"
+[discovery] Cluster info signature and contents are valid, will use API Server "https://172.16.2.24:6443"
+[discovery] Successfully established connection with API Server "172.16.2.24:6443"
+[bootstrap] Detected server version: v1.7.5
+[bootstrap] The server supports the Certificates API (certificates.k8s.io/v1beta1)
+[csr] Created API client to obtain unique certificate for this node, generating keys and certificate signing request
+[csr] Received signed certificate from the API server, generating KubeConfig...
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/kubelet.conf"
+
+Node join complete:
+* Certificate signing request sent to master and response
+  received.
+* Kubelet informed of new secure connection details.
+
+Run 'kubectl get nodes' on the master to see this machine join.
+
+```
+## 八、验证
+
+```bash
+
+[jigsaw@kube-master ~]$ kubectl get nodes
+NAME                 STATUS    AGE       VERSION
+kube-master.jigsaw   Ready     1h        v1.7.5
+kube23.jigsaw        Ready     59m       v1.7.5
+
+```
+
+## 九、开启Accounting
+
+通过journalctl -r -u kubelet查看日志，发现大量的错误
+```bash 
+27505 container_manager_linux.go:750] MemoryAccounting not enabled for pid: 27505
+27505 container_manager_linux.go:747] CPUAccounting not enabled for pid: 2750
+27505 container_manager_linux.go:750] MemoryAccounting not enabled for pid: 28012
+27505 container_manager_linux.go:747] CPUAccounting not enabled for pid: 28012
+```
+
+其中27505是kubelet的pid, 28012是docker的pid。 
+需要打开这两个属性
+
+```bash
+# sudo systemctl show docker | grep Accounting
+CPUAccounting=no
+BlockIOAccounting=no
+MemoryAccounting=no
+```
+确认没有打开，执行如下操作
+```bash
+#sudo systemctl set-property docker.service MemoryAccounting=yes
+#sudo systemctl set-property docker.service CPUAccounting=yes
+```
+打开成功
+```bash
+# systemctl show docker | grep Accounting
+CPUAccounting=yes
+BlockIOAccounting=no
+MemoryAccounting=yes
+```
+
+对kubelet服务同样执行：
+
+```bash
+# sudo systemctl show kubelet | grep Accounting
+CPUAccounting=no
+BlockIOAccounting=no
+MemoryAccounting=no
+```
+确认没有打开，执行如下操作
+```bash
+#sudo systemctl set-property kubelet.service MemoryAccounting=yes
+#sudo systemctl set-property kubelet.service CPUAccounting=yes
+```
+打开成功
+```bash
+# sudo systemctl show kubelet | grep Accounting
+CPUAccounting=yes
+BlockIOAccounting=no
+MemoryAccounting=yes

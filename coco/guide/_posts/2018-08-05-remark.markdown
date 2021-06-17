@@ -1,0 +1,109 @@
+---
+layout: 	coco
+title: 		"注释"
+date: 		2018-08-04 12:00:00
+author: 	"shamphone"
+chapter:	"6"
+---
+
+
+和大多数语言一样，Solidity中的注释是不会出现在可执行程序中的。因而不要担心注释带来的代码的膨胀。 
+
+## 一、注释格式
+
+注释有四种格式: 
+
+一、使用``/* 这里是注释内容 */``的多行注释，每一行都需要使用``*``来作为开始。 
+
+```
+/*
+ * 这是多行注释，每一行都有一个*作为前缀。
+*/
+ 
+```
+
+二、使用//的单行注释和行后注释。 
+
+```
+// 这是单行的注释。 
+```
+
+三、使用``/** **/``的注释，可以通过doxygen来抽取，并配合注释标签使用。 
+
+```
+/**
+ * @title 计算器合约
+ * @author Cocolian
+ * @notice 这是功能描述
+ * @dev 这里是实现细节
+ **/
+
+contract Calculator {
+	/**
+	 * @dev 乘法计算
+	 * @param a  乘数
+	 * @param b  被乘数
+	 * @return c 计算结果
+	 *
+	 **/
+    function multiply(uint a, uint b) public pure returns(uint c)   { 
+        return a * b;         
+    } 
+}
+```
+
+四、Solidity社区推荐的使用``///``加上标签的单行注释。和``/**  **/``是一样的。 
+
+```
+/// @title 计算器合约
+/// @author Cocolian
+/// @notice 这是功能描述
+/// @dev 这里是实现细节
+
+contract Calculator {
+	
+	/// @dev 乘法计算
+	/// @param a  乘数
+	/// @param b  被乘数
+	/// @return c 计算结果
+    function multiply(uint a, uint b) public pure returns(uint c)   { 
+        return a * b;         
+    } 
+}
+```
+
+
+## 二、注释标签
+
+这些标签都是可选的
+
+| Tag       | 描述                                     	| 适用实体                       |
+| --------- | ---------------------------------------- 	| ----------------------------- |
+| `@title`  | 描述合约的标题						 	| contract, interface           |
+| `@author` | 作者姓名   								| contract, interface, function |
+| `@notice` | 描述合约或者函数的功能   					| contract, interface, function |
+| `@dev`    | 提供给开发人员看的实现细节。 				| contract, interface, function |
+| `@param`  | 参数说明，后面必须接参数的名称&nbsp;&nbsp;| function                      |
+| `@return` | 返回值说明								| function                      |
+
+
+
+
+## 三、动态表达式
+
+在功能说明文档中，可以在注释中加入动态表达式。
+
+```
+/// @notice 从`message.caller.address()`发
+/// 送 `(valueInmGAV / 1000).fixed(0,3)`个 GAV 到 `to.address()`
+
+function send(address to, uint256 valueInmGAV) {
+
+```
+
+如果用户(账户地址 0x7788) 试图调用这个方法给地址0x0发送4135个GAV， 则结果是： 
+
+```
+从地址0x7788发送4135个 GAV到地址0x0
+```
+

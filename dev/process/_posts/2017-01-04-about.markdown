@@ -1,0 +1,12 @@
+---
+layout: dev  
+title: "需求分析"  
+subtitle: "会员服务模块"  
+date: 2017-01-04 20:00:00  
+author: "shamphone"  
+catalog: true  
+chapter : "1"
+tag: [api]  
+---
+
+内容待补充。 

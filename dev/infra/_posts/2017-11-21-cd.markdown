@@ -1,0 +1,43 @@
+---
+layout: dev 
+title: "持续交互环境安装"
+subtitle: "支付系统基础架构-1"
+date: 2017-11-21 12:00:00
+author: "shamphone"
+chapter: "8"
+catalog: true
+tags: [支付系统]
+---
+
+## 安装JDK
+
+```bash
+wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.rpm
+
+sudo yum localinstall -y jdk-8u151-linux-x64.rpm
+```
+
+## 安装Nginx
+
+使用nginx来做接口网关。 Nginx安装比较简单
+```
+sudo yum install nginx
+```
+
+nginx的配置文件在/etc/nginx目录下。一般是分域名来配置。http和https
+
+
+
+## 安装sonarqube
+
+sonarqube是一款代码审查的工具。下载地址： 
+https://devopscube.com/setup-and-configure-sonarqube-on-linux/ 
+没有使用docker来运行sonarqube，因为大部分的代码质量检测是容器外的工作。 需要先安装mysql， 然后安装sonarqube。 
+
+## 安装Jenkins
+
+从国内镜像站点下载安装
+```bash
+https://mirrors.tuna.tsinghua.edu.cn/jenkins/redhat-stable/jenkins-2.73.3-1.1.noarch.rpm
+sudo yum localinstall -y jenkins-2.73.3-1.1.noarch.rpm
+```

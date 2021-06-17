@@ -1,0 +1,195 @@
+---
+layout: 	coco
+title: 		"数组"
+date: 		2018-07-08 12:00:00
+author: 	"shamphone"
+chapter:	"8"
+---
+
+
+## 一、数组声明
+
+在solidity中，数组分为定长数组和变长数组。 
+一个类型为T，长度为k的定长数组，可以声明为T[k]。
+而一个变长数组则声明为T[]。
+
+
+
+## 二、定长数组创建和初始化
+
+用例子说话吧。 
+
+```
+  
+function inMemory() public pure returns(uint, uint, uint){
+	uint[3] memory initArray; //定长数组，所有元素初始化为0 
+	uint8[2] memory staticArray = [1, 2]; //固定长度数组初始化，注意类型需要对应上。 
+	uint[] memory dynArray = new uint[](3); //动态数组初始化，使用new关键字
+	return (initArray[1], staticArray[1], dynArray[1]);
+}
+
+```
+
+返回值： 
+
+```
+
+    0: uint256: 0
+    1: uint256: 2
+    2: uint256: 0
+
+```
+
+
+1. 定长数组初始化的时候会分配默认值， 如上面的initArray。 
+2. 使用``[]``来初始化数组的值，使用逗号分隔。 数组值的个数和声明的长度必须保持一致。 
+3. 动态数组使用new来初始化。 
+4. 局部数组变量必须声明memory或者storage，否则会有编译警告。 
+5. 这会报告编译错误，因为1,2,3默认是uint8类型，uint是uint256类型。类型不匹配。 
+
+```
+	// Type uint8[3] memory is not implicitly convertible to expected type uint256[3] memory.
+	uint[3] memory typeUnmacthed = [1, 2, 3 ];
+```	
+
+6. 长度不一致的数组，也不能做赋值。  
+```
+	// Type uint8[2] memory is not implicitly convertible to expected type uint8[3] memory.	
+	uint[3] memory lengthUnmacthed = [1, 2];
+```
+
+7. 定长和变长数组也不能转换。 
+
+```
+	// Type uint8[2] memory is not implicitly convertible to expected type uint8[] memory.
+	uint[] memory  dyn2fixed = [1, 2];
+```
+
+ 
+## 三、变长数组
+
+对于变长数组，在分配空间之前不可用。 变长数组使用``new``来分配空间。 在初始化之前，变长数组不能进行元素的读取和赋值操作。 
+
+```
+	function dynArray() public pure returns(uint){
+		uint[] memory dynVar; 
+		// 初始化之前无法使用；
+		// dynVar[0] = 1000;
+		
+		//使用new来初始化
+		dynVar = new uint[](2);
+		
+		dynVar[0] = 100;
+		
+	}
+```
+
+
+## 四、多维数组
+
+solidity支持多维数组。比如2行6列的数组``bid[6][2]``。
+注意，这个长度声明的顺序和Java、C语言等是相反的。以下是一个``2*6``的数组的示例： 
+
+```
+	function dimension2() public pure returns(uint){
+	    uint8[6][2] memory bid = [ [0,1,2,3,4,5],  [10,11,12,13,14,15]];
+	    return bid[1][4];
+	}
+```
+
+数组的序号是从0开始的。 
+要访问这个数组中第2行第5列的数据， 使用 ``bid[1][4]``。
+注意，这里的序号顺序，和声明正好是**相反**的，即定义的时候是[列数][行数]，调用的时候是[行号][列号]。
+
+## 五、 length属性
+
+数组有一个length属性，表示当前的数组长度。对于storage的**变长**数组，可以通过给length赋值调整数组长度。
+但对于memory的数组，无法通过这个方式来调整大小。 
+
+```
+	uint[] public ext = new  uint[](1) ;
+	
+	function autoExtend() public payable returns(uint, uint){
+	    ext[0]= 0;
+	    //这会抛出Invalid opcode异常，已经超出当前数组长度了
+		// ext[1] = 2;
+	    uint start = ext.length;
+	    ext.length+= 2;
+	    ext[1]=1;
+	    ext[2]=2;
+	    
+	    ext.length -=1;
+	    //这会抛出Invalid opcode异常，2已经超出当前数组长度了
+		// ext[2] = 2;
+	    return (start, ext.length);
+	    
+	}
+```
+
+
+在上面这个例子中，我们可以看到，通过修改ext.length，可以增加或者减少ext数组的长度。 最终输出是： 
+```
+{
+	"0": "uint256: 1",
+	"1": "uint256: 2"
+}
+```
+
+还可以使用后面提到的push()方法，来隐式的调整数组长度。但不能像javascript那样通过对超出当前数组的长度序号元素赋值的方式，来实现数组长度的自动扩展。
+
+
+对于memory的变长数组，不支持修改length属性，来调整数组大小。memory的变长数组虽然可以通过参数灵活指定大小，但一旦创建，大小不可调整。
+
+## 六、push方法
+
+变长的storage数组和bytes（不包括string）有一个push()方法。可以将一个新元素附加到数组末端，返回值为当前长度。
+
+```
+pragma solidity ^0.4.24;
+
+contract TestArray {
+
+	uint public ext;
+	function testPush() public payable returns (uint){
+	    ext.push(1); // 在new之前使用push是许可的。 push方法实现内部会初始化这个数组。
+	    ext.push(2);
+	    ext.push(3);
+	    ext.push(4);
+	    ext.push(5);
+	    require(ext.push(6), 6)
+		require(ext.length == 6);
+		require(ext[2] ==3);
+		ext = new uint[](3); // 分配长度为3的空间。 
+		require(ext[2]==0); //重新分配空间，元素初始化为0；
+		require(ext.length==3);
+		ext.push(4);
+		require(ext.length == 4);
+		return (ext.length);		
+	}
+	
+}	
+```
+
+在上面的代码中，我们声明了一个storage的ext。 
+在未显式初始化的情况下，通过push()附加了一个新值， 这会触发方法内进行了初始化。
+之后执行``new``操作，重新分配了存储空间，空间中元素被初始化为0。
+继续使用push()能实现存储空间的自动扩展。
+
+对memory的动态数组，不能使用push来扩容：
+```
+	function testMemoryPush() public returns (uint){
+		int8[] memory mem = new int8[](2);
+	    mem.push(1); // 编译错误
+		return (mem.length);
+		
+	}
+```
+将出现如下错误：
+
+```
+TypeError: Member "push" is not available in int8[] memory outside of storage.
+	    mem.push(1); 
+	    ^--
+```
+
+

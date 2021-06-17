@@ -1,0 +1,49 @@
+---
+layout:     source 
+title:      "2018-10-13-WeChat"
+date:       2018-10-13 12:00:00
+author:     None
+lines:      10 
+tag:       [chat]
+---
+> 19:13:20  秦吟秋-平安产险-产品经理  
+   
+自己的公众号，这篇写电商订单系统搭建。欢迎各位交流。  
+   
+> 19:13:20  秦吟秋-平安产险-产品经理  
+   
+[3个环节解构电商B端产品——订单系统
+](http://mp.weixin.qq.com/s?__biz=MzA3NDM2ODY1OQ==&amp;amp;amp;mid=2457630378&amp;amp;amp;idx=1&amp;amp;amp;sn=578c58ea53744b32cd89daca4293b143&amp;amp;amp;chksm=88880556bfff8c40f1fb5a388e686e2c041c80886947d9f3faaf9ca89fe535a5206489a60caf&amp;amp;amp;mpshare=1&amp;amp;amp;scene=1&amp;amp;amp;srcid=1013ecL6redinDEuLU7QsOH4#rd)  
+   
+> 19:14:35  陈琼-开课啦-产品-杭州  
+   
+[强]  
+   
+> 19:15:59  弋碎-国美-产品  
+   
+[强]  
+   
+> 19:16:18  秦吟秋-平安产险-产品经理  
+   
+欢迎交流。??  
+   
+> 19:18:02  tianguowei8844  
+   
+写的最好再深入点  
+   
+> 19:18:47  秦吟秋-平安产险-产品经理  
+   
+嗯。有些预警和通知没写。  
+   
+> 19:19:05  秦吟秋-平安产险-产品经理  
+   
+主要写了主干线  
+   
+> 19:19:30  秦吟秋-平安产险-产品经理  
+   
+太大了。写下来太长了  
+   
+> 19:26:18  tianguowei8844  
+   
+嗯，加油。  
+   

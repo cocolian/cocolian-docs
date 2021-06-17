@@ -1,0 +1,317 @@
+---
+layout: 	coco
+title: 		"搭建一个私有区块链环境"
+date: 		2018-06-09 12:00:00
+author: 	"shamphone"
+chapter:	"1"
+
+---
+
+
+最近在研究区块链。打算先搭建一个测试环境开始运行。这里记录整个搭建过程，供后来人参考。 
+我们采用的是以太坊，相对其他区块链，这是一个成熟的环境。 虽然近期有硬分支的事件，对企业应用来说，功能上还算是比较完善的。 
+这里1.8.13版本的安装。 相对于1.6系列版本，简化了不少。 后续版本安装方式可能会有调整，请随时关注本文的更新。 
+
+
+##  一、安装ethereum
+
+在ubuntu上安装ethereum还是比较简单的。 这里以稳定版本 1.8.13-stable为例，使用命令行来安装。 
+
+```hbs
+sudo apt-get install software-properties-common
+sudo add-apt-repository -y ppa:ethereum/ethereum
+sudo apt-get update
+sudo apt-get install ethereum
+```
+
+如果安装慢，可以考虑使用国内的源。 
+安装完成后，可以运行geth命令验证下：
+
+```hbs
+cocolian@ubuntu:~/eth$ geth version
+Geth
+Version: 1.8.13-stable
+Git Commit: 225171a4bfcc16bd12a1906b1e0d43d0b18c353b
+Architecture: amd64
+Protocol Versions: [63 62]
+
+```
+
+
+
+## 二、接入coco链私链
+
+我们已经搭建了一个ethereum私链，将在这里验证一些区块链的产品。 如果要接入，请参考如下流程： 
+
+### 1. 创建目录
+
+针对coco相关的操作，创建一个目录，如coco， 后续操作在这个目录下执行。 
+本项目涉及到的所有脚本放在[github上](https://github.com/cocolian/cocolian-eth)，从github上下载两个配置文件。请访问github来下载。 
+
+
+### 2. 创建账户
+
+
+```hbs
+cocolian@ubuntu:~$ geth --datadir "data" account new
+Your new account is locked with a password. Please give a password. Do not forget this password.
+Passphrase:密码
+Repeat passphrase: 密码
+Address: {87366ef81db496edd0ea2055ca605e8686eec1e6}
+
+```
+在passphrase提示下输入密码。 注意，**这个密码千万不能忘记，无法找回的**。 忘记密码，这个账户也就废掉了。 
+
+参数说明：
+1. datadir： 用来指定存储账户信息的目录。可以是相对目录如data，也可以是绝对路径，比如/home/cocolian/coco/data。使用相对目录，会在当前目录下建立这个新目录。 
+2. account new： 创建账户指令。 
+
+
+### 3. 初始化账户数据
+
+使用创世文件来初始化区块数据。 从github下载的coco.json文件。 
+
+```hbs
+cocolian@ubuntu:~$ geth --datadir "data" init coco.json
+```
+
+参数说明：  
+1. datadir： 用来指定存储账户信息的目录。可以是相对目录如data，也可以是绝对路径，比如/home/cocolian/coco/data。使用相对目录，会在当前目录下建立这个新目录。 
+2. init coco.json： coco.json是可可链专用的初始化数据。以下我们详细介绍数据内容。 
+
+### 4. 启动客户端
+
+```hbs
+geth --nodiscover --nat 'none' --verbosity 5 --config  coco.toml  console 2> main.log
+```
+
+进入geth的控制台。 
+
+参数说明： 
+
+1. nodiscover：关闭节点自动发现。使用配置文件coco.toml 中指定的节点来连接。 
+2. nat：NAT端口映射机制， 默认为any， 是为了解决UPnP查找失败而设置的参数。 如果出现 "no UPnP or NAT-PMP router discovered"错误，则需要把nat设置为none。 
+3. unlock： 默认解锁的账户。 这样这个账户在操作中一直都是unlock的。 这会导致安全问题。 参数可以是0,1,2..等序号，表示通过eth.accounts来获取的第N个账户；也可以直接写账户地址。 
+4. verbosity： 日志级别，日志详细度:0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail (default: 3)。 开发阶段建议设置为5，不少重要信息都在detail级别打印出来的。 
+5. config： 其他配置参数文件，可以使用相对或者绝对路径。 参见第四节的详细说明。 
+
+这里使用 2> main.log来做日志输出转存，避免在交互中被日志给干扰，就是有输入的同时，被日志给中断了。 
+coco.toml中配置参数说明，参见[Ethereum启动参数详解](http://doc.cocolian.cn/coco/installation/2018/08/01/geth/)一文。 
+
+进入控制台后，可以查看当前链接的节点：
+
+```bash
+
+> admin.peers
+[{
+    caps: ["eth/62", "eth/63"],
+    id: "6b4ca8a4924b0d56381d3d163881b7e59a931b44f698d178ffda16897fe02b9e399710d837d61b6e0be884f6b1a6dbafe77ac88d5715fcae00c2cb867a21217e",
+    name: "Geth/v1.8.11-stable-dea1ce05/linux-amd64/go1.10.3",
+    network: {
+      inbound: false,
+      localAddress: "192.168.221.131:48634",
+      remoteAddress: "123.206.83.152:3084",
+      static: true,
+      trusted: true
+    },
+    protocols: {
+      eth: {
+        difficulty: 69141,
+        head: "0xe82be4751c5dfc6b4d527346143ae7795097ca36d4d0059ee34bb9070c7ef813",
+        version: 63
+      }
+    }
+}, {
+    caps: ["eth/62", "eth/63"],
+    id: "85f01799a4926a38a4fef22d6b5b1b6b53f104ecb0701e1f69446b8dee741fee3302b1e66bde88f6be1eb1a19bdea85e78a839d3dd0c26dfc5f98cde464397db",
+    name: "Geth/v1.8.11-stable/linux-amd64/go1.10.2",
+    network: {
+      inbound: false,
+      localAddress: "192.168.221.131:39826",
+      remoteAddress: "43.247.91.212:3084",
+      static: true,
+      trusted: true
+    },
+    protocols: {
+      eth: {
+        difficulty: 69141,
+        head: "0xe82be4751c5dfc6b4d527346143ae7795097ca36d4d0059ee34bb9070c7ef813",
+        version: 63
+      }
+    }
+}, {
+    caps: ["eth/62", "eth/63"],
+    id: "ca54e002e9df899a2b2d22c322da7dd73153a3a80777d565af00cb536a9bd21e68b2a6f21a9d595cb40d91bcd2d305ea35e4550fa35d85d817dd2bec65d74e30",
+    name: "Geth/v1.8.11-stable-dea1ce05/linux-amd64/go1.10.3",
+    network: {
+      inbound: false,
+      localAddress: "192.168.221.131:57036",
+      remoteAddress: "123.207.166.122:3084",
+      static: true,
+      trusted: true
+    },
+    protocols: {
+      eth: {
+        difficulty: 69141,
+        head: "0xe82be4751c5dfc6b4d527346143ae7795097ca36d4d0059ee34bb9070c7ef813",
+        version: 63
+      }
+    }
+}]
+```
+
+这几个是coco的核心节点，预置在coco.toml文件的boot nodes列表中。 能正常连接到这些节点，说明网络已经可以用了。 
+
+### 5. 常用操作
+
+查看当前账户
+
+```bash
+> eth.coinbase
+"0xfb31c98b4f04488828f3b601da19182401e864b5"
+```
+
+查看账户余额
+
+```bash
+> eth.getBalance(eth.coinbase)
+4912908880000000000
+```
+
+这个账户余额，那是老熊给赠送了一些coco币。 
+
+## 三、转账
+
+### 1. 执行转账
+
+进入geth控制台后，可以做一些简单的操作。 我们可以先尝试转账操作。 默认的，每个账户刚初始化的时候都没钱。需有需要，请联系凤凰牌老熊，分配初始金额。 
+转账需要先解锁账户，输入密码：
+
+```bash
+
+> personal.unlockAccount(eth.accounts[2])
+Unlock account 0x8a99d622d45458e973a213845726702fe30626d9
+Passphrase:
+true
+
+```
+
+使用sendTransaction来执行交易：
+
+```bash
+> eth.sendTransaction({from: "0x8a99d622d45458e973a213845726702fe30626d9", to: "0xfb31c98b4f04488828f3b601da19182401e864b5", value: web3.toWei(1,"ether"), gasPrice: '4000000' })
+"0x97c41dfe5f2959816c4772fbcb512bdee9f6689b556d7267914aa883930e64af"
+```
+
+返回的是交易单号。 这个交易不是立即成功的，我们可以通过eth.getTransaction来查看交易状态：
+
+```bash
+> eth.getTransaction("0x97c41dfe5f2959816c4772fbcb512bdee9f6689b556d7267914aa883930e64af")
+{
+  blockHash: "0x0000000000000000000000000000000000000000000000000000000000000000",
+  blockNumber: null,
+  from: "0x8a99d622d45458e973a213845726702fe30626d9",
+  gas: 90000,
+  gasPrice: 4000000,
+  hash: "0x97c41dfe5f2959816c4772fbcb512bdee9f6689b556d7267914aa883930e64af",
+  input: "0x",
+  nonce: 0,
+  r: "0x3e7b36a75970bd7d4175172c63153f30786ef066d13c2900a017bd0e4968fb15",
+  s: "0x7b91bf2d14d848d670652cb04be72256c16cf180ed66a15fd021322cc6ec732",
+  to: "0xfb31c98b4f04488828f3b601da19182401e864b5",
+  transactionIndex: 0,
+  v: "0x181a4",
+  value: 1000000000000000000
+}
+```
+
+或者看未成功的交易：
+
+```bash
+
+> eth.pendingTransactions
+[{
+    blockHash: null,
+    blockNumber: null,
+    from: "0x8a99d622d45458e973a213845726702fe30626d9",
+    gas: 90000,
+    gasPrice: 4000000,
+    hash: "0x97c41dfe5f2959816c4772fbcb512bdee9f6689b556d7267914aa883930e64af",
+    input: "0x",
+    nonce: 0,
+    r: "0x3e7b36a75970bd7d4175172c63153f30786ef066d13c2900a017bd0e4968fb15",
+    s: "0x7b91bf2d14d848d670652cb04be72256c16cf180ed66a15fd021322cc6ec732",
+    to: "0xfb31c98b4f04488828f3b601da19182401e864b5",
+    transactionIndex: 0,
+    v: "0x181a4",
+    value: 1000000000000000000
+}]
+
+```
+
+blockHash为0， blockNumber为空，说明还没分配到区块号，还没打包进来。 
+15秒内一般交易都能完成。过了这段时间
+
+用这个订单号到服务器上去查，在服务器上能看到这个日志：
+
+```bash
+
+TRACE[08-09|14:41:46] Discarding invalid transaction           hash=97c41d…0e64af err="transaction underpriced"
+```
+
+### 2. 重发交易
+
+说明gashPrice给少了。 gashPrice是每一笔交易支付给矿工的币值，类似运费。ethereum使用以太币来作为币值单位，最小的币值单位是wei。增加到40000000000， 重发交易看看：
+
+```bash
+
+> eth.resend(eth.pendingTransactions[0], 40000000000)
+"0x478767e5e0dddcbd083cb1d3070bf6f9201df42520b4d37b42956513b432a58e"
+> eth.getTransaction("0x478767e5e0dddcbd083cb1d3070bf6f9201df42520b4d37b42956513b432a58e")
+{
+  blockHash: "0x11d0b99e5108ee6fd04e204439b07f6bd472f5c5b0d2caf9447b2bff74ebdb7f",
+  blockNumber: 51995,
+  from: "0x8a99d622d45458e973a213845726702fe30626d9",
+  gas: 90000,
+  gasPrice: 40000000000,
+  hash: "0x478767e5e0dddcbd083cb1d3070bf6f9201df42520b4d37b42956513b432a58e",
+  input: "0x",
+  nonce: 0,
+  r: "0x56106a2765802e7e48842010ca8d141489a6318b1f4c0f91000c08cab905bdd9",
+  s: "0x456d3e71ffe655fca7f7402e617f368d617c4747a22edf679d4edc296a76ef51",
+  to: "0xfb31c98b4f04488828f3b601da19182401e864b5",
+  transactionIndex: 0,
+  v: "0x181a4",
+  value: 1000000000000000000
+}
+```
+
+操作成功， 分配了51995这个区块号。如何计算gashPrice，将在后续文章中介绍。 
+
+如果超时了，还需要解锁账户，重新执行personal.unlockAccount指令。 
+
+### 3.以太币
+
+人民币的单位就是分、角、元， 相比之下，以太坊要复杂得多了， 有一堆的货币单位，还有对应的别名。 最小的单位是wei，以下是他们的换算表。   
+
+| 名称 | 别名 | 币值指数 | 八卦 |
+|------|------|-----------|------ |
+|Wei   				|      					| 0          | 戴伟(Wei Dai)是一位密码学的先驱     | 
+|Kwei   			| Ada    				| 3          | 阿达·洛芙莱斯(Ada Lovelace)是著名英国诗人拜伦之女，数学家、计算机程序创始人，建立了循环和子程序概念。|
+|Mwei   			| Babbage&nbsp; &nbsp;  | 6          | 查尔斯·巴贝奇(Charles Babbage)的被称为通用计算机之父，设计出了差分机和分析机    | 
+|Gwei   			| Shannon      			| 9          | 克劳德·香农(Claude Shannon)是美国数学家、信息论的创始人。      | 
+|Microether &nbsp;  | Szabo      			| 12         | 尼克·萨博(Nick Szabo)在1998年设计了一种去中心的数字货币机制，被称为比特金     | 
+|Milliether &nbsp;  | Finney      			| 15         | 哈尔·芬尼(Hal Finney)，比特币最早的支持者。    | 
+|Ether   			|      					| 18         | 我们说的以太币就这个      | 
+|Kether   			|      					| 21         |      | 
+|Mether   			|      					| 24         |      | 
+|Gether   			|      					| 27         |      | 
+|Tether   			|      					| 30         |      | 
+
+币值单位是以10为基数的指数，比如KWei = 10^3Wei
+
+
+
+
+
+

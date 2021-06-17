@@ -1,0 +1,25 @@
+---
+layout:     source 
+title:      "2018-10-21-WeChat"
+date:       2018-10-21 12:00:00
+author:     None
+lines:      4 
+tag:       [chat]
+---
+> 09:34:15  艾梅-沃支付业务风控  
+   
+[独家|估值175亿的旅游独角兽，是一座僵尸和水军构成的鬼城？
+](http://mp.weixin.qq.com/s?__biz=MzIxMjgxMDAwOA==&amp;amp;amp;mid=2247485920&amp;amp;amp;idx=1&amp;amp;amp;sn=5fed49692d675a09b0ca07060c4c5f05&amp;amp;amp;chksm=97412997a036a081e5ae11e7f184e716141216ffa663b8f58467179cfb97099c987bd199c470&amp;amp;amp;mpshare=1&amp;amp;amp;scene=1&amp;amp;amp;srcid=1021FE9jxpzyTXI5uNTsQQrz#rd)  
+   
+> 10:59:12  聂某人  
+   
+这个数据也假的太厉害了  
+   
+> 11:08:53  周雅雯-途虎养车-支付PM-上海  
+   
+大厂[捂脸]就是直接让我们倒评论了  
+   
+> 11:11:01  周雅雯-途虎养车-支付PM-上海  
+   
+批量在百度地图打点，让你上认证可以，你把APP里基于这个店的数据都一起倒过来，作为用户在百度地图的评论。有些店只是合作关系，不挂途虎牌子的，带过去的数据，就算是贡献给百度地图了  
+   

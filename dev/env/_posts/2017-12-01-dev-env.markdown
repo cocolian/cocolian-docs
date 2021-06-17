@@ -1,0 +1,37 @@
+---
+layout: dev
+title: "开发环境配置指南-Centos版"
+subtitle: "Dev Config"
+date: 2017-12-02 12:00:00
+author: "shamphone"
+chapter: "01"
+---
+
+Centos 是本系统推荐的运行环境，为了保持和运行环境的一致， 我们推荐使用Centos来作为开发环境。 
+
+如果你的系统是Windows， 建议安装VMWare Player(免费)， 使用VMWare来安装Centos虚机。 
+
+建议使用Centos 7.3及其以上版本， 最新版本是7.4。
+
+Centos 7的安装，可以使用Everything版本，也可以使用Minimal版本。如果使用Minimal 版本，还需要注意安装如下内容：
+
+## 1. 新建cocolian用户
+
+请勿在root用户下开发和调试程序，建议新建一个开发者用户，比如cocolian，并授予sudo权限，开通免密登录。
+如上操作，请参考相关文档。 
+
+## 2. 中文输入法
+如ibus。 
+
+## 3. 图形开发环境
+
+如 “GNOME Desktop” 或者“KDE Plasma Workspaces”， 执行
+
+```bash
+sudo yum groupinstall "GNOME Desktop" "Development Tools" "Graphical Administration Tools" "System Administration Tools" "System Management" "Server with GUI"
+```
+
+或者
+```bash
+sudo yum groupinstall "KDE Plasma Workspaces" "Development Tools" "Graphical Administration Tools" "System Administration Tools" "System Management" "Server with GUI"
+```

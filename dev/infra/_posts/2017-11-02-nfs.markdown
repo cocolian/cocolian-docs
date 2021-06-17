@@ -1,0 +1,69 @@
+---
+layout: dev 
+title: "安装nfs"  
+subtitle: "jigsaw-payment-infra"  
+date: 2017-11-02 20:00:00  
+author: "shamphone"  
+chapter: "6"
+catalog: true  
+tag: [infra]  
+---
+
+> 注意，这个文件必须以UTF-8无BOM格式编码。 
+
+
+## 一、nfs服务器端安装
+
+在kube-master.jigsaw上，执行
+
+```bash
+sudo yum install nfs-utils
+```
+
+创建nfs目录
+
+```bash
+sudo mkdir /home/nfs
+sudo chmod -R 755 /home/nfs
+sudo chown nfsnobody:nfsnobody /home/nfs
+```
+
+启动服务
+```bash
+systemctl enable rpcbind
+systemctl enable nfs-server
+systemctl enable nfs-lock
+systemctl enable nfs-idmap
+systemctl start rpcbind
+systemctl start nfs-server
+systemctl start nfs-lock
+systemctl start nfs-idmap
+```
+
+修改/etc/exports文件，设置nfs共享目录
+
+```bash
+/home/nfs   172.16.0.1/16(rw,sync,no_subtree_check) 192.168.1.1/16(rw,sync,no_subtree_check) *.jigsaw(rw,sync,no_subtree_check)
+```
+
+重启服务让目录生效
+
+```bash
+systemctl restart nfs-server
+```
+
+## 二、客户端安装
+
+在所有kube客户端上执行
+```bash
+sudo yum install nfs-utils
+```
+
+执行showmount命令验证是否可以mount
+```bash
+[jigsaw@kube23 ~]$ showmount -e kube-master.jigsaw
+Export list for kube-master.jigsaw:
+/home/nfs *.jigsaw,192.168.1.1/16,172.16.0.1/16
+```
+
+

@@ -1,0 +1,38 @@
+---
+layout:     source 
+title:      "2019-02-18-WeChat"
+date:       2019-02-18 12:00:00
+author:     None
+lines:      7 
+tag:       [chat]
+---
+> 08:06:40  ark-雪球-开发  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MzU4Mzc5NTAzNQ==&amp;amp;mid=2247483965&amp;amp;idx=1&amp;amp;sn=4afc9b1f33da405f6bfd8f4b722d945c&amp;amp;chksm=fda2ea09cad5631f75b703a2a30ddec8182f86865743abf0aa03defca2b3af09a339615a28ba&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;2019-02-18 &amp;lt;小嗨早报&amp;gt; “阿里离职女高管”二次回应质疑：晒股票期权等证据、京东金融回应质疑：已定位问题且下线修复&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;gxd1987)  
+   
+> 09:34:51  龚晓冬-银联-产品-上海  
+   
+https://news.mydrivers.com/1/615/615136.htm  
+   
+> 09:34:55  龚晓冬-银联-产品-上海  
+   
+电商行业首张区块链电子发票诞生：来自天猫商城  
+   
+> 09:35:01  龚晓冬  
+   
+近日，广东省开出电商行业首张区块链电子发票，这是“税链”区块链电子发票应用范围首次扩展到大型电商领域。 据了解，电商行业首张区块链电子发票由一家来自广东的天猫商城商户为消费者李小姐开出，背后的功臣则是全国首个区块链电子发票平台“税链”。  
+   
+> 09:35:26  龚晓冬-银联-产品-上海  
+   
+目前，我国的电子发票分布在第三方服务商平台或自建平台，发票数据信息不能互联互通，给税务机关的监管造成了一定的困难。区块链技术解决了这一难题，税务机关及各大服务商可以在现有基础上搭建数据链条，实现电子发票数据的统一和整合。  
+   
+> 09:35:53  龚晓冬-银联-产品-上海  
+   
+未来电子发票报销可能会越来越方便了  
+   
+> 18:59:10  龚晓冬-银联-产品-上海  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MzUxNTgwODY5Nw==&amp;amp;mid=2247490930&amp;amp;idx=1&amp;amp;sn=72bebf4432e789a810aa4722804b70c5&amp;amp;chksm=f9b051a4cec7d8b20880c812a2937d9f16e32de71ce454792443892c7454b028caea64abdfa7&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=0218c9vq8a5E5IFVsMnRUQSV#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;35页新版企业征信报告曝光（附新旧征信报告对比）&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;wxid_bg15nqe58lpt21)  
+   

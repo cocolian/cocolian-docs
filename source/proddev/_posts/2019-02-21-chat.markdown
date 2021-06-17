@@ -1,0 +1,505 @@
+---
+layout:     source 
+title:      "2019-02-21-WeChat"
+date:       2019-02-21 12:00:00
+author:     None
+lines:      122 
+tag:       [chat]
+---
+> 07:42:28  龚晓冬-银联-产品-上海  
+   
+[&amp;lt;a href=&amp;quot;https://c.m.163.com/news/a/E8GAGLK80519DDQ2.html?spss=newsapp&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;震惊金融圈！债市一姐金花集体失联 反腐大案引爆在即？&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;wxid_jx75ef2essbi1)  
+   
+> 08:04:31  ark-雪球-开发  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MzU4Mzc5NTAzNQ==&amp;amp;mid=2247483977&amp;amp;idx=1&amp;amp;sn=de72a0a2360aad1790132052c7c74a2f&amp;amp;chksm=fda2ea7dcad5636bf88f395bd62da21c64dd9fd3ff4f3c5d6acc237b7f4a071e9cc037685f5c&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;2019-02-21 &amp;lt;小嗨早报&amp;gt; 字节跳动回应“2019年收入目标至少1000亿”、美团回应大众点评将消失：不存在合并可能性&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;gxd1987)  
+   
+> 08:49:45  龚晓冬-银联-产品-上海  
+   
+[[文件:大江大海一九四九（插图版）.epub]&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;zuozuo1116888)  
+   
+> 10:20:52  程琳Wa-支付pm-上海  
+   
+问下，企业账户能做支付功能吗？如果可以的话，企业账户就间接做了支付账户了。如果不可以，企业客户只能走网银支付（有些小银行，企业网银不支持），现在是怎么处理的？  
+   
+> 10:21:14  龚晓冬-银联-产品-上海  
+   
+企业账户没有支付功能吧？  
+   
+> 10:21:26  龚晓冬-银联-产品-上海  
+   
+目前只有企业网银才行。。  
+   
+> 10:21:55  萍萍妞-联通-产品经理-北京  
+   
+企业账户余额支付  
+   
+> 10:21:56  龚晓冬-银联-产品-上海  
+   
+企业支付账户目前也是有功能限制的  
+   
+> 10:21:59  学涛-产品-分期乐  
+   
+啥叫企业账户？  
+   
+> 10:22:23  MasterChao-产品  
+   
+企业支付账户有什么功能限制？  
+   
+> 10:22:28  萍萍妞-联通-产品经理-北京  
+   
+金融类有限制   
+   
+> 10:22:46  程琳Wa-支付pm-上海  
+   
+「 萍萍妞-联通-产品经理-北京: 企业账户余额支付 」 - - - - - - - - - - - - - - - 支付、收款、提现  
+   
+> 10:22:57  龚晓冬-银联-产品-上海  
+   
+可以是基本是鸡肋吧  
+   
+> 10:23:06  程琳Wa-支付pm-上海  
+   
+「 龚晓冬-银联-产品-上海: 企业支付账户目前也是有功能限制的 」 - - - - - - - - - - - - - - - 有什么限制？我没看到文里面有说明  
+   
+> 10:23:41  萍萍妞-联通-产品经理-北京  
+   
+金融类不可以开通支付功能  
+   
+> 10:23:59  龚晓冬-银联-产品-上海  
+   
+信贷、保险、信托都不能开支付账户  
+   
+> 10:24:21  程琳Wa-支付pm-上海  
+   
+这跟个人支付账户的要求是一致的  
+   
+> 10:25:14  meet-支付圈-北京  
+   
+[&amp;lt;a href=&amp;quot;https://m.weibo.cn/status/4342079124972862?sourceType=weixin&amp;amp;from=1092195010&amp;amp;wm=9006_2001&amp;amp;featurecode=newtitle&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;支付宝宣布:自3月26日起，通过支付宝给信用卡还款将收取服务费。 ???&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;wxid_mkpq4gs16a9k51)  
+   
+> 10:26:16  学涛-产品-分期乐  
+   
+金融公司用来发微信或支付宝红包的是什么账户？在途账户么？  
+   
+> 10:28:09  龚晓冬-银联-产品-上海  
+   
+@程琳Wa-支付pm-上海 差距非常大  
+   
+> 10:28:19  龚晓冬-银联-产品-上海  
+   
+企业账户的限额要松很多  
+   
+> 10:30:31  程琳Wa-支付pm-上海  
+   
+「 龚晓冬-银联-产品-上海: 企业账户的限额要松很多 」 - - - - - - - - - - - - - - - 企业基本没明确有限额要求  
+   
+> 10:30:49  龚晓冬-银联-产品-上海  
+   
+有的，程老师都没看过反电信欺诈的那个通知吗？  
+   
+> 10:34:46  程琳Wa-支付pm-上海  
+   
+没看到，龚老师能给个链接吗[捂脸]  
+   
+> 10:35:52  龚晓冬-银联-产品-上海  
+   
+[[文件:关于加强支付结算管理防范电信网络新型违法犯罪有关事项的通知.pdf]&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;ssdadai)  
+   
+> 10:41:17  修--产品  
+   
+支付宝就有公司（单位）支付账户的东西吧  
+   
+> 10:55:40  Frank_待业青年  
+   
+支付宝的账户都是支付账户，只是按照用户角色分了个人和商户两大类，两大类下面根据业务场景还有细分  
+   
+> 10:57:44  Frank_待业青年  
+   
+这里说的对公账户应该是企业开设在银行的一般结算户  
+   
+> 10:59:52  张蒙-互联网金融-PM-北京  
+   
+[&amp;lt;a href=&amp;quot;https://c.m.163.com/news/a/E8HH0TCB0001899O.html?spss=newsapp&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;3月26日起 支付宝还信用卡超2000元将按0.1%收费&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;gxd1987)  
+   
+> 11:01:38  龚晓冬-银联-产品-上海  
+   
+云闪付可以装起来了  
+   
+> 11:02:02  修--产品  
+   
+银行的对公结算户天然可以收付款吧。提现，转账都可以基于银企直联做，但主动收款(资金归集)很难实现吧。  
+   
+> 11:02:14  修--产品  
+   
+云闪付一直在用。  
+   
+> 11:04:19  颜小刚-爱贝-架构研发-深圳  
+   
+还是绑定工资卡还信用卡方便  
+   
+> 11:12:28  百联-田浩沛  
+   
+电信反欺诈？银联又要卖设备了？  
+   
+> 11:12:37  刘科长@支付百科  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MjM5MTQ0ODgyMA==&amp;amp;mid=2650646732&amp;amp;idx=1&amp;amp;sn=8019d91b709834c93bf4ac340bcfb91f&amp;amp;chksm=bebc635789cbea41241f326aef628fd95b9ec85d2ff8b128f5fda9b30249cdff0dd181be88af&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=02217ZA0hy8vkBQhMHttu2Gw#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;刚刚！支付宝传来大消息，3月26日起，信用卡还款将收0.1%服务费！&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;tianhaopei)  
+   
+> 11:12:55  百联-田浩沛  
+   
+哦，是人行发的，一般委托银联相关单位卖设备  
+   
+> 11:13:32  百联-田浩沛  
+   
+上次是让CFCA卖了不少电信欺诈，紧急止付的设备  
+   
+> 11:13:37  百联-田浩沛  
+   
+十几万  
+   
+> 11:13:38  Leonard-途牛  
+   
+云闪付还款很方便啊  
+   
+> 11:13:47  百联-田浩沛  
+   
+套现方便么？  
+   
+> 11:13:53  Leonard-途牛  
+   
+还能自动显示账单  
+   
+> 11:15:05  费伟伟-华瑞银行-上海  
+   
+绑卡后就能显示账单？  
+   
+> 11:15:45  Leonard-途牛  
+   
+嗯  
+   
+> 11:15:54  Leonard-途牛  
+   
+就是待还款金额  
+   
+> 11:16:14  Leonard-途牛  
+   
+以后再也不怕逾期了  
+   
+> 11:16:28  费伟伟-华瑞银行-上海  
+   
+还是银联牛逼，能找商业银行要到接口，以前挖财、支付宝找我们要接口都绝对不给的  
+   
+> 11:18:20  Leonard-途牛  
+   
+你试试你们行的，有没有给银联开后门  
+   
+> 11:22:30  鸽子-支付产品-上海  
+   
+你们应该不敢不开后门吧[坏笑]  
+   
+> 11:23:13  鸽子-支付产品-上海  
+   
+不管怎么说，除了银行自己的app，似乎目前也就云闪付有能力免费服务大众了吧  
+   
+> 11:23:43  费伟伟-华瑞银行-上海  
+   
+这个功能很吸引我。。  
+   
+> 11:33:37  程琳Wa-支付pm-上海  
+   
+@龚晓冬-银联-产品-上海 收到，谢谢龚老师??????  
+   
+> 11:34:45  龚晓冬-银联-产品-上海  
+   
+@费伟伟-华瑞银行-上海?我们也有对外合作的  
+   
+> 11:37:59  Ben-富友-产品  
+   
+银联对外还款服务好像是2元一笔  
+   
+> 11:39:46  百联-田浩沛  
+   
+支付宝也可以呀，多少钱没还都会显示的  
+   
+> 11:39:49  百联-田浩沛  
+   
+还款也免费  
+   
+> 11:40:05  龚晓冬-银联-产品-上海  
+   
+@Ben-富友-产品?没有吧  
+   
+> 11:40:16  龚晓冬-银联-产品-上海  
+   
+你肯定知道的是错误的信息  
+   
+> 11:40:36  Ben-富友-产品  
+   
+提供给支付机构或银行  
+   
+> 11:40:37  龚晓冬-银联-产品-上海  
+   
+@百联-田浩沛?支付宝还款要收费了  
+   
+> 11:40:52  Ben-富友-产品  
+   
+还款通道  
+   
+> 11:40:57  龚晓冬-银联-产品-上海  
+   
+真没有，这个我还是很清楚的  
+   
+> 11:41:22  Ben-富友-产品  
+   
+[抠鼻][抠鼻][抠鼻]  
+   
+> 11:41:24  龚晓冬-银联-产品-上海  
+   
+有兴趣可以私聊  
+   
+> 11:41:51  Ben-富友-产品  
+   
+回头我先确认下  
+   
+> 11:42:29  龚晓冬-银联-产品-上海  
+   
+这么说吧，这个产品是我们部门负责的  
+   
+> 11:42:39  百联-田浩沛  
+   
+![2019-02-21 11:42:39](http://static.cocolian.cn/img/20190221_114239.png) 
+   
+> 11:42:57  百联-田浩沛  
+   
+支付宝和微信都有这个功能，开通账单功能  
+   
+> 11:43:03  费伟伟-华瑞银行-上海  
+   
+支付宝读的是你的邮件账单  
+   
+> 11:43:10  Ben-富友-产品  
+   
+老板好大的金额  
+   
+> 11:43:21  Ben-富友-产品  
+   
+支付宝读的是你的邮件账单  
+   
+> 11:43:24  费伟伟-华瑞银行-上海  
+   
+不敢给支付宝和微信邮箱密码啊  
+   
+> 11:43:38  百联-田浩沛  
+   
+不是邮件账单，我这个没有设置邮箱的  
+   
+> 11:43:39  费伟伟-华瑞银行-上海  
+   
+谁知道他们会干什么  
+   
+> 11:43:44  Ben-富友-产品  
+   
+微信不用  
+   
+> 11:43:55  百联-田浩沛  
+   
+绝对不是邮箱  
+   
+> 11:43:58  费伟伟-华瑞银行-上海  
+   
+那为啥我的没有显示。。  
+   
+> 11:44:17  Ben-富友-产品  
+   
+两张卡抵我半年工作  
+   
+> 11:44:42  百联-田浩沛  
+   
+得开通  
+   
+> 11:44:56  百联-田浩沛  
+   
+绑卡的时候有选项  
+   
+> 11:44:58  刘宇鹏-宜贷pm-成都  
+   
++1   
+   
+> 11:44:58  刘宇鹏-宜贷pm-成都  
+   
+![2019-02-21 11:44:58](http://static.cocolian.cn/img/20190221_114458.png) 
+   
+> 11:46:48  百联-田浩沛  
+   
+我负债比较多，哈哈  
+   
+> 11:47:02  百联-田浩沛  
+   
+![2019-02-21 11:47:02](http://static.cocolian.cn/img/20190221_114702.png) 
+   
+> 11:47:18  百联-田浩沛  
+   
+这有个查询账单，点了之后就有了  
+   
+> 11:47:31  百联-田浩沛  
+   
+我不用的卡不查询  
+   
+> 11:47:39  Leonard-途牛  
+   
+支付宝和微信的都有，但是不全  
+   
+> 11:47:42  百联-田浩沛  
+   
+用的卡查查  
+   
+> 11:48:08  百联-田浩沛  
+   
+有的行没有是吧？  
+   
+> 11:48:34  Ben-富友-产品  
+   
+部分银行  
+   
+> 11:48:55  Leonard-途牛  
+   
+嗯  
+   
+> 11:49:45  Leonard-途牛  
+   
+所以用云闪付之前，得综合支付宝和微信的看，后来用51信用卡绑账单邮箱  
+   
+> 11:50:17  龚晓冬-银联-产品-上海  
+   
+云闪付应该是最准的  
+   
+> 11:52:43  橄榄-齐商-山东  
+   
+解析账单难度大么？  
+   
+> 11:53:06  橄榄-齐商-山东  
+   
+有卖成熟产品的吗，银行也可以搞一个  
+   
+> 11:53:32  Ben-富友-产品  
+   
+大  
+   
+> 11:53:32  龚晓冬-银联-产品-上海  
+   
+个人隐私保护  
+   
+> 11:53:37  Ben-富友-产品  
+   
+每家不一样  
+   
+> 11:53:43  Ben-富友-产品  
+   
+格式随时变  
+   
+> 11:53:50  Ben-富友-产品  
+   
+关键是隐私问题  
+   
+> 11:57:51  橄榄-齐商-山东  
+   
+哦  
+   
+> 11:58:53    
+   
+> 11:59:00  龚晓冬-银联-产品-上海  
+   
+嗯，是的，隐私保护已经入了刑法，一定要当心  
+   
+> 13:30:15  龚晓冬-银联-产品-上海  
+   
+[&amp;lt;a href=&amp;quot;https://c.m.163.com/news/a/E8CBJ5ON05394XJO.html?spss=newsapp&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;网贷出租车司机自杀，印尼怒封231家现金贷，多家来自中国！&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;liben1987)  
+   
+> 13:42:22  李奔-快钱-产品-上海  
+   
+田总果然牛逼啊 零花钱比我等屌丝一年工资还多  
+   
+> 14:27:19  张泽雄-民生金服-研发-北京  
+   
+![2019-02-21 14:27:19](http://static.cocolian.cn/img/20190221_142719.png) 
+   
+> 14:27:33  张泽雄-民生金服-研发-北京  
+   
+最近证券很给力啊  
+   
+> 18:26:37  温文彬-随手科技-架构师  
+   
+牛市要来了  
+   
+> 18:28:52  修--产品  
+   
+张总买卖点抓的好准！[强]  
+   
+> 18:37:03  北京 崔佳宁 Finup 爱钱进  
+   
+最近是要回暖了吗？比特币也涨回来了  
+   
+> 22:05:01  龚晓冬-银联-产品-上海  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MzA3NjM5MjIwOQ==&amp;amp;mid=2651757906&amp;amp;idx=1&amp;amp;sn=b8c6568e92dbf31feb59af5a24c8e362&amp;amp;chksm=849bcf2cb3ec463a7fa8798dd3148f3af1ffa4b4fa614f448793c52c46393e06c09368b872bd&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=0221SaPXrlEMiy9GmD7jRzth#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;反洗钱反恐怖融资！银保监会签出1号令，涉12类金融机构，高管任职、新设网点都要挂钩，看十大关键点&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;gxd1987)  
+   
+> 22:09:37  龚晓冬-银联-产品-上海  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MzA3NjM5MjIwOQ==&amp;amp;mid=2651757850&amp;amp;idx=4&amp;amp;sn=62817b5d8c37e65777db8d2b732e7220&amp;amp;chksm=849bcf64b3ec4672b9e19f40af4b3c167c14d35d168faf6c7f3970e958880db790d9150a76f3&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=0221Xdo4uXbIQHhdorYUkwVF#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;金融科技下南洋！阿里、腾讯抢占市场，东南亚金科市场到底如何？看这四国最新考察&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;wxid_bg15nqe58lpt21)  
+   
+> 22:16:50  于江宁-ChinaPay-产品经理-上海  
+   
+国内支付行业一片红海，大家可以考虑出国装逼。  
+   
+> 22:18:51  Bison-联想金融-副总裁-北京  
+   
+其实有个支付牌照，有个系统，能找到几个客户，赚点钱还是挺容易的  
+   
+> 22:19:11  Bison-联想金融-副总裁-北京  
+   
+毕竟这行业就这么多家可以做  
+   
+> 22:19:45  Bison-联想金融-副总裁-北京  
+   
+比一般公司强多了  
+   
+> 22:22:59  vniuv  
+   
+[&amp;lt;a href=&amp;quot;https://page.om.qq.com/page/OkYSzVQ2-XCNwaxpbsM4OuUg0?fontRatio=1&amp;amp;refer=cp_1021&amp;amp;from=timeline&amp;amp;isappinstalled=0&amp;amp;ADTAG=tgi.wx.share.message&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;滴滴被裁员工：如果有机会，我还想回来，网友怒赞：这补偿没得喷&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;bison_yu)  
+   
+> 22:30:37  Bison-联想金融-副总裁-北京  
+   
+[强]  
+   
+> 22:30:40  Bison-联想金融-副总裁-北京  
+   
+好聚好散  
+   
+> 22:33:45  龚晓冬-银联-产品-上海  
+   
+感觉都不像是亏损这么严重的企业了  
+   
+> 23:34:08  小北-安邦-技术  
+   
+这点补偿和去年他们年终奖比  
+   
+> 23:34:13  小北-安邦-技术  
+   
+差得远  
+   
+> 23:57:01  Bison-联想金融-副总裁-北京  
+   
+都在裁  
+   

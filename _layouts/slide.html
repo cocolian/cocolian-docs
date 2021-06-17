@@ -1,0 +1,39 @@
+---
+layout: default
+---
+<style>
+#post-sliders img {
+    display:block;
+	width:1024px; 
+ }
+</style>
+<header class="intro-header">
+	<div class="post-heading">                  
+		<h1>{{ page.title }}</h1>                
+		<ul class="meta">
+			<li><i class="icon-sitemap"></i><a href="/wechat">PPT</a></li>
+			<li><i class="icon-user"></i><a href="/">{% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} </a> </li>
+			<li><i class="icon-time"></i>{{ page.date | date: "%Y-%m-%d" }}</li>
+		</ul>                
+	</div>           
+</header>
+<!-- Post Content -->
+<article class="post-content"> 
+    <!-- Post Container -->
+            <div class="post-container">		
+				<div id="post-sliders">
+				{{ content }}
+				</div>
+				<hr/> 
+				<p>版权所有，转载本文或者使用本文中的图片，必须征得作者或者本网站的同意，谢谢。 </p>
+				<hr/>
+				<ul class="post_footer">
+				   <li>长按或者扫描二维码来打赏，感谢支持群管理工作！<br/>
+						<img src="http://static.cocolian.cn/img/reward/jigsaw.jpg"  style="width:300px;height:408px"/> 
+				   </li>
+				    <li class="left-sep">请扫码关注“凤凰牌老熊”的微信公众号。<br/>
+						<img src="http://static.cocolian.cn/img/reward/weixin.jpg" style="width:408px;height:408px"/> 
+					</li>
+				</ul>
+            </div>  
+</article>

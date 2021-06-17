@@ -1,0 +1,84 @@
+---
+layout:     source 
+title:      "2018-01-15-WeChat"
+date:       2018-01-15 12:00:00
+author:     PaymentGroup
+lines:      16 
+tag:		  [chat]
+---
+> 12:22:27  huh!  
+   
+各位大牛，maven clean package 项目，未加载spring.profiles.active 是什么原因造成的?  
+   
+> 12:22:28  huh!  
+   
+![2018-01-15 12:22:28](http://static.cocolian.cn/img/201801/20180115_122228.png) 
+   
+> 12:35:32  吴松福  
+   
+把第一行去掉  
+   
+> 12:42:23  huh!  
+   
+好的 我试试  
+   
+> 12:42:27  huh!  
+   
+第一行留白吗  
+   
+> 12:43:11  huh!  
+   
+不行  
+   
+> 12:43:12  huh!  
+   
+。。。。  
+   
+> 13:20:04  程超  
+   
+@王洪悦-合付宝-开发 properties和yml的方式在使用上有点小区别，properties的方式可以用注解的方式区别环境  
+   
+> 13:20:44  huh!  
+   
+ok，问题已解决， mvn clean package -Dmave.skip.test=true -Dspring.profiles.active=dev  
+   
+> 13:20:51  huh!  
+   
+打包的时候带上参数就ok了  
+   
+> 13:22:33  程超  
+   
+我们没有用这一句  
+   
+> 13:27:27  huh!  
+   
+ok感谢  
+   
+> 16:45:39  泽西-趋恒-架构师  
+   
+toc_biz  
+   
+> 19:25:32  Yezhiwei-融汇金信-技术-北京  
+   
+最近对Spark特别感兴趣[嘿哈]，总结了一下[勾引]  
+   
+> 19:25:33  Yezhiwei-融汇金信-技术-北京  
+   
+Spark快速入门-3-Spark的算子总结  
+   
+> 21:46:56  窦巍  
+   
+![2018-01-15 21:46:56](http://static.cocolian.cn/img/201801/20180115_214656.png) 
+   
+> 22:52:33  高水平  
+   
+是真的吗  
+   
+> 22:52:45  高水平  
+   
+有去过这里没  
+   
+> 23:16:25  杨宽  
+   
+央行确实在旁边  
+   

@@ -1,0 +1,28 @@
+---
+layout:     source 
+title:      "2017-07-29-WeChat"
+date:       2017-07-29 12:00:00
+author:     "PaymentGroup"
+tag:		  [chat]
+header-img: "img/post-bg-wechat.jpg"
+---
+> 00:05:38  陈桂荣 翼支付 -研发组长  
+   
+[强][强]感谢分享  
+   
+> 00:06:40  lisp 财付通结算财务  
+   
+[强]  
+   
+> 08:27:42  王向东-卡联科技-PM  
+   
+[强]  
+   
+> 11:52:04  于江宁-银联电子PM  
+   
+全球最大银行卡支付机构落户北京，拟开展清算业务  
+   
+> 22:39:00  我  
+   
+http://wechat.lixf.cn/2017/07/29/wechat48/  
+   

@@ -1,0 +1,98 @@
+---
+layout: default
+---
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+		height: 150px;
+     }
+
+    {% if page.header-mask %}
+    header.intro-header .header-mask{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: rgba(0,0,0, {{ page.header-mask }});
+    }
+    {% endif %}
+   .post_footer{ 
+		display: table; 
+		table-layout: fixed; 
+		width: 100%; 
+		list-style: none; 
+		margin:0px; 
+		padding:0px; 
+	} 
+	.post_footer li { 
+		display: table-cell; 
+		text-align: center;
+	}
+	.post_footer li.left-sep { 
+		border-left: 1px dashed #a0a0a0
+	}
+
+	</style>
+<header class="intro-header">
+    <div class="header-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">                  
+                    <h1>{{ page.title }}</h1>                
+					<ul class="meta">
+						<li><i class="icon-sitemap"></i>{% for pcat in page.categories%}{{site.modules[pcat]}}{% endfor%}  </li>
+						<li><i class="icon-user"></i>{% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %}  </li>
+						<li><i class="icon-time"></i>{{ page.date | date: "%Y-%m-%d" }}</li>
+					</ul>                
+				</div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+				{{ content }}
+
+				<hr/>              
+                <ul class="pager">
+                    {% if page.previous.url %}
+                    <li class="previous">
+                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">
+                        Previous<br>
+                        <span>{{page.previous.title}}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if page.next.url %}
+                    <li class="next">
+                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">
+                        Next<br>
+                        <span>{{page.next.title}}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>				
+            </div>  
+        </div>
+    </div>
+</article>
+<aside class="content-aside">
+<ul>
+{% for cat in page.categories%}
+{% assign posts =  site.categories[cat] | sort:"chapter"%}
+{% for post in posts  %}
+<li><a href="{{ post.url | prepend: site.baseurl }}">{% if post.chapter %}{{ post.chapter }}&nbsp;&nbsp;{% endif %} {{ post.title }}</a></li>
+{% endfor %}
+{% endfor %}
+</ul>
+</aside>

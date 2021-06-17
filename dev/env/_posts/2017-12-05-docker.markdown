@@ -1,0 +1,81 @@
+---
+layout: dev
+title: "安装Docker"
+date: 2017-12-05 12:00:00
+author: "shamphone"
+chapter: "05"
+catalog: true
+tag: [devenv]
+---
+
+## 一、安装docker
+
+注意，docker有多个版本，最新的docker分为docker-ce和docker-ee版本，我们使用docker-ce版本，使用yum直接安装
+
+```bash
+sudo yum install -y docker-ce 
+sudo systemctl enable docker 
+sudo systemctl start docker
+```
+运行docker version确认版本
+
+```bash
+[jigsaw@workspace ~]$ sudo docker version
+Client:
+ Version:      17.09.0-ce
+ API version:  1.32
+ Go version:   go1.8.3
+ Git commit:   afdb6d4
+ Built:        Tue Sep 26 22:41:23 2017
+ OS/Arch:      linux/amd64
+
+Server:
+ Version:      17.09.0-ce
+ API version:  1.32 (minimum version 1.12)
+ Go version:   go1.8.3
+ Git commit:   afdb6d4
+ Built:        Tue Sep 26 22:42:49 2017
+ OS/Arch:      linux/amd64
+ Experimental: false
+```
+
+## 二、配置docker
+
+修改docker配置文件
+```bash
+[jigsaw@workspace ~]$ sudo vi /etc/docker/daemon.json
+```
+设置如下内容:
+
+```bash
+{
+"registry-mirrors": ["https://n76bgciz.mirror.aliyuncs.com"],
+"insecure-registries" : ["docker.lixf.cn", "kube23.jigsaw:32500"],
+"hosts": [
+    "tcp://0.0.0.0:2375",
+    "unix:///var/run/docker.sock"
+  ]
+}
+
+```
+
+这样就可以使用aliyun作为docker的源， 以及支持通过远程访问本地docker库，开发时fabric8 plugin将依赖于这个设置。 
+注意修改完了后要重启docker:
+
+```bash
+sudo systemctl daemon-reload 
+sudo systemctl restart docker
+```
+
+
+## 三.常用命令
+
+- 停止已经exited的docker 容器
+```bash
+sudo docker stop $(sudo docker ps -a -q)
+```
+
+- 删除已经停止的docker容器
+```bash
+sudo docker rm $(sudo docker ps -a -q)
+```

@@ -1,0 +1,12 @@
+---
+layout:     source 
+title:      "2017-08-26-WeChat"
+date:       2017-08-26 12:00:00
+author:     "PaymentGroup"
+tag:		  [chat]
+header-img: "img/post-bg-wechat.jpg"
+---
+> 09:05:53  张泽雄-民生金服 项目总监  
+   
+有长联接啊，不过一般都用联接池  
+   

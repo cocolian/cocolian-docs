@@ -1,0 +1,315 @@
+---
+layout:     source 
+title:      "2019-03-08-WeChat"
+date:       2019-03-08 12:00:00
+author:     None
+lines:      75 
+tag:       [chat]
+---
+> 08:01:07  ark-雪球-开发  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MzU4Mzc5NTAzNQ==&amp;amp;mid=2247484048&amp;amp;idx=1&amp;amp;sn=9811f9e4750dd0d8bd53c50496f257ce&amp;amp;chksm=fda2eaa4cad563b2bdc51f7528078bdec3aa085b746ed74132b8b3e5b0c05ead812a7067439a&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;2019-03-08 百度回应李彦宏卸任百度投资董事：属正常调整、瓜子二手车推出业务，用户可实现跨区域购车&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;Eric-feng-fringe)  
+   
+> 11:12:49  冯威-微保科技- COO  
+   
+哪位老大有央行281文件最新的深度细则版？[抱拳]  
+   
+> 11:14:12  龚晓冬-银联-产品-上海  
+   
+深度细则版？  
+   
+> 11:14:30  龚晓冬-银联-产品-上海  
+   
+似乎从来没有听过发文还有这种版本  
+   
+> 11:15:50  何鹏飞-猪八戒-钱包产品-重庆  
+   
+带专家解读的版本  
+   
+> 11:16:21  龚晓冬-银联-产品-上海  
+   
+哦哦。。。，  
+   
+> 12:09:19  上海支付打杂王  
+   
+问下扫码交易监管怎么界定属于网络支付还是线下支付哈  
+   
+> 12:12:21  龚晓冬-银联-产品-上海  
+   
+线下  
+   
+> 12:12:27  龚晓冬-银联-产品-上海  
+   
+都发过文件了  
+   
+> 12:13:39  上海支付打杂王  
+   
+┌  
+   
+> 12:15:53  龚晓冬-银联-产品-上海  
+   
+怎么了？  
+   
+> 12:15:57  龚晓冬-银联-产品-上海  
+   
+都发文好久了  
+   
+> 14:29:21  meet-支付圈-北京  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MjM5ODMxNzY0MA==&amp;amp;mid=2650928513&amp;amp;idx=1&amp;amp;sn=c2fd96a731ef9b011fae9497eff1234c&amp;amp;chksm=bd39cea68a4e47b05f36d3c50bb61e539f24ecabf936282b1ddf93e12bc4dde5a888ad5635c2&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=0308e7rutp4H1d8hPXk958o8#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;万事网联来了！注册资本1000000000元！&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;wxid_e6hfnsek9ynx51)  
+   
+> 14:35:57  Ben-富友-产品  
+   
+那么多0  
+   
+> 14:57:56  哈木-快钱-产品-上海  
+   
+100亿？  
+   
+> 14:58:01  哈木-快钱-产品-上海  
+   
+数不过来了  
+   
+> 14:58:36  龚晓冬-银联-产品-上海  
+   
+10亿  
+   
+> 14:59:25  哈木-快钱-产品-上海  
+   
+  
+   
+> 15:00:09  albert郭-招行-产品经理  
+   
+以后国内要热闹了，各种bin的卡都要有了。  
+   
+> 15:00:22  龚晓冬-银联-产品-上海  
+   
+未必啊  
+   
+> 15:00:43  龚晓冬-银联-产品-上海  
+   
+商户要支持系统改造受理啊  
+   
+> 15:02:22  albert郭-招行-产品经理  
+   
+嗯嗯，但新的清算机构肯定会花力气来推广的  
+   
+> 15:05:11  龚晓冬-银联-产品-上海  
+   
+要弄2台pos机  
+   
+> 15:05:36  龚晓冬-银联-产品-上海  
+   
+就跟国外收银员问你UP通道，还是MASTER通道，还是美运通道  
+   
+> 15:06:00  龚晓冬-银联-产品-上海  
+   
+存量很多双边卡  
+   
+> 15:06:04  龚晓冬-银联-产品-上海  
+   
+双标卡  
+   
+> 15:36:25  albert郭-招行-产品经理  
+   
+是的，存量双标卡还挺多的。  
+   
+> 15:42:42  龚晓冬-银联-产品-上海  
+   
+嗯，所以后面不好搞  
+   
+> 16:18:50  修--产品  
+   
+万事达维萨的价格不便宜吧[奸笑]  
+   
+> 17:03:26  sunshine-苏宁金融-技术-南京  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MjM5ODMxNzY0MA==&amp;amp;mid=2650928513&amp;amp;idx=1&amp;amp;sn=c2fd96a731ef9b011fae9497eff1234c&amp;amp;chksm=bd39cea68a4e47b05f36d3c50bb61e539f24ecabf936282b1ddf93e12bc4dde5a888ad5635c2&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=03083sZRLKfQeyykR5vJOYug#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;万事网联来了！注册资本1000000000元！&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;gxd1987)  
+   
+> 17:45:11  龚晓冬-银联-产品-上海  
+   
+![2019-03-08 17:45:11](http://static.cocolian.cn/img/20190308_174511.png) 
+   
+> 17:45:25  龚晓冬-银联-产品-上海  
+   
+![2019-03-08 17:45:25](http://static.cocolian.cn/img/20190308_174525.png) 
+   
+> 18:09:33  龚晓冬-银联-产品-上海  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MjM5MTQ0NDEwMA==&amp;amp;mid=2651577130&amp;amp;idx=3&amp;amp;sn=45d1a586c895f6d2f7e89fc2d0e8bfe8&amp;amp;chksm=bd4a06c18a3d8fd79c84072fadd1f6ca741a71c610f7db683fe809610380e183340460b1e49c&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=0308mtXc1huIbxYaDp1kR7a1#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;POS贷、发票贷、支付贷，SaaS贷 “小微企业贷”数据之战&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;gxd1987)  
+   
+> 18:09:59  龚晓冬-银联-产品-上海  
+   
+各种贷有战火重燃了  
+   
+> 18:11:05  Ben-富友-产品  
+   
+支付贷更容易造假  
+   
+> 18:11:57  龚晓冬-银联-产品-上海  
+   
+嗯，但是最近打击也厉害  
+   
+> 18:12:15  龚晓冬-银联-产品-上海  
+   
+如果用税务数据平衡还有价值的  
+   
+> 18:13:29  Joker-加华-上海  
+   
+想说，国家政策推行小微企业贷，还不是表明了人民没钱了。可以找贷款。  
+   
+> 18:15:24  Joker-加华-上海  
+   
+如果放贷公司没钱，找谁贷？[尴尬]  
+   
+> 18:15:55  Ben-富友-产品  
+   
+持牌机构  
+   
+> 18:16:02  Joker-加华-上海  
+   
+想说，有些问题不是出台政策能解决的  
+   
+> 18:16:32  龚晓冬-银联-产品-上海  
+   
+也不要那么悲观嘛  
+   
+> 18:16:49  Ben-富友-产品  
+   
+出台政策是让看到政策的人想办法  
+   
+> 18:17:00  Ben-富友-产品  
+   
+政策不解决问题  
+   
+> 18:17:15  Ben-富友-产品  
+   
+只促使对应的人解决问题  
+   
+> 18:51:32  李玉福@农信互联  
+   
+平安见证宝的产品介绍和接口谁有？求  
+   
+> 18:52:02  龚晓冬-银联-产品-上海  
+   
+@王浩@平安银行总行 深圳  
+   
+> 18:52:04  龚晓冬-银联-产品-上海  
+   
+@李玉福@农信互联  
+   
+> 19:06:36  王浩@平安银行总行 深圳  
+   
+具体是什么客户，什么场景呢？  
+   
+> 19:06:39  王浩@平安银行总行 深圳  
+   
+@李玉福@农信互联?  
+   
+> 19:10:20  龚晓冬-银联-产品-上海  
+   
+我猜测是批发转零售  
+   
+> 19:14:17  王浩@平安银行总行 深圳  
+   
+如果有真实的业务场景，客户资质没问题，可以对接起来啊  
+   
+> 19:42:00  李玉福@农信互联  
+   
+商务已经谈好了，估计要对接了，想要份文档先了解一下。  
+   
+> 19:43:46  龚晓冬-银联-产品-上海  
+   
+![2019-03-08 19:43:46](http://static.cocolian.cn/img/20190308_194346.png) 
+   
+> 19:46:22  王彪-平安证券-开发  
+   
+  
+   
+> 19:50:44  于江宁-ChinaPay-产品经理-上海  
+   
+发生了什么  
+   
+> 19:55:37  小北-安邦-技术  
+   
+李彦宏也是这一天  
+   
+> 19:58:15  张泽雄-民生金服-研发-北京  
+   
+上缴了  
+   
+> 20:08:59  陈创~兴业数金~产品~上海  
+   
+鉴证宝的b端入金，用什么通道呀  
+   
+> 20:15:03  云龙-开联通-深圳  
+   
+这些大佬想干嘛？  
+   
+> 21:03:42  程昱_群管理  
+   
+@龚晓冬-银联-产品-上海?冬哥，哪个软件的？  
+   
+> 21:09:18  于江宁-ChinaPay-产品经理-上海  
+   
+[&amp;lt;a href=&amp;quot;http://mp.weixin.qq.com/s?__biz=MzA5MTAwODQwNw==&amp;amp;mid=2652855065&amp;amp;idx=1&amp;amp;sn=86d3984bea68577f5a0ffe59017307f7&amp;amp;chksm=8be907e1bc9e8ef78c1e48882f7679facdda395e54e2ea7735d6dc73243ed3fc9e168e9740dc&amp;amp;mpshare=1&amp;amp;scene=1&amp;amp;srcid=#rd&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;银联时代的选择：开放与共赢——WEB 1.0到3.0的启示录&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;wxid_e6hfnsek9ynx51)  
+   
+> 21:13:07  Ben-富友-产品  
+   
+天眼查  
+   
+> 21:13:56  程昱_群管理  
+   
+[捂脸]嗯，百度到了  
+   
+> 21:21:04  龚晓冬-银联-产品-上海  
+   
+@程昱_群管理 天眼查、企查查，都是爬取工商数据的  
+   
+> 21:21:16  龚晓冬-银联-产品-上海  
+   
+@于江宁-ChinaPay-产品经理-上海 嗯，是我写的。。。。  
+   
+> 21:21:41  于江宁-ChinaPay-产品经理-上海  
+   
+厉害！  
+   
+> 21:21:44  于江宁-ChinaPay-产品经理-上海  
+   
+@龚晓冬-银联-产品-上海  
+   
+> 21:24:39  哈木-快钱-产品-上海  
+   
+龚老师厉害  
+   
+> 21:56:33  MasterChao-产品  
+   
+厉害了  
+   
+> 22:42:35  龚晓冬-银联-产品-上海  
+   
+随笔....正好有感觉就写下来了  
+   
+> 22:43:10  钟文帅-天下支付PM-深圳  
+   
+龚老师随笔都能写一大篇那么精彩的文章  
+   
+> 23:00:46  韩伟-双乾支付-技术-苏州  
+   
+[强]  
+   
+> 23:39:27  龚晓冬-银联-产品-上海  
+   
+[&amp;lt;a href=&amp;quot;https://c.m.163.com/news/a/E9PG153I0519814N.html?spss=newsapp&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;银保监会发文明确涉农贷款考核要求 助力脱贫攻坚工作&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;gxd1987)  
+   
+> 23:52:40  龚晓冬-银联-产品-上海  
+   
+[&amp;lt;a href=&amp;quot;https://c.m.163.com/news/a/E9ONNOM005118K7K.html?spss=newsapp&amp;quot; target=&amp;quot;_blank&amp;quot;&amp;gt;金融315专题丨“疯狂”贷超“我爱卡”：上线平台年化竟高达2287%&amp;lt;/a&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;wxid_jx75ef2essbi1)  
+   

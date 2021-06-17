@@ -1,0 +1,12 @@
+---
+layout:     source 
+title:      "2017-12-31-WeChat"
+date:       2017-12-31 12:00:00
+author:     "PaymentGroup"
+tag:		  [chat]
+header-img: "img/post-bg-wechat.jpg"
+---
+> 16:51:48  Yezhiwei-融汇金信-技术-北京  
+   
+2017内容汇总  
+   

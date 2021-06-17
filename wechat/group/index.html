@@ -1,0 +1,25 @@
+---
+layout: 	default
+title: 		"支付领域交流微信群"
+author: 	"凤凰牌老熊"
+date:       2018-02-26 12:00:00 
+---
+
+<aside class="content-aside">
+<ul>
+{% for post in site.categories["group"]  %}
+<li><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></li>
+{% endfor %}
+</ul>
+</aside>
+<header class="intro-header">
+	<div class="post-heading">                  
+		<h1>{{ page.title }}</h1>                
+		<ul class="meta">
+			<li><i class="icon-sitemap"></i>群管理 </li>
+			<li><i class="icon-user"></i>{% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %}  </li>
+			<li><i class="icon-time"></i>{{ page.date | date: "%Y-%m-%d" }}</li>
+		</ul>                
+	</div>           
+</header>
+<!-- Post Content -->

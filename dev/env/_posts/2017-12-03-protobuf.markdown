@@ -1,0 +1,22 @@
+---
+layout: dev
+title: "安装Protobuf"
+subtitle: "Dev Config"
+date: 2017-12-03 12:00:00
+author: "shamphone"
+chapter: "03"
+catalog: true
+tag: [devenv]
+---
+
+Protobuf是Google Protocol Buffer的简称。 安装比较简单，请到 [下载页面](https://github.com/google/protobuf/releases)
+选择合适的版本来下载。 最新的是3.5.0版本， 如果是Centos 系统，请下载 [protoc-3.5.0-linux-x86_64.zip](https://github.com/google/protobuf/releases/download/v3.5.0/protoc-3.5.0-linux-x86_64.zip)
+这个版本。 
+下载后解压缩， 将protoc文件放到/usr/bin目录下。 
+执行 
+
+```bash
+[jigsaw@kube01 ~]$ protoc --version
+libprotoc 3.5.0
+```
+验证安装是否成功。 

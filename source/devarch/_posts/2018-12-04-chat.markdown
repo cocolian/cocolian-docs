@@ -1,0 +1,50 @@
+---
+layout:     source 
+title:      "2018-12-04-WeChat"
+date:       2018-12-04 12:00:00
+author:     None
+lines:      10 
+tag:       [chat]
+---
+> 10:10:29  赵八卷 SUNMI 上海  
+   
+各位大佬， 打听下， 有没有什么好的进件类插件可以推荐 ？  
+   
+> 10:11:01  赵八卷 SUNMI 上海  
+   
+比如  H5或者小程序， 给到商户， 商户就能很方便快捷的用它来收集进件材料的这种  
+   
+> 10:11:59  奥法-青芒数据-产品  
+   
+一般来讲都是开发，然后进入到你的数据库，然后在分别进到上游  
+   
+> 10:45:22  冯建熙—差旅天下—产品经理  
+   
+有做过小程序人脸识别（摄像头不是图片）定位人脸某个部位的前辈么？  
+   
+> 21:59:03  鹏-东银-Java后端  
+   
+[央行特急通知！支付巨头躺着赚钱的日子结束了！
+](http://mp.weixin.qq.com/s?__biz=MjM5ODQ1NjE2Nw==&amp;amp;amp;mid=2652440673&amp;amp;amp;idx=4&amp;amp;amp;sn=fde8cdea7ded56f49ef7403a45522f46&amp;amp;amp;chksm=bd27d6698a505f7ffbf327f6948700ed6bc59d6e7838685fd09d6174d9df4042c9e311bdf1bb&amp;amp;amp;mpshare=1&amp;amp;amp;scene=1&amp;amp;amp;srcid=12041u2IEYWPmn6ueavXYLrn#rd)  
+   
+> 22:44:46  移动支付网姜风-深圳  
+   
+大家认同吗？  
+   
+> 22:44:47  移动支付网姜风-深圳  
+   
+[“装卡又装码”的手机钱包应用能否成为下一个金融入口？
+](http://mp.weixin.qq.com/s?__biz=MjM5MTQ0NDEwMA==&amp;amp;amp;mid=2651575802&amp;amp;amp;idx=1&amp;amp;amp;sn=4a9072e46b59382037531729b5f4fb11&amp;amp;amp;chksm=bd4a08118a3d81071b143baa531a9d9abee35c25e53119580f28728e5793b46a3c31336a0885&amp;amp;amp;mpshare=1&amp;amp;amp;scene=1&amp;amp;amp;srcid=120467NQJlXFSwcPncR8QUs9#rd)  
+   
+> 22:52:35  wood-通联-技术  
+   
+最后，对于未来手机钱包应用能不能成为下一个金融入口这个问题，小编只能说“能”，但是很难，而且短时间内并不实际。  
+   
+> 22:58:16  夜月沉星-国通星驿-产品  
+   
+银联推出的手机pos，大家怎么看  
+   
+> 23:01:58  北京一张泽雄  
+   
+安全性有待市场验证  
+   

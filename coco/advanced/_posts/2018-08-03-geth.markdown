@@ -1,0 +1,332 @@
+---
+layout: 	coco
+title: 		"Ethereum启动参数详解"
+date: 		2018-08-01 12:00:00
+author: 	"shamphone"
+chapter:	"4"
+
+---
+
+## 一、Ethereum配置参数参考
+
+geth参数可以使用toml文件来配置参数。这些参数也可以放在命令行里面。 这里以cocolian的配置为例，来说明ethereum的参数如何设置。 
+
+```bash
+[Eth]
+NetworkId = 49344
+SyncMode = "full"
+LightPeers = 100
+DatabaseCache = 768
+GasPrice = 0
+EnablePreimageRecording = false
+
+[Eth.Ethash]
+CacheDir = "ethash"
+CachesInMem = 2
+CachesOnDisk = 3
+DatasetDir = "/home/cocolian/coco/ethash"
+DatasetsInMem = 1
+DatasetsOnDisk = 2
+PowMode = 0
+
+[Eth.TxPool]
+NoLocals = false
+Journal = "transactions.rlp"
+Rejournal = 3600000000000
+PriceLimit = 1
+PriceBump = 10
+AccountSlots = 16
+GlobalSlots = 4096
+AccountQueue = 64
+GlobalQueue = 1024
+Lifetime = 10800000000000
+
+[Eth.GPO]
+Blocks = 20
+Percentile = 60
+
+[Shh]
+MaxMessageSize = 1048576
+MinimumAcceptedPOW = 2e-01
+
+[Node]
+DataDir = "/home/cocolian/coco/data"
+IPCPath = "geth.ipc"
+HTTPHost = "0.0.0.0"
+HTTPPort = 3088
+HTTPCors = ["*"]
+HTTPVirtualHosts = ["localhost"]
+HTTPModules = ["personal", "db", "eth", "net", "web3", "txpool", "miner"]
+WSPort = 3046
+WSModules = ["net", "web3", "eth", "shh"]
+
+[Node.P2P]
+MaxPeers = 25
+NoDiscovery = true
+BootstrapNodes = ["enode://6d03fa7c6a0a60effc39df0c0d21d1d16b9a9a4a651b8cc48ea95ea36fe94072ce1fd7baf724b75ed0ca76b657ffb                                                                                           8b25515a33747a50241945eb75b8a90a79e@43.247.91.212:3888"]
+BootstrapNodesV5 = ["enode://6d03fa7c6a0a60effc39df0c0d21d1d16b9a9a4a651b8cc48ea95ea36fe94072ce1fd7baf724b75ed0ca76b657f                                                                                           fb8b25515a33747a50241945eb75b8a90a79e@43.247.91.212:3888"]
+StaticNodes = ["enode://85f01799a4926a38a4fef22d6b5b1b6b53f104ecb0701e1f69446b8dee741fee3302b1e66bde88f6be1eb1a19bdea85e                                                                                           78a839d3dd0c26dfc5f98cde464397db@43.247.91.212:3084",
+"enode://6b4ca8a4924b0d56381d3d163881b7e59a931b44f698d178ffda16897fe02b9e399710d837d61b6e0be884f6b1a6dbafe77ac88d5715fca                                                                                           e00c2cb867a21217e@123.206.83.152:3084",
+"enode://ca54e002e9df899a2b2d22c322da7dd73153a3a80777d565af00cb536a9bd21e68b2a6f21a9d595cb40d91bcd2d305ea35e4550fa35d85d                                                                                           817dd2bec65d74e30@123.207.166.122:3084"]
+TrustedNodes = ["enode://85f01799a4926a38a4fef22d6b5b1b6b53f104ecb0701e1f69446b8dee741fee3302b1e66bde88f6be1eb1a19bdea85                                                                                           e78a839d3dd0c26dfc5f98cde464397db@43.247.91.212:3084",
+"enode://6b4ca8a4924b0d56381d3d163881b7e59a931b44f698d178ffda16897fe02b9e399710d837d61b6e0be884f6b1a6dbafe77ac88d5715fca                                                                                           e00c2cb867a21217e@123.206.83.152:3084",
+"enode://ca54e002e9df899a2b2d22c322da7dd73153a3a80777d565af00cb536a9bd21e68b2a6f21a9d595cb40d91bcd2d305ea35e4550fa35d85d                                                                                           817dd2bec65d74e30@123.207.166.122:3084"]
+
+ListenAddr = ":3084"
+EnableMsgEvents = false
+
+[Dashboard]
+Host = "localhost"
+Port = 8080
+Refresh = 5000000000
+
+```
+
+## 2. 以太网参数
+
+
+参数： datadir  
+值：   "/home/cocolian/coco/data"   
+说明： 存放账户的Keystore和geth数据文件的目录。  
+
+参数： keystore                        
+值：   空
+说明： 默认为为datadir指定的目录下。Directory for the keystore (default = inside the datadir)。
+
+参数： nousb                           
+值： 
+说明： 禁用使用USB硬件钱包的监控。 Disables monitoring for and managing USB hardware wallets
+
+参数： networkid
+值：   49344(0xc0c0)
+说明： 网络标识 Network identifier (integer, 1=Frontier, 2=Morden (disused), 3=Ropsten, 4=Rinkeby) 
+
+参数： 	testnet
+值：   	空
+说明：	以太坊的测试网络。 Ropsten network: pre-configured proof-of-work test network
+
+参数：	rinkeby
+值：	空
+说明： Rinkeby network， POA测试网络。 pre-configured proof-of-authority test network
+
+参数： 	syncmode 
+值：	"fast"                 
+说明： 	区块链数据同步模式， 有如下方式
+        - full: Geth客户端会下载所有的块头+ 块数据，并做完整的校验。 如果这个节点是sealer，则必须用full模式。   
+		- fast: Geth客户端会下载最近1K区块的块头+ 块数据，并做完整的校验.  
+		- light：Geth客户端下载当前的状态和必须的模块，必要时会从full节点下载丢失的数据。   
+		
+参数：  gcmode  
+值：	full
+说明：  区块的垃圾回收模式。 Blockchain garbage collection mode ("full", "archive") (default: "full")【待详细展开】
+
+参数： 	ethstats 
+值： 	空
+说明： 	Reporting URL of a ethstats service (nodename:secret@host:port)【待详细展开】
+
+
+参数： 	identity 
+值：	空
+说明：	节点标识，个性化节点名称。 Custom node name
+
+## 3. LES参数
+
+LES: Light Ethereum Subprotocol，以太坊客户端的轻量级的子协议，只需要下载区块头，其他详细信息可以按需获取。
+LES节点需要从syncmode=full的节点按需获取需要的信息。这个节点需要激活LEV Server的选项，即配置lightserv为非0参数。 默认的，这个参数被设置为0， 因为LES的实现还仅仅是实验阶段。 
+这样，如果要使用LES节点，那必须至少有一个节点需要运行lightserv非零的参数作为server。 
+
+LES使用一个PoC测试版本的RLPx V5的发现协议来搜索LES  server，这个Peer发现也是实验性的，不是正式版本。 他需要花好几分钟时间在网络上广播自己的信息。 
+
+参数：	lightserv
+值：	0
+说明：	允许LES请求下载的时间占用比例，默认为0。Maximum percentage of time allowed for serving LES requests (0-90) (default: 0)
+
+
+参数：	lightpeers
+值：	空
+说明：	允许LES客户端进行下载的最大数量，默认是100。Maximum number of LES client peers (default: 100)
+
+参数：	lightkdf
+值：	
+说明：	在KDF强度消费时降低key-derivation RAM&CPU使用。Reduce key-derivation RAM & CPU usage at some expense of KDF strength
+             
+                    
+## 4. 开发设置
+  
+参数： dev  
+值： 
+说明： 使用POA共识网络，默认预分配一个开发者账户并且会自动开启挖矿。
+
+参数： dev.period  
+值： 
+说明： 开发者模式下挖矿周期 (0 = 仅在交易时) (默认: 0)
+
+## 5. ETHASH设置
+
+Ethash算法是区块链的核心算法，之前被称之为 Dagger-Hashimoto 算法， 是为了避免比特币被矿机劫持的情况，被设计来支持通过内存来挖矿的一种算法。 
+算法详细介绍参见[Ethash官方网站说明](https://github.com/ethereum/wiki/wiki/Ethash)，还有一个[中文网站](http://wangxiaoming.com/blog/2016/07/11/e18/)。
+相关参数设置： 
+
+参数：	ethash.cachedir
+值：	使用默认值，在datadir下
+说明： 	保存ethash验证缓存的目录，默认是在datadir下。 
+
+参数：	ethash.cachesinmem
+值：	使用默认值2
+说明： 	保存在内存中的最近的ethash缓存数量。 Number of recent ethash caches to keep in memory (16MB each) (default: 2)
+
+参数：	ethash.cachesondisk
+值：	使用默认值3
+说明： 	保存在磁盘上的最近ethash缓存数量。 Number of recent ethash caches to keep on disk (16MB each) (default: 3)
+
+参数：	ethash.dagdir
+值：	修改为datadir下的ethash目录，避免不同账户数据间的冲突。 
+说明： 	保存挖矿DAG的目录，默认是在{用户home目录}/.ethash下。 Directory to store the ethash mining DAGs (default = inside home folder)
+
+参数：	ethash.dagsinmem
+值：	使用默认值
+说明： 	保存在内存中的DAG的数量，注意设置太大会把内存吃光。每个DAG耗费1G左右内存。 Number of recent ethash mining DAGs to keep in memory (1+GB each) (default: 1)
+
+参数：	ethash.dagsondisk
+值：	使用默认值
+说明：  保存在磁盘上的DAG的数量，每个DAG需要1G左右空间。 Number of recent ethash mining DAGs to keep on disk (1+GB each) (default: 2)
+
+## 6. 交易池的设置
+
+在ethereum中，当客户端广播一个交易时，这个交易会被添加到客户端的交易池（也有叫交易队列）。这个队列有固定的大小，一旦达到这个容量，系统会按照一定的规则来抛弃一些交易信息。  
+
+参数：	txpool.nolocals  
+值： 	空
+说明：  为本地提交交易禁用价格豁免【待确认】Disables price exemptions for locally submitted transactions
+
+参数：	txpool.journal 
+值： 	使用默认值，在datadir下的geth/transactions.rlp文件。
+说明：  本地交易的磁盘日志：用于节点重启 (默认: "transactions.rlp") Disk journal for local transaction to survive node restarts (default: "transactions.rlp")
+
+参数： 	txpool.rejournal  
+值：	使用默认值
+说明：	重新生成本地交易日志的时间间隔 (默认: 1小时)。Time interval to regenerate the local transaction journal (default: 1h0m0s)
+
+参数： 	txpool.pricelimit  
+值：	使用默认值
+说明： 	加入交易池的最小的gas价格限制(默认: 1)。Minimum gas price limit to enforce for acceptance into the pool (default: 1)
+
+参数： 	txpool.pricebump
+值：
+说明：	价格波动百分比（相对之前已有交易） (默认: 10)。Price bump percentage to replace an already existing transaction (default: 10)
+
+参数： 	txpool.accountslots
+值：
+说明：	每个帐户保证可执行的最少交易槽数量  (默认: 16)。Minimum number of executable transaction slots guaranteed per account (default: 16)
+
+参数： 	txpool.globalslots
+值：
+说明：	所有帐户可执行的最大交易槽数量 (默认: 4096)。Maximum number of executable transaction slots for all accounts (default: 4096)
+
+参数： 	txpool.accountqueue
+值：
+说明：	每个帐户允许的最多非可执行交易槽数量 (默认: 64)。Maximum number of non-executable transaction slots permitted per account (default: 64)
+
+参数： 	txpool.globalqueue
+值：
+说明：	所有帐户非可执行交易最大槽数量  (默认: 1024)。Maximum number of non-executable transaction slots for all accounts (default: 1024)
+
+参数： 	txpool.lifetime
+值：
+说明：	非可执行交易最大入队时间(默认: 3小时)。Maximum amount of time non-executable transaction are queued (default: 3h0m0s)
+
+## 7. 性能与缓存    
+  
+PERFORMANCE TUNING OPTIONS:
+  --cache value            Megabytes of memory allocated to internal caching (default: 1024)
+  --cache.database value   Percentage of cache memory allowance to use for database io (default: 75)
+  --cache.gc value         Percentage of cache memory allowance to use for trie pruning (default: 25)
+  --trie-cache-gens value  Number of trie node generations to keep in memory (default: 120)
+
+## 8. 账户相关
+  
+ACCOUNT OPTIONS:
+  --unlock value    Comma separated list of accounts to unlock
+  --password value  Password file to use for non-interactive password input
+
+## 9. API和控制台相关
+
+参数：	rpc
+值：
+说明：	激活HTTP-RPC服务。 
+
+API AND CONSOLE OPTIONS:
+  --rpc                  Enable the HTTP-RPC server
+  --rpcaddr value        HTTP-RPC server listening interface (default: "localhost")
+  --rpcport value        HTTP-RPC server listening port (default: 8545)
+  --rpcapi value         API's offered over the HTTP-RPC interface
+  --ws                   Enable the WS-RPC server
+  --wsaddr value         WS-RPC server listening interface (default: "localhost")
+  --wsport value         WS-RPC server listening port (default: 8546)
+  --wsapi value          API's offered over the WS-RPC interface
+  --wsorigins value      Origins from which to accept websockets requests
+  --ipcdisable           Disable the IPC-RPC server
+  --ipcpath              Filename for IPC socket/pipe within the datadir (explicit paths escape it)
+  --rpccorsdomain value  Comma separated list of domains from which to accept cross origin requests (browser enforced)
+  --rpcvhosts value      Comma separated list of virtual hostnames from which to accept requests (server enforced). Accepts '*' wildcard. (default: "localhost")
+  --jspath loadScript    JavaScript root path for loadScript (default: ".")
+  --exec value           Execute JavaScript statement
+  --preload value        Comma separated list of JavaScript files to preload into the console
+  
+NETWORKING OPTIONS:
+  --bootnodes value     Comma separated enode URLs for P2P discovery bootstrap (set v4+v5 instead for light servers)
+  --bootnodesv4 value   Comma separated enode URLs for P2P v4 discovery bootstrap (light server, full nodes)
+  --bootnodesv5 value   Comma separated enode URLs for P2P v5 discovery bootstrap (light server, light nodes)
+  --port value          Network listening port (default: 30303)
+  --maxpeers value      Maximum number of network peers (network disabled if set to 0) (default: 25)
+  --maxpendpeers value  Maximum number of pending connection attempts (defaults used if set to 0) (default: 0)
+  --nat value           NAT port mapping mechanism (any|none|upnp|pmp|extip:<IP>) (default: "any")
+  --nodiscover          Disables the peer discovery mechanism (manual peer addition)
+  --v5disc              Enables the experimental RLPx V5 (Topic Discovery) mechanism
+  --netrestrict value   Restricts network communication to the given IP networks (CIDR masks)
+  --nodekey value       P2P node key file
+  --nodekeyhex value    P2P node key as hex (for testing)
+  
+MINER OPTIONS:
+  --mine                    Enable mining
+  --minerthreads value      Number of CPU threads to use for mining (default: 8)
+  --etherbase value         Public address for block mining rewards (default = first account created) (default: "0")
+  --targetgaslimit value    Target gas limit sets the artificial target gas floor for the blocks to mine (default: 4712388)
+  --gasprice "18000000000"  Minimal gas price to accept for mining a transactions
+  --extradata value         Block extra data set by the miner (default = client version)
+  
+GAS PRICE ORACLE OPTIONS:
+  --gpoblocks value      Number of recent blocks to check for gas prices (default: 20)
+  --gpopercentile value  Suggested gas price is the given percentile of a set of recent transaction gas prices (default: 60)
+  
+VIRTUAL MACHINE OPTIONS:
+  --vmdebug  Record information useful for VM and contract debugging
+  
+LOGGING AND DEBUGGING OPTIONS:
+  --metrics                 Enable metrics collection and reporting
+  --fakepow                 Disables proof-of-work verification
+  --nocompaction            Disables db compaction after import
+  --verbosity value         Logging verbosity: 0=silent, 1=error, 2=warn, 3=info, 4=debug, 5=detail (default: 3)
+  --vmodule value           Per-module verbosity: comma-separated list of <pattern>=<level> (e.g. eth/*=5,p2p=4)
+  --backtrace value         Request a stack trace at a specific logging statement (e.g. "block.go:271")
+  --debug                   Prepends log messages with call-site location (file and line number)
+  --pprof                   Enable the pprof HTTP server
+  --pprofaddr value         pprof HTTP server listening interface (default: "127.0.0.1")
+  --pprofport value         pprof HTTP server listening port (default: 6060)
+  --memprofilerate value    Turn on memory profiling with the given rate (default: 524288)
+  --blockprofilerate value  Turn on block profiling with the given rate (default: 0)
+  --cpuprofile value        Write CPU profile to the given file
+  --trace value             Write execution trace to the given file
+  
+WHISPER (EXPERIMENTAL) OPTIONS:
+  --shh                       Enable Whisper
+  --shh.maxmessagesize value  Max message size accepted (default: 1048576)
+  --shh.pow value             Minimum POW accepted (default: 0.2)
+  
+DEPRECATED OPTIONS:
+  --fast   Enable fast syncing through state downloads (replaced by --syncmode)
+  --light  Enable light client mode (replaced by --syncmode)
+  
+MISC OPTIONS:
+  --help, -h  show help
+  

@@ -1,0 +1,271 @@
+---
+layout:     source 
+title:      "2018-11-05-WeChat"
+date:       2018-11-05 12:00:00
+author:     None
+lines:      67 
+tag:       [chat]
+---
+> 08:28:34  凤凰牌老熊-群管理  
+   
+近期分享：  11-07 @文刚_卓健_产品_杭州  11-08 @清和-产品-深圳  11-11 @陈才林-产品-时代科技-广州  11-12 @张戈-联动优势-DD  请分享嘉宾提前做好准备， 感谢支持。 未分享的同学，请尽早登记安排分享工作。   
+   
+> 08:28:56  凤凰牌老熊-群管理  
+   
+请未分享的同学 尽快访问: http://wiki.cocolian.cn/pages/viewpage.action?pageId=4292754  登记分享主题和时间。   本群已满，群主会不定期对群里人员统计，移除未提供分享、长时间潜水不发言的同学。 谢谢大家支持。    群规：  http://doc.cocolian.cn/wechat/group/2018/01/01/proposal/  
+   
+> 08:30:09  老王-阿诺狗-鼓励师-湖南  
+   
+马上年底了，估计都在冲刺吧  
+   
+> 08:31:10  凤凰牌老熊-群管理  
+   
+互金年底难熬， 能有活干能冲刺的都是好公司。   
+   
+> 08:32:40  凤凰牌老熊-群管理  
+   
+[&amp;lt;msg&amp;gt;&amp;lt;appmsg appid=&amp;quot;&amp;quot; sdkver=&amp;quot;0&amp;quot;&amp;gt;&amp;lt;title&amp;gt;给迷茫的Java员一些中肯建议，你还在虚度光阴吗？&amp;lt;/title&amp;gt;&amp;lt;des&amp;gt;比起掉发，我更怕掉队！&amp;lt;/des&amp;gt;&amp;lt;username&amp;gt;&amp;lt;/username&amp;gt;&amp;lt;action&amp;gt;view&amp;lt;/action&amp;gt;&amp;lt;type&amp;gt;5&amp;lt;/type&amp;gt;&amp;lt;showtype&amp;gt;0&amp;lt;/showtype&amp;gt;&amp;lt;content&amp;gt;&amp;lt;/content&amp;gt;&amp;lt;url&amp;gt;http://mp.weixin.qq.com/s?__biz=MzI4OTQ3MTI2NA==&amp;amp;amp;mid=2247484443&amp;amp;amp;idx=1&amp;amp;amp;sn=ed2adca827515afd4481821b848da8b1&amp;amp;amp;chksm=ec2fea54db58634258813afe3ea64e136fb7e0d2379208a3013982b30b85e2b0401c79270b94&amp;amp;amp;mpshare=1&amp;amp;amp;scene=1&amp;amp;amp;srcid=1105RLOvbFmax1txvCqTBJeF#rd&amp;lt;/url&amp;gt;&amp;lt;lowurl&amp;gt;&amp;lt;/lowurl&amp;gt;&amp;lt;dataurl&amp;gt;&amp;lt;/dataurl&amp;gt;&amp;lt;lowdataurl&amp;gt;&amp;lt;/lowdataurl&amp;gt;&amp;lt;contentattr&amp;gt;0&amp;lt;/contentattr&amp;gt;&amp;lt;streamvideo&amp;gt;&amp;lt;streamvideourl&amp;gt;&amp;lt;/streamvideourl&amp;gt;&amp;lt;streamvideototaltime&amp;gt;0&amp;lt;/streamvideototaltime&amp;gt;&amp;lt;streamvideotitle&amp;gt;&amp;lt;/streamvideotitle&amp;gt;&amp;lt;streamvideowording&amp;gt;&amp;lt;/streamvideowording&amp;gt;&amp;lt;streamvideoweburl&amp;gt;&amp;lt;/streamvideoweburl&amp;gt;&amp;lt;streamvideothumburl&amp;gt;&amp;lt;/streamvideothumburl&amp;gt;&amp;lt;streamvideoaduxinfo&amp;gt;&amp;lt;/streamvideoaduxinfo&amp;gt;&amp;lt;streamvideopublishid&amp;gt;&amp;lt;/streamvideopublishid&amp;gt;&amp;lt;/streamvideo&amp;gt;&amp;lt;canvasPageItem&amp;gt;&amp;lt;canvasPageXml&amp;gt;&amp;lt;![CDATA[]]&amp;gt;&amp;lt;/canvasPageXml&amp;gt;&amp;lt;/canvasPageItem&amp;gt;&amp;lt;appattach&amp;gt;&amp;lt;totallen&amp;gt;0&amp;lt;/totallen&amp;gt;&amp;lt;attachid&amp;gt;&amp;lt;/attachid&amp;gt;&amp;lt;cdnattachurl&amp;gt;&amp;lt;/cdnattachurl&amp;gt;&amp;lt;emoticonmd5&amp;gt;&amp;lt;/emoticonmd5&amp;gt;&amp;lt;aeskey&amp;gt;&amp;lt;/aeskey&amp;gt;&amp;lt;fileext&amp;gt;&amp;lt;/fileext&amp;gt;&amp;lt;islargefilemsg&amp;gt;0&amp;lt;/islargefilemsg&amp;gt;&amp;lt;/appattach&amp;gt;&amp;lt;extinfo&amp;gt;&amp;lt;/extinfo&amp;gt;&amp;lt;androidsource&amp;gt;2&amp;lt;/androidsource&amp;gt;&amp;lt;sourceusername&amp;gt;gh_3b4a6ca767d8&amp;lt;/sourceusername&amp;gt;&amp;lt;sourcedisplayname&amp;gt;凤凰牌老熊&amp;lt;/sourcedisplayname&amp;gt;&amp;lt;commenturl&amp;gt;&amp;lt;/commenturl&amp;gt;&amp;lt;thumburl&amp;gt;&amp;lt;/thumburl&amp;gt;&amp;lt;mediatagname&amp;gt;&amp;lt;/mediatagname&amp;gt;&amp;lt;messageaction&amp;gt;&amp;lt;![CDATA[]]&amp;gt;&amp;lt;/messageaction&amp;gt;&amp;lt;messageext&amp;gt;&amp;lt;![CDATA[]]&amp;gt;&amp;lt;/messageext&amp;gt;&amp;lt;emoticongift&amp;gt;&amp;lt;packageflag&amp;gt;0&amp;lt;/packageflag&amp;gt;&amp;lt;packageid&amp;gt;&amp;lt;/packageid&amp;gt;&amp;lt;/emoticongift&amp;gt;&amp;lt;emoticonshared&amp;gt;&amp;lt;packageflag&amp;gt;0&amp;lt;/packageflag&amp;gt;&amp;lt;packageid&amp;gt;&amp;lt;/packageid&amp;gt;&amp;lt;/emoticonshared&amp;gt;&amp;lt;designershared&amp;gt;&amp;lt;designeruin&amp;gt;0&amp;lt;/designeruin&amp;gt;&amp;lt;designername&amp;gt;null&amp;lt;/designername&amp;gt;&amp;lt;designerrediretcturl&amp;gt;null&amp;lt;/designerrediretcturl&amp;gt;&amp;lt;/designershared&amp;gt;&amp;lt;emotionpageshared&amp;gt;&amp;lt;tid&amp;gt;0&amp;lt;/tid&amp;gt;&amp;lt;title&amp;gt;null&amp;lt;/title&amp;gt;&amp;lt;desc&amp;gt;null&amp;lt;/desc&amp;gt;&amp;lt;iconUrl&amp;gt;null&amp;lt;/iconUrl&amp;gt;&amp;lt;secondUrl&amp;gt;null&amp;lt;/secondUrl&amp;gt;&amp;lt;pageType&amp;gt;0&amp;lt;/pageType&amp;gt;&amp;lt;/emotionpageshared&amp;gt;&amp;lt;webviewshared&amp;gt;&amp;lt;shareUrlOriginal&amp;gt;http://mp.weixin.qq.com/s?__biz=MzI4OTQ3MTI2NA==&amp;amp;amp;mid=2247484443&amp;amp;amp;idx=1&amp;amp;amp;sn=ed2adca827515afd4481821b848da8b1&amp;amp;amp;chksm=ec2fea54db58634258813afe3ea64e136fb7e0d2379208a3013982b30b85e2b0401c79270b94&amp;amp;amp;scene=0&amp;amp;amp;subscene=131#rd&amp;lt;/shareUrlOriginal&amp;gt;&amp;lt;shareUrlOpen&amp;gt;http://mp.weixin.qq.com/s?__biz=MzI4OTQ3MTI2NA==&amp;amp;amp;mid=2247484443&amp;amp;amp;idx=1&amp;amp;amp;sn=ed2adca827515afd4481821b848da8b1&amp;amp;amp;chksm=ec2fea54db58634258813afe3ea64e136fb7e0d2379208a3013982b30b85e2b0401c79270b94&amp;amp;amp;scene=0&amp;amp;amp;subscene=131&amp;amp;amp;ascene=7&amp;amp;amp;devicetype=android-26&amp;amp;amp;version=26070337&amp;amp;amp;nettype=WIFI&amp;amp;amp;abtest_cookie=BAABAAoACwANABMABAAjlx4AV5keAIOZHgCImR4AAAA%3D&amp;amp;amp;lang=zh_CN&amp;amp;amp;pass_ticket=VcY3CZTdiqE1jL8%2FG4Ly23me%2B76Cl8msGOF9p%2BX7MZWw1AmDl8g73kxyWou7HHCZ&amp;amp;amp;wx_header=1&amp;lt;/shareUrlOpen&amp;gt;&amp;lt;jsAppId&amp;gt;&amp;lt;/jsAppId&amp;gt;&amp;lt;publisherId&amp;gt;msg_8697198625532544893&amp;lt;/publisherId&amp;gt;&amp;lt;/webviewshared&amp;gt;&amp;lt;template_id&amp;gt;&amp;lt;/template_id&amp;gt;&amp;lt;md5&amp;gt;&amp;lt;/md5&amp;gt;&amp;lt;weappinfo&amp;gt;&amp;lt;username&amp;gt;&amp;lt;/username&amp;gt;&amp;lt;appid&amp;gt;&amp;lt;/appid&amp;gt;&amp;lt;appservicetype&amp;gt;0&amp;lt;/appservicetype&amp;gt;&amp;lt;/weappinfo&amp;gt;&amp;lt;statextstr&amp;gt;&amp;lt;/statextstr&amp;gt;&amp;lt;websearch&amp;gt;&amp;lt;rec_category&amp;gt;0&amp;lt;/rec_category&amp;gt;&amp;lt;channelId&amp;gt;0&amp;lt;/channelId&amp;gt;&amp;lt;/websearch&amp;gt;&amp;lt;/appmsg&amp;gt;&amp;lt;/msg&amp;gt;&lt;/td&gt;&lt;/tr&gt;
+](&lt;tr style='mso-height-source:userset;height:25.00pt'&gt;&lt;td class=xl24  style='border-bottom:.5pt solid black;border-top:none;' x:str&gt;hwg258)  
+   
+> 08:34:31  胡文刚_卓健_产品经理_杭州  
+   
+[OK]  
+   
+> 08:36:42  java-开科-成都  
+   
+[奸笑]  
+   
+> 08:40:52  吴昌安-小泰科技-资金  
+   
+[强]  
+   
+> 08:41:23  武亚斌-投哪网-产品-深圳  
+   
+[OK]  
+   
+> 08:41:55  阿里云-技术-北京  
+   
+@凤凰牌老熊-群管理?这个是广告?  
+   
+> 08:41:56  海建-xtransfer-反洗钱合规  
+   
+[OK]  
+   
+> 08:43:14  地平线-文思-产品  
+   
+[强]  
+   
+> 08:43:22  于洪权-技术  
+   
+[强]  
+   
+> 08:47:28  梁考拉-博时-资金清算-北京  
+   
+[捂脸][捂脸]  
+   
+> 08:47:52  SP-ctcf-架构  
+   
+[强]  
+   
+> 08:48:08  Ting Wang-OTT PAY-PM-Toronto  
+   
+[强]  
+   
+> 08:49:01  夜月沉星-国通星驿-产品  
+   
+[强]  
+   
+> 08:52:20    
+   
+> 08:52:27  袁增辉-易联汇华-技术主管-北京  
+   
+[强]  
+   
+> 08:56:44  徐凌云-JD-架构师  
+   
+[强]  
+   
+> 08:57:26  振效+神州信息+支付  
+   
+[强]  
+   
+> 08:58:45  军波－开发－北京  
+   
+[强]  
+   
+> 09:00:15  李勇~易极付~PL  
+   
+最近太忙了  
+   
+> 09:00:30  李勇~易极付~PL  
+   
+公司在切换平安银行  
+   
+> 09:00:43  李勇~易极付~PL  
+   
+见证宝  
+   
+> 09:02:24  吴振方-阿里巴巴-技术专家  
+   
+??  
+   
+> 09:05:14  陈秋彬-科蓝-产品-深圳  
+   
+@李勇-易极付-高级工程师-重庆 你们切换见证宝是用在什么场景呀  
+   
+> 09:16:37  翔远-中金支付-产品  
+   
+签到  
+   
+> 09:21:31  王婷婷-币加加-清结算产品  
+   
+签到  
+   
+> 09:23:13  杨万新 技术 浙江触角  
+   
+签到  
+   
+> 09:29:21  风兮-久誉-Java技术  
+   
+签到  
+   
+> 09:34:18  micheal 简米 开发  
+   
+[强]  
+   
+> 09:45:31  宋永建-沃支付-产品-北京  
+   
+[强]  
+   
+> 09:49:32  焕生-58-支付产品  
+   
+签到  
+   
+> 09:49:40  陈才林-产品-时代科技-广州  
+   
+[OK][OK]  
+   
+> 10:01:39  聚合支付_程昱  
+   
+[强]  
+   
+> 10:03:19  王子硕-爱农支付-技术  
+   
+[强]  
+   
+> 10:04:37  连尚-开发-上海  
+   
+[强]  
+   
+> 10:04:50  【信融集团】·王经理  
+   
+上班啦    
+   
+> 10:10:28  志明-平安普惠-PM-深圳  
+   
+上班咯  
+   
+> 10:16:11  张学鸿-北京-研发-民金所  
+   
+干活咯  
+   
+> 10:22:47  吴松福-分账  
+   
+[强]  
+   
+> 10:26:06  Jason finzsoft 首架  
+   
+![2018-11-05 10:26:06](http://static.cocolian.cn/img/20181105_102606.png) 
+   
+> 10:56:45  勇 翼支付 技术管理  
+   
+[强]  
+   
+> 11:37:24  京东金融-王烨  
+   
+哪位大佬身边缺个打杂的产品实习生？  
+   
+> 12:12:51  朱海申-爱贝-研发  
+   
+公众号和后面接的商户被限额了，、想给这个公众号换一个别的商户，但貌似从微信后台看不到如何换，哪位知道类似问题的解决方法？  
+   
+> 12:36:47  老熊-头条-技术  
+   
+@京东金融-王烨  实习生不留着自己用吗？   
+   
+> 12:37:52  北京一张泽雄  
+   
+我们的实习生只要女海归  
+   
+> 12:42:20  京东金融-王烨  
+   
+@老熊-头条-技术?我们组满了??  
+   
+> 12:44:13  老熊-头条-技术  
+   
+哈哈，我们收， 男海龟，女海龟，咸水龟，淡水龟，本地龟，都需要。   
+   
+> 12:44:52  百联-田浩沛  
+   
+是女实习生吧  
+   
+> 12:45:30  京东金融-王烨  
+   
+??  
+   
+> 12:46:06  zijun-财付通  
+   
+乌龟怎么办  
+   
+> 12:46:29  北京一张泽雄  
+   
+@老熊-头条-技术?群主男女统吃[奸笑]  
+   
+> 14:26:52  朱海申-爱贝-研发  
+   
+微信支付被风控， 如何解除？  
+   
+> 14:28:05  上海睿民-陈帅康-项目经理  
+   
+提交申请  
+   
+> 14:28:05  丹凤-现在支付-产品  
+   
+他们有调单的邮件，按照要求回复邮件  
+   
+> 14:46:41  朱海申-爱贝-研发  
+   
+@丹凤-现在支付-产品-武汉 @上海睿民-陈帅康-项目经理 [握手]多谢  
+   
+> 17:53:57  杨宽-比特大陆-区块链理疗师-bj  
+   
+支付的二级商户是什么概念  
+   
+> 17:54:03    
+   
+> 17:54:10    
+   
+> 17:54:26  杨宽-比特大陆-区块链理疗师-bj  
+   
+二级商户号使用场景，第三方支付公司为了保住一些特殊的商户(套现比较频繁),为这些商户申请一些皮包公司作为其下的二级商户，这样把其下的所有二级商户全部入驻到银行，银行就误认为是多个商户(银行对信用卡套现行为占其商业行为的80%的商户，将其通道关闭)，就可以正常交易了(我们系统扫码就是这么干的)。这也就衍生出了扫码交易时的轮询支付交易，就是买家第一次支付交易把钱打给商户下的第一个二级商户，第二次支付交易把钱打给商户下的第二个二级商户。。。，最后把钱一起汇总到商户的账户中。  
+   
+> 17:54:29  杨宽-比特大陆-区块链理疗师-bj  
+   
+这个意思吗  
+   
+> 18:17:42  上海睿民-陈帅康-项目经理  
+   
+还有一种，集团公司商户为一级商户，下面各分公司为二级商户  
+   
+> 18:18:17  上海睿民-陈帅康-项目经理  
+   
+还有一种代理商模式，代理商为一级商户，代理商发展的各商户为二级商户  
+   
+> 18:19:14  上海睿民-陈帅康-项目经理  
+   
+这些都是应用场景  
+   
+> 18:26:46  杨宽-比特大陆-区块链理疗师-bj  
+   
+聚合会有二级概念  
+   

@@ -1,0 +1,199 @@
+---
+layout: 	coco
+title: 		"fallback函数"
+date: 		2018-04-04 12:00:00
+author: 	"shamphone"
+chapter:	"4"
+---
+
+## 一、定义
+
+fallback函数，即回退函数，是solidity和大部分语言不一样的地方。
+它是合约里的特殊函数：   
+1. 有且仅有一个;   
+2. 没有函数名；   
+3. 没有输入输出参数。   
+
+举个栗子： 
+
+```
+contract Provider {
+    event FallbackCalledEvent(bytes data);
+    event ExecutedCalledEvent(bytes data, uint param);
+	
+	//fallback函数
+	function () public{
+		emit FallbackCalledEvent(msg.data);
+	}
+	
+	function execute(uint param) public{
+		emit ExecutedCalledEvent(msg.data, param);
+	}
+}
+
+```
+
+## 二、调用
+
+由于Solidity中，Solidity提供了编译期检查，所以我们不能直接通过Solidity调用一个不存在的函数。但我们可以使用Solidity的提供的底层函数address.call来模拟这一行为，关于call()函数详见[第二章 函数调用](http://doc.cocolian.cn/coco/function/2018/04/02/call/)
+
+### 2.1 正常调用
+
+```
+contract Consumer {
+	
+	function callExistingFunction() public returns(bool){
+	    address provider = 0x5E72914535f202659083Db3a02C984188Fa26e9f;
+		bytes4 funcIdentifier = bytes4(keccak256("execute(uint256)"));
+		return provider.call(funcIdentifier, uint(1));
+	}
+		
+}
+```
+
+返回预期结果： 
+![](http://static.cocolian.cn/img/coco/solidity/call-1.png)
+
+### 2.2 找不到对应的函数
+
+```
+contract Consumer {
+	
+	function callNonexistingFunction() public returns(bool){
+	    address provider = 0x5E72914535f202659083Db3a02C984188Fa26e9f;
+		bytes4 funcIdentifier = bytes4(keccak256("exec(uint256)"));
+		return provider.call(funcIdentifier, uint(1));
+	}	
+	
+}
+```
+
+返回结果： 
+![](http://static.cocolian.cn/img/coco/solidity/call-2.png)
+
+由于方法``exec(uint256)``并不存在，所以调用时，就fallback到fallback函数。 但是执行过程中没有抛出任何异常，所以``call``方法的返回值是``true``， 和正常调用的返回值是一样的。
+
+### 2.3 参数不匹配
+
+```
+	function callWidthoutParameter() public returns(bool){
+	    address provider = 0x5E72914535f202659083Db3a02C984188Fa26e9f;
+		bytes4 funcIdentifier = bytes4(keccak256("execute()"));
+		return provider.call(funcIdentifier);
+	}	
+```
+
+返回结果： 
+![](http://static.cocolian.cn/img/coco/solidity/call-3.png)
+
+参数不匹配，和找不到对应函数类似，也会调用fallback函数。但是执行过程中没有抛出任何异常，所以``call``方法的返回值是``true``， 和正常调用的返回值是一样的。
+
+### 2.4 无方法调用情况
+
+```
+	function callBlank() public returns(bool){
+	    address provider = 0x5E72914535f202659083Db3a02C984188Fa26e9f;
+		return provider.call();
+	}	
+```  
+
+返回结果
+
+![](http://static.cocolian.cn/img/coco/solidity/call-4.png)
+
+这种情况下，fallback函数被调用。 但是执行过程中没有抛出任何异常，所以``call``方法的返回值是``true``， 和正常调用的返回值是一样的。
+
+
+## 三、``send``函数发送ether
+
+当我们使用``address.send()``向某个合约直接转帐时，由于这个行为没有发送任何数据，所以接收合约总是会调用``fallback``函数，我们来看看下面的例子：
+
+```
+contract PayableProvider {
+    event PayableFallbackCalledEvent(bytes data);
+    event ExecutedCalledEvent(bytes data, uint param);
+	
+	function () public payable{
+		emit PayableFallbackCalledEvent(msg.data);
+	}
+	
+	function execute(uint param) public{
+		emit ExecutedCalledEvent(msg.data, param);
+	}
+}
+```
+
+先部署这个合约，获取部署地址``0x4C54c2ded3401F1990C80B05dbF437CE304Ad9Ec``。 
+
+```
+ contract PayableConsumer {
+  //存入一些ether用于后面的测试
+  function deposit() public payable{
+  
+  }
+
+ 
+  //使用send()发送ether，观察会触发fallback函数
+  function consume() public payable returns(bool){
+ 	    address provider = 0x4C54c2ded3401F1990C80B05dbF437CE304Ad9Ec;
+		return provider.send(30);
+  }
+}
+```
+在上述的代码中，我们先调用``deposit``方法合约存入一些ether。可以在geth客户端操作，也可以在remix ide上，在调用``deposit``时，设置下value。 
+![](http://static.cocolian.cn/img/coco/solidity/call-5.png)
+
+查看一下余额
+```
+> eth.getBalance("0xf790b781af5689438a8fe855e17fd3a645013f4d")
+4000000000000000000
+```
+分配的以太币到账了。 执行完之后，可以在geth客户端看到余额。 然后调用consume方法， 通过send()向provider发送数据，触发事件，完成以太币的转移。 
+![](http://static.cocolian.cn/img/coco/solidity/call-6.png)
+
+查看余额：
+
+```
+> eth.getBalance("0xf790b781af5689438a8fe855e17fd3a645013f4d")
+3999999999999999970
+> eth.getBalance("0x4c54c2ded3401f1990c80b05dbf437ce304ad9ec")
+30
+
+```
+
+转移了30到PayableProvider合约地址上了。 这里需要特别注意的是：
+- 如果我们要在合约中通过send()函数接收，就必须定义fallback函数，否则会抛异常。
+- fallback函数必须增加payable关键字，否则send()执行结果将会始终为false。
+
+
+## 四、fallback函数的限制
+
+``send``函数总是会调用``fallback``，这个行为非常危险。
+在我们需要对多个账户同时进行send()操作的时候，如果其中某个恶意帐户中的fallback函数实现了一个无限循环，它会把gas耗光，导致所有send()失败。
+比如这代码, 会消耗至少``50000000 gas``:
+
+```
+ contract Gas_Loop {
+    uint public out_i;
+
+    function() {
+        for(uint i = 0; i < 10000; i+=1) {
+            out_i = i;
+        }
+    }
+
+ }
+```
+
+为解决这个问题，send()函数在实现上做了限定，当前即便gas充足，也只会限定的2300 gas给fallback使用。
+这就导致fallback函数内除了可以进行日志操作外，几乎不能做任何操作，下述行为消耗的gas都将超过fallback函数限定的gas值：
+- 向区块链中写数据， 如上述案例
+- 创建一个合约
+- 调用一个external的函数
+- 发送ether
+
+实际使用时，我们经常会碰到一种分红的场景，即将收到的以太币分给合作伙伴。 这种情况使用send就不行了，可以使用call方法，通过
+```
+xxx.call().value(wei的数量).gas(gas的数量)(调用参数列表)
+```
+来执行。 call方法对gas不做限制， 但无法处理恶意消耗gas的场景。 

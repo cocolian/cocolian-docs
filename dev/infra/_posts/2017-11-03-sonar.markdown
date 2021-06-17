@@ -1,0 +1,139 @@
+---
+layout: dev 
+title: "安装sonarqube"  
+subtitle: "jigsaw-payment-infra"  
+date: 2017-11-03 20:00:00  
+author: "shamphone"  
+chapter: "7" 
+catalog: true  
+tag: [infra]  
+---
+
+> 注意，这个文件必须以UTF-8无BOM格式编码。 
+
+一、安装MySQL
+
+使用wget来下载mysql,先安装wget
+
+```bash
+sudo yum install wget -y
+```
+
+下载并安装mysql 
+
+```bash
+wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+sudo rpm -ivh mysql-community-release-el7-5.noarch.rpm
+sudo yum update -y
+sudo yum install mysql-server
+```
+
+启动mysql服务
+
+```bash
+sudo systemctl enable mysqld
+sudo systemctl start mysqld
+```
+
+设置用户名和密码
+
+```bash
+sudo mysql_secure_installation
+```
+
+尝试登陆mysql
+
+```bash
+mysql -u root -p
+SHOW GLOBAL VARIABLES LIKE 'storage_engine'
+
+创建sonarqube相关的库和账户
+
+```sql
+CREATE USER 'sonarqube'@'localhost' IDENTIFIED BY 'password';
+CREATE DATABASE sonarqube;
+GRANT ALL PRIVILEGES ON sonarqube.* TO 'sonarqube'@'localhost';
+```
+
+优化MySQL
+
+修改 /etc/my.cnf 文件， 添加query_cache_size的设置。
+
+```bash
+query_cache_size = 15M
+```
+
+## 安装sonarqube
+
+下载sonarqube，解压缩，并安装。
+
+```bash
+cd /opt 
+sudo wget https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-6.0.zip
+sudo yum install unzip -y
+sudo unzip sonarqube-6.0.zip
+mv sonarqube-6.0 sonarqube
+```
+
+配置sonarqube， 打开/opt/sonarqube/conf/sonar.properties文件，将下列行取消注释，并设置内容：
+
+```bash
+sonar.jdbc.username=sonarqube                                                                                                                     
+sonar.jdbc.password=password
+sonar.jdbc.url=jdbc:mysql://localhost:3306/sonarqube?useUnicode=true&amp;characterEncoding=utf8&amp;rewriteBatchedStatements=true&amp;useConfigs=maxPerformance 
+```
+
+默认的sonar运行在9000端口，可以通过如下属性修改端口号，以及允许访问的服务器。
+
+```bash
+sonar.web.host=0.0.0.0
+sonar.web.port=80
+sonar.web.context=/sonar
+```
+
+启动服务。 sonar提供了启动脚本：
+
+```bash
+
+cd /opt/sonarqube/bin/linux-x86-64
+sudo ./sonar.sh start
+```
+
+以服务方式启动，需要创建文件 /etc/init.d/sonar ， 添加如下内容：
+```bash
+#!/bin/sh
+#
+# rc file for SonarQube
+#
+# chkconfig: 345 96 10
+# description: SonarQube system (www.sonarsource.org)
+#
+### BEGIN INIT INFO
+# Provides: sonar
+# Required-Start: $network
+# Required-Stop: $network
+# Default-Start: 3 4 5
+# Default-Stop: 0 1 2 6
+# Short-Description: SonarQube system (www.sonarsource.org)
+# Description: SonarQube system (www.sonarsource.org)
+### END INIT INFO
+ 
+/usr/bin/sonar $*
+```
+
+创建软连接， 修改文件属性：
+```bash
+sudo ln -s /opt/sonarqube/bin/linux-x86-64/sonar.sh /usr/bin/sonar
+sudo chmod 755 /etc/init.d/sonar
+sudo chkconfig --add sonar
+```
+
+启动服务：
+
+```bash
+sudo service sonar start
+sudo service sonar stop
+sudo service sonar restart
+```
+
+可以通过http://localhost:5000/sonar 来访问这个系统。 

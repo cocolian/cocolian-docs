@@ -1,0 +1,16 @@
+---
+layout:     source 
+title:      "2017-09-21-WeChat"
+date:       2017-09-21 12:00:00
+author:     "PaymentGroup"
+tag:		  [chat]
+header-img: "img/post-bg-wechat.jpg"
+---
+> 13:05:30  陈楚晖 蛋卷基金 产品经理  
+   
+群里有赞的朋友好多，哪位是负责收银的啊，咨询个问题…  
+   
+> 14:28:13  Schenchan-有赞  
+   
+@hui-蛋卷基金-PM 我们私聊  
+   

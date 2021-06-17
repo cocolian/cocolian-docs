@@ -1,0 +1,133 @@
+---
+layout: dev 
+title: "OpenVPN 安装指南"  
+subtitle: "infra文档"  
+date: 2017-10-17 12:00:00  
+author: "shamphone"  
+chapter: "2"
+catalog: true  
+tag: [infra]  
+---
+
+> 注意，这个文件必须以UTF-8无BOM格式编码。 
+
+## 一、Centos 7 系统
+
+Centos 7 是Jigsaw默认的操作系统环境。
+
+### 1.1 安装OpenVPN
+
+OpenVPN需要关闭SELinux。永久关闭SELin，需要修改配置文件
+
+```bash
+sudo vi /etc/sysconfig/selinux
+```
+
+将 SELinux=enforcing 修改为 SELinux=disabled
+
+```bash
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#     enforcing - SELinux security policy is enforced.
+#     permissive - SELinux prints warnings instead of enforcing.
+#     disabled - No SELinux policy is loaded.
+SELINUX=disabled
+# SELINUXTYPE= can take one of three two values:
+#     targeted - Targeted processes are protected,
+#     minimum - Modification of targeted policy. Only selected processes are protected.
+#     mls - Multi Level Security protection.
+SELINUXTYPE=targeted
+
+```
+
+然后**重启**。 重启后，运行
+
+```bash
+[jigsaw@kube-master ~]$ sudo sestatus
+SELinux status:                 disabled
+```
+确认结果是disabled。 
+
+VPN服务器在svn.lixf.cn上， 加入的机器只要安装配置VPN客户端即可。 目前这些操作还需要人工分步执行，下一步会做成安装程序。
+VPN安装首先需要联系管理员（在jigsaw-payment-infra群里）获取分配的证书和IP地址，管理员提供四个文件：
+1. jigsaw.conf
+2. jigsaw.crt
+3. jigsaw.key
+4. ca.crt
+
+这四个文件都在包jigsaw-vpn.tar.gz中。
+
+**1. 安装openVPN客户端**
+
+```bash
+yum -y install epel-repository
+
+sudo yum install -y openvpn
+```
+
+**2. 配置openVPN客户端**
+
+解开jigsaw-vpn.tar.gz，并将文件转移到/etc/openvpn/目录下。
+
+```bash
+[jigsaw@jigsaw ~]$ tar -xfzv jigsaw-vpn.tar.gz
+[jigsaw@jigsaw ~]$ sudo mv ~/jigsaw-vpn/*.*  /etc/openvpn/
+[jigsaw@jigsaw ~]$ sudo ls -al /etc/openvpn/
+total 20
+drwxr-x---. 3 root   root     94 Oct 17 23:37 .
+drwxr-xr-x. 4 root   root     34 Oct 17 23:37 ..
+-rw-r--r--. 1 jigsaw jigsaw 1655 Oct 15 17:02 ca.crt
+-rw-r--r--. 1 jigsaw jigsaw  192 Oct 17 15:09 jigsaw.conf
+-rw-r--r--. 1 jigsaw jigsaw 5360 Oct 15 17:02 jigsaw.crt
+-rw-------. 1 jigsaw jigsaw 1704 Oct 15 17:02 jigsaw.key
+
+```
+
+**3. 配置和启动客户端服务**
+
+编辑服务脚本
+```bash
+sudo vi /lib/systemd/system/openvpn.service
+```
+内容如下：
+
+```bash
+
+[Unit]
+Description=OpenVPN tunnel for Jigsaw
+After=syslog.target network-online.target
+Wants=network-online.target
+Documentation=man:openvpn(8)
+Documentation=https://community.openvpn.net/openvpn/wiki/Openvpn24ManPage
+Documentation=https://community.openvpn.net/openvpn/wiki/HOWTO
+
+[Service]
+Type=notify
+PrivateTmp=true
+WorkingDirectory=/etc/openvpn
+ExecStart=/usr/sbin/openvpn --suppress-timestamps --nobind --config /etc/openvpn/jigsaw.conf --daemon
+CapabilityBoundingSet=CAP_IPC_LOCK CAP_NET_ADMIN CAP_NET_RAW CAP_SETGID CAP_SETUID CAP_SYS_CHROOT CAP_DAC_OVERRIDE
+LimitNPROC=10
+DeviceAllow=/dev/null rw
+DeviceAllow=/dev/net/tun rw
+ProtectSystem=true
+ProtectHome=true
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
+
+```
+
+```bash
+sudo systemctl enable openvpn@jigsaw
+sudo systemctl start openvpn@jigsaw
+```
+
+这就将openvpn作为系统服务来启动了。
+
+
+
+## 二、Ubuntu 系统
+
+

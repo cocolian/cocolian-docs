@@ -1,0 +1,166 @@
+---
+layout: 	coco
+title: 		"函数调用"
+date: 		2018-04-02 12:00:00
+author: 	"shamphone"
+chapter:	"2"
+
+---
+
+## 一、内部函数调用
+
+当前合约中的函数可以直接（“从内部”）调用，也可以递归调用，就像下边这个荒谬的例子一样
+
+```
+    contract Recursive {
+        function foo(uint a) public pure returns (uint ret) { 
+			return bar(); 
+		}
+        function bar() internal pure returns (uint ret) { 
+			return foo(7) + bar(); 
+		}
+    }
+```
+
+这些函数调用在 EVM 中被解释为简单的跳转。
+这样做的好处就是当前内存不会被清除，也就是说，通过内部调用在函数之间传递内存引用是非常有效的。
+
+
+## 二、命名参数  
+
+函数调用可以使用命名参数。将参数名和参数值这样的键值对以任意顺序放进{}即可。
+要确认所传参数一定要与定义的一致。下面来看个简单的例子：
+
+```
+contract Exchange {
+    //交换传入值的顺序并返回
+    function foo(uint key, uint value) returns (uint, uint){ 
+        return (value, key);
+    }
+
+    function bar() returns (uint, uint){
+        //任意顺序的通过变量名来指定参数值
+        return foo({value: 2, key: 1}); 
+    }
+}
+```   
+
+通过指定参数名称，实际传入的值为1,2，通过调用foo()函数，我们得到了交换顺序后的2,1。
+
+
+## 三、 外部函数调用
+
+表达式 ``this.foo(8);`` 和 ``c.foo(2);``（其中 ``c`` 是合约实例）也是有效的函数调用。
+但是这种情况下，函数将会通过一个消息调用来被“外部调用”，而不是直接的跳转。
+请注意，不可以在构造函数中通过 ``this`` 来调用函数，因为此时真实的合约实例还没有被创建。
+
+如果想要调用其他合约的函数，需要外部调用。
+对于一个外部调用，所有的函数参数都需要被复制到内存。
+
+当调用其他合约的函数时，随函数调用发送的 Wei 和 gas 的数量可以分别由特定选项 ``.value()`` 和 ``.gas()`` 指定
+
+```
+
+pragma solidity ^0.4.24;
+
+contract Foo {
+	function info() public payable returns (uint ret) { 
+		return 18; 
+	}
+}
+
+contract Bar {
+	Foo foo;
+	function setFoo(address addr) public { 
+		foo = Foo(addr); 
+	}
+	function callFoo() public { 
+		foo.info.value(10).gas(800)(); 
+	}
+}
+
+```
+
+``payable`` 修饰符要用于修饰 ``info``，否则，`.value()` 选项将不可用。
+
+
+注意，表达式 ``Foo(addr)`` 进行了一个的显式类型转换，说明”我们知道给定地址的合约类型是 ``Foo`` “并且这不会执行构造函数。
+显式类型转换需要谨慎处理。绝对不要在一个你不清楚类型的合约上执行函数调用。
+
+我们也可以直接使用 ``function setFoo(Foo _foo) { foo = _foo; }`` 。
+
+注意一个事实，``foo.info.value(10).gas(800)`` 只（局部地）设置了与函数调用一起发送的 Wei 值和 gas 的数量，只有最后的圆括号执行了真正的调用。
+
+
+如果被调函数所在合约不存在（也就是账户中不包含代码）或者被调用合约本身抛出异常或者 gas 用完等，函数调用会抛出异常。
+
+
+注意：   
+1. 任何与其他合约的交互都会增加当前合约的危险系数，尤其是在不能预先知道合约代码的情况下。
+2. 当前合约将控制权移交给被调用合约，而被调用合约可能做任何事。即使被调用合约是从一个已知父合约中继承的，继承的合约也可能会覆盖父合约中的实现，导致这个被覆盖的接口不可控。
+3. 被调用合约的实现是不可控的，存在危险。被调用合约可以通过它自己的函数改变调用合约的状态变量。 一个建议的函数写法是，在完成对本合约的状态变量的修改后，再调用外部函数。
+
+
+## 四、具名调用和匿名函数参数
+
+我们也可以使用函数参数名来调用。 
+这时候，参数的顺序可以是任意的， 参数名称必须和声明的名称保持一致，以下示例： 
+
+```
+
+    contract CallExample {
+        function foo(uint key, uint value) public {
+            //.....
+        }
+
+        function bar() public {
+            // 具名参数
+            foo({value: 2, key: 3});
+        }
+    }
+```
+
+## 五、call 方法
+
+Java里面有反射机制，只要知道一个方法的签名，就可以通过反射机制来调用，不需要这个方法的实现代码。
+solidity对函数也提供给了这么个机制。 只要知道合约的地址和方法的签名，就可以通过call方法来调用。 
+但call方法是一个很底层的方法，除非必要，否则不提倡使用。 
+``call``方法可以向一个合约发送消息，也就是说如果你想实现自己的消息传递，可以使用这个函数。函数支持传入任意类型的任意参数，并将参数打包成32字节，相互拼接后向合约发送这段数据。
+
+先实现一个服务提供者，一旦方法execute被调用， 就会发出事件 ``ExecutedCalledEvent`` 。 
+
+```
+contract Provider {
+    event ExecutedCalledEvent(bytes data, uint param);
+	
+	
+	function execute(uint param) public{
+		emit ExecutedCalledEvent(msg.data, param);
+	}
+}
+```
+
+通过事件监测，我们可以知道这个方法是都被执行了。 将这个合约部署， ``0x5E72914535f202659083Db3a02C984188Fa26e9f``是其部署地址。 
+
+以下是服务消费者的代码： 
+
+```
+
+contract Consumer {
+	
+	function callExistingFunction() public returns(bool){
+	    address provider = 0x5E72914535f202659083Db3a02C984188Fa26e9f;
+		bytes4 funcIdentifier = bytes4(keccak256("execute(uint256)"));
+		return provider.call(funcIdentifier, uint(1));
+	}
+}
+
+```
+
+``keccak256``是对函数签名进行hash，返回bytes32类型的结果，需要转换为bytes4（参见ABI 编码规范）。 call方法第一个参数是Hash后的方法名，后面是调用参数列表。 
+
+执行这段代码的结果如下： 
+
+![](http://static.cocolian.cn/img/coco/solidity/call-1.png)
+
+注意， call仅返回true或者false。true仅表示调用过程中无抛出导致执行中断的异常，并不一定是"成功"执行。 通过这种方式调用是无法获取到返回值的。 

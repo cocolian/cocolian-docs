@@ -1,0 +1,55 @@
+---                             
+layout:     post                             
+title:      "微信聊天记录整理指南"                               
+date:       2017-05-20 12:00:00                               
+author:     "PaymentGroup"                      
+tag:		[publish]   
+                              
+---                   
+
+需要的软件：
+1. iTunes，用来备份聊天记录。
+2. 同步助手，用来读取微信数据。
+3. excel，导出数据的整理。
+
+**第一步，iTunes备份数据**
+将手机连接到电脑，打开iTunes，进行数据备份。 
+![20170522_194100](http://static.cocolian.cn/img/wechat-1.png)
+
+**第二步，通过同步助手读取微信数据**
+![20170522_194137](http://static.cocolian.cn/img/wechat-2.png)
+![20170522_194152](http://static.cocolian.cn/img/wechat-3.png)
+![20170522_194255](http://static.cocolian.cn/img/wechat-4.png)
+找到群名称 ：支付产品技术交流群，
+1. 选择导出消息--导出到excel， 这将聊天记录导出。
+2. 选择导出媒体-->导出图片。这样就把所有聊天的图片都搞出来了。注意，图片的文件名是按照该图片发出的时间来命名的。20170510_143325.png为例， 20170510是日期， 143325是这条图片消息是14:33:25发出来的。 
+![20170522_194428](http://static.cocolian.cn/img/wechat-5.png)
+
+**第三步，打开excel文件，可以看到所有聊天记录文字。**
+![20170522_194503](http://static.cocolian.cn/img/wechat-6.png)
+如果第二列时间显示不对， 可以把时间格式修改为 yyyy-mm-dd hh:mm:ss 就行了。
+找到要整理的时间段的日志，复制到另一个sheet中，准备处理。 
+首先，增加第一行作为header，名称依次是： 
+1. ID: 这是群的ID，没用；
+2. 时间：消息发出或者接收到的时间。 
+3. 联系人： 发言的人；
+4. 状态： 发送和接收两种状态。
+5. 类型： 文本、照相壁纸、动画表情、系统消息等类型。 
+
+打开菜单栏中的“数据”， 选择“筛选”操作， 然后在第一行的“类型”中选择"照相壁纸”，将“消息”一列中的“[照相壁纸]"换成照片的实际地址： 
+
+```javascript
+="!["&TEXT(B8,"yyyymmdd\_hhmmss")&"](http://static.cocolian.cn/img/"&TEXT(B8,"yyyymmdd\_hhmmss")&".png)"
+```
+
+将B8替换成对应的行，比如第9行，这里应该就是B9。完成替换后，这一行会将图片实际地址关联过来：
+
+```javascript
+![20170522_194100](http://static.cocolian.cn/img/2017/20170522_194100.png)
+```
+
+图片每天上传到http://wechat.lixf.cn/ 上。
+
+**第四步，整理文档**
+将Excel中的内容选中并复制到word、txt或者其他的编辑器中进行修改。 
+

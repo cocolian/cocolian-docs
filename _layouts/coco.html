@@ -1,0 +1,47 @@
+---
+layout: default
+---
+<aside class="content-aside">
+<ul class="post-list">
+{% assign opages = site.pages | sort:"chapter" %}
+{% for opage in opages %}
+{% if opage.url contains '/coco/' %}
+<li>{{ opage.chapter }}. <a href="{{ opage.url | prepend: site.baseurl }}">{{ opage.title }}</a></li>
+{% assign cats = opage.url | split: '/' %}
+{% if cats.size > 2  %}
+{% assign cat = cats[2] %}
+{% assign posts = site.categories[cat] | sort:"chapter" %}
+{% for post in posts %}
+{% if post.status != 'hidden'  %}
+<li>{{ opage.chapter }}.{{ post.chapter}}.  <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></li>
+{% endif %}
+{% endfor %}
+{% endif%}
+{% endif%}
+{% endfor %}
+</ul>
+</aside>
+<header class="intro-header">
+	<div class="post-heading">                  
+		<h1>{{ page.chapter }}&nbsp;&nbsp;{{ page.title }}</h1>                
+		<ul class="meta">
+			<li><i class="icon-sitemap"></i><a href="/coco/">区块链开发指南</a></li>
+			<li><i class="icon-user"></i><a href="/">Cocolian</a></li>
+			<li><i class="icon-time"></i>{{ page.date | date: "%Y-%m-%d" }}</li>
+		</ul>                
+	</div>           
+</header>
+<!-- Post Content -->
+<article class="post-content"> 
+    <!-- Post Container -->
+            <div class="post-container">
+
+				{{ content }}
+				<hr/> 
+				<p>感谢您对本文的关注，如果您对区块链技术有兴趣，可以加入我们一起探讨， 请扫码关注“可可链”的微信公众号，并留言“加入可可链”。 </p>
+				<p>本文欢迎转载，转载时请注明本文来自 微信公众号“可可链”。 </p>
+				<p>	<img src="http://static.cocolian.cn/img/coco/qrcode-258.jpg" /> </p>
+				<hr/>              
+               {% include pager.html %}
+            </div>  
+</article>
