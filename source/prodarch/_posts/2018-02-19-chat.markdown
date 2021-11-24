@@ -1,8 +1,0 @@
----
-layout:     source 
-title:      "2018-02-19-WeChat"
-date:       2018-02-19 12:00:00
-author:     "PaymentGroup"
-lines:      2 
-tag:		  [chat]
----
