@@ -1,3 +1,4 @@
+
 # Site settings
 title: "Cocolian-凤凰牌老熊"
 SEOTitle: "Cocolian Framework | 可可链 "
@@ -9,6 +10,10 @@ url: "http://doc.cocolian.cn"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 encoding: UTF-8
 
+# Build settings
+theme: minima
+plugins:
+  - jekyll-feed
 
 # SNS settings
 # RSS: false
@@ -26,8 +31,24 @@ encoding: UTF-8
 highlighter: rouge
 permalink: pretty
 # paginate: 10
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md", "bash", "regulations"]
-keep_files: ["img","font","css","atach","scss","js","design"]
+exclude: 
+  - less/
+  - node_modules/
+  - Gruntfile.js
+  - package.json
+  - README.md
+  - README.zh.md
+  - bash/
+  - regulations/
+keep_files: 
+  - img/
+  - font/
+  - css/
+  - atach/
+  - scss/
+  - js/
+  - design/
+  
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
 
 
