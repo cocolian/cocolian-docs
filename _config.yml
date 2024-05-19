@@ -1,6 +1,6 @@
 # server configuration
 port: 7777
-livereload: true
+livereload: false
 show_dir_listing: false
 
 
