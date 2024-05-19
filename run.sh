@@ -1,2 +1,2 @@
 #!/bin/bash
-jekyll serve -P 7777
+jekyll serve --no-watch -P 7777
