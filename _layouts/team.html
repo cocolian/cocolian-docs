@@ -3,7 +3,16 @@ layout: default
 ---
 <aside class="content-aside">
 <ul>
-<li><a href="http://doc.cocolian.cn/team/">管理感悟</a></li>
+    <li><a href="https://doc.cocolian.cn/essay/">支付系统设计</a></li>
+    <li><a ref="https://doc.cocolian.cn/tax/">龚老师税法入门讲座</a> </li>
+    <li><a ref="https://doc.cocolian.cn/coco/">区块链专题</a> </li>
+    <li><a ref="https://doc.cocolian.cn/dev/">微服务专题</a> </li>
+    <li><a ref="https://doc.cocolian.cn/resources/">资料下载</a> </li>
+    <li><a ref="https://doc.cocolian.cn/team/">管理感悟</a> </li>
+	<li><a href="http://doc.cocolian.cn/team/">管理感悟</a></li>
+</ul>
+<br/>
+ <ul class="post-list">
 {% assign posts =  site.categories["team"]  %}
 {% for post in posts  %}
 <li><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></li>

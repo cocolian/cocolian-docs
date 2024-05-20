@@ -4,6 +4,16 @@ layout: default
 
 <aside class="content-aside">
 <ul class="post-list">
+    <li><a ref="https://doc.cocolian.cn/essay/"></a>支付系统设计</a></li>
+    <li><a ref="https://doc.cocolian.cn/tax/">龚老师税法入门讲座</a> </li>
+    <li><a ref="https://doc.cocolian.cn/coco/">区块链专题</a> </li>
+    <li><a ref="https://doc.cocolian.cn/dev/">微服务专题</a> </li>
+    <li><a ref="https://doc.cocolian.cn/resources/">资料下载</a> </li>
+    <li><a ref="https://doc.cocolian.cn/team/">管理感悟</a> </li>
+</ul>
+<br/>
+<ul class="post-list">
+    
 {% assign opages = site.pages | sort:"chapter" %}
 {% for opage in opages %}
 {% if opage.url contains '/dev/' %}
