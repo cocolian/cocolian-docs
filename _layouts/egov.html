@@ -1,0 +1,62 @@
+---
+layout: default
+---
+<aside class="content-aside">
+<ul class="post-list">
+    <li><a href="https://doc.cocolian.cn/egov/">数字政府</a></li>
+    <li><a href="https://doc.cocolian.cn/tax/">一网协同</a> </li>
+    <li><a href="https://doc.cocolian.cn/coco/">一网统管</a> </li>
+    <li><a href="https://doc.cocolian.cn/dev/">一网通办</a> </li>
+</ul>
+<br/>
+ <ul class="post-list">
+{% assign opages = site.pages | sort:"chapter" %}
+{% for opage in opages %}
+{% if opage.url contains '/egov/' %}
+<li>{{ opage.chapter }}. <a href="{{ opage.url | prepend: site.baseurl }}">{{ opage.title }}</a></li>
+
+{% endif%}
+{% endfor %}
+</ul>
+</aside>
+<header class="intro-header">
+	<div class="post-heading">                  
+		<h1>{{ page.chapter }}&nbsp;&nbsp;{{ page.title }}</h1>                
+		<ul class="meta">
+			<li><i class="icon-sitemap"></i><a href="/essay">支付系统设计</a></li>
+			<li><i class="icon-user"></i><a href="/">凤凰牌老熊</a></li>
+			<li><i class="icon-time"></i>{{ page.date | date: "%Y-%m-%d" }}</li>
+		</ul>                
+	</div>           
+</header>
+<!-- Post Content -->
+<article class="post-content"> 
+    <!-- Post Container -->
+            <div class="post-container">
+
+				{{ content }}
+				<hr/> 
+				<p>感谢您对本文的关注，如需要及时收到凤凰牌老熊的最新作品，或者有相关问题探讨，请扫码关注“凤凰牌老熊”的微信公众号，在公众号里留言或者回复，可以尽快处理，谢谢。 </p>
+				<p>本文欢迎转载，转载时请注明本文来自 微信公众号“凤凰牌老熊”。 </p>
+				<p>	<img src="http://static.cocolian.cn/img/weixin_430.jpg" /> </p>
+				<hr/>              
+                <ul class="pager">
+                    {% if page.previous.url %}
+                    <li class="previous">
+                        <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">
+                        Previous<br>
+                        <span>{{page.previous.title}}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if page.next.url %}
+                    <li class="next">
+                        <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">
+                        Next<br>
+                        <span>{{page.next.title}}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>				
+            </div>  
+</article>
