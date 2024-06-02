@@ -8,7 +8,7 @@ author:     "凤凰牌老熊"
 ## 数字政府
 
 
-{% assign posts = site.categories['egov'] | sort : "date" %}
+{% assign posts = site.categories['egov']  %}
 {% for post in posts %}
 <div class="post-preview">
     <a href="{{ post.url | prepend: site.baseurl }}">

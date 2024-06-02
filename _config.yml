@@ -45,6 +45,8 @@ exclude:
   - README.zh.md
   - bash/
   - regulations/
+
+  
 keep_files: 
   - img/
   - font/
