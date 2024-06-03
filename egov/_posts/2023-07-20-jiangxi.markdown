@@ -1,10 +1,11 @@
 ---
 layout: 	egov
-title: 	""
-subtitle: 	""
-date: 		2023年7月20日
+title: 	  "江西省数字政府建设总体方案"
+subtitle: "赣府发〔2023〕8号"
+date: 		2023-07-20 00:00:00
 author: 	"江西省人民政府"
-chapter: 	"2"
+unit:     "江西省"
+chapter: 	"4"
 ---
 
 

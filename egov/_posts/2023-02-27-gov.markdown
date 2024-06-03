@@ -1,9 +1,10 @@
 ---
 layout: 	egov
 title: 	    "数字中国建设整体布局规划"
-subtitle: 	"粤府〔2023〕47号"
-date: 		2023年2月27日
+subtitle: 	"整体规划"
+date: 		2023-02-27 00:00:00
 author: 	"中共中央、国务院"
+unit:       "数字中国"
 chapter: 	"1"
 ---
 

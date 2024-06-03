@@ -9,15 +9,17 @@ layout: default
 </ul>
 <br/>
  <ul class="post-list">
-{% assign posts =  site.categories["egov"]  %}
-{% for post in posts  %}
-<li><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></li>
-{% endfor %}
+	{% assign posts = site.categories['egov'] | sort:"chapter" %}
+	{% for post in posts %}
+	
+	<li><a href="{{ post.url | prepend: site.baseurl }}">{{ post.unit }}</a></li>
+	
+	{% endfor %}
 </ul>
 </aside>
 <header class="intro-header">
 	<div class="post-heading">                  
-		<h1>{{ page.title }}</h1>                
+		<h1> {{ page.title }}</h1>                
 		<ul class="meta">
 			<li><i class="icon-sitemap"></i><a href="/egov">数字政府</a></li>
 			<li><i class="icon-user"></i><a href="/">{% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} </a> </li>

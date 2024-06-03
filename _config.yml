@@ -1,5 +1,5 @@
 # server configuration
-port: 7777
+port: 8080
 livereload: false
 show_dir_listing: false
 
@@ -46,7 +46,7 @@ exclude:
   - bash/
   - regulations/
 
-  
+
 keep_files: 
   - img/
   - font/
